@@ -1,0 +1,38 @@
+[
+  {
+    "hostname": "apollo",
+    "os": "Ubuntu 22.04",
+    "ip": "",
+    "function": "Inventory API Server",
+    "admin": {
+      "username": "aselime",
+      "password": "piKis4ufrocl"
+    },
+    "virtualized": true,
+    "days_online": 154
+  },
+  {
+    "hostname": "hera",
+    "os": "Ubuntu 22.04",
+    "ip": "",
+    "function": "Web Server",
+    "admin": {
+      "username": "",
+      "password": ""
+    },
+    "virtualized": true,
+    "days_online": 322
+  },
+  {
+    "hostname": "hades",
+    "os": "Debian 10",
+    "ip": "",
+    "function": "Web Server",
+    "admin": {
+      "username": "",
+      "password": ""
+    },
+    "virtualized": true,
+    "days_online": 340
+  }
+]

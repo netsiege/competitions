@@ -1,0 +1,12 @@
+[Unit]
+Description=Phoboss Inventory API
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/opt/phobos
+ExecStart=/usr/bin/python3 /opt/phobos/app.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
