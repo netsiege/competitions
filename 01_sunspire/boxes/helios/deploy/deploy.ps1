@@ -190,6 +190,26 @@ Set-Content -Path "$heliosCtrlPath\ctrl.txt" -Value "" -Force
 Write-Host "[+] Control files created" -ForegroundColor Green
 
 # ===============================
+# ENABLE RDP
+# ===============================
+Write-Host "[*] Enabling Remote Desktop..." -ForegroundColor Cyan
+
+# Enable Remote Desktop
+Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name "fDenyTSConnections" -Value 0
+
+# Disable Network Level Authentication (NLA) for easier access
+Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -Name "UserAuthentication" -Value 0
+
+# Enable Remote Desktop firewall rule
+Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+
+# Ensure Remote Desktop Services is running
+Set-Service -Name "TermService" -StartupType Automatic
+Start-Service -Name "TermService" -ErrorAction SilentlyContinue
+
+Write-Host "[+] Remote Desktop enabled" -ForegroundColor Green
+
+# ===============================
 # WINDOWS SERVER HARDENING (Disable for CTF)
 # ===============================
 Write-Host "[*] Configuring Windows settings for CTF..." -ForegroundColor Cyan
@@ -222,6 +242,7 @@ Write-Host "===============================" -ForegroundColor Yellow
 Write-Host ""
 Write-Host "Services:" -ForegroundColor Cyan
 Write-Host "  - VNC (TightVNC on :5900, no authentication)"
+Write-Host "  - RDP (Remote Desktop on :3389)"
 Write-Host ""
 Write-Host "Users:" -ForegroundColor Cyan
 Write-Host "  - helios:password (weak/guessable)"
@@ -239,6 +260,6 @@ Write-Host "  - Privesc: Environment variable ADMIN_BACKUP_KEY contains admin pa
 Write-Host "  - Lateral Movement: SSH keys in C:\Users\helios\.ssh\ for starfall"
 Write-Host ""
 Write-Host "Scoring:" -ForegroundColor Cyan
-Write-Host "  - Services: VNC"
+Write-Host "  - Services: VNC, RDP"
 Write-Host "  - Files: C:\Administrator\ctrl.txt, C:\Users\helios\ctrl.txt"
 Write-Host ""
