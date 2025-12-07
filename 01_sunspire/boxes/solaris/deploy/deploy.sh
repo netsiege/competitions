@@ -192,7 +192,6 @@ chmod 644 /var/www/html/ctrl.txt
 echo "" > /root/ctrl.txt
 chmod 644 /root/ctrl.txt
 
-
 echo "[+] Control files created"
 
 # ===============================

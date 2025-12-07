@@ -2,7 +2,9 @@
 """
 Starfall Health Monitoring API
 - External API on :5000 (health checks, history)
-- Internal API on :5001 (config display with SSRF)
+- Internal API on :5001 (config display)
+
+Developed by fern (systems stewardess @ Sunspire)
 """
 
 import os
@@ -153,7 +155,7 @@ def get_system_ip(hostname):
 def fetch_system_info(ip):
     """
     Fetch system info from remote API.
-    Makes request to IP:4000/api/info with special user agent and token.
+    Makes a GET request to http://<ip>:4000/api/info
     """
     try:
         headers = {
@@ -207,7 +209,7 @@ def internal_index():
 def config_display():
     """
     Display configuration for a system by hostname.
-    Makes SSRF request to the system's IP:4000/api/info endpoint.
+    Makes request to the system's IP:4000/api/info endpoint.
     """
     hostname = request.args.get("hostname", "").strip('"').strip("'")
     
