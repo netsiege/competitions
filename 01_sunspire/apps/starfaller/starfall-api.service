@@ -1,0 +1,16 @@
+[Unit]
+Description=Starfall Health Monitor API
+After=network.target
+
+[Service]
+Type=simple
+User=starfall
+Group=starfall
+WorkingDirectory=/opt/starfall
+ExecStart=/usr/bin/python3 /opt/starfall/app.py
+Restart=always
+RestartSec=5
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target

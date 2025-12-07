@@ -1,0 +1,24 @@
+{
+    "systems": [
+        {
+            "hostname": "solaris",
+            "ip": "10.100.1.10"
+        },
+        {
+            "hostname": "forge",
+            "ip": "10.100.1.20"
+        },
+        {
+            "hostname": "orbital",
+            "ip": "10.100.1.30"
+        },
+        {
+            "hostname": "pyre",
+            "ip": "10.100.1.40"
+        },
+        {
+            "hostname": "starfall",
+            "ip": "127.0.0.1"
+        }
+    ]
+}
