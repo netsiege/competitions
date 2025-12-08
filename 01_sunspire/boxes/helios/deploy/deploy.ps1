@@ -25,11 +25,13 @@ Add-LocalGroupMember -Group "Remote Desktop Users" -Member "helios"
 $pyrePassword = ConvertTo-SecureString "h1ewFWZG" -AsPlainText -Force
 New-LocalUser -Name "pyre" -Password $pyrePassword -Description "Pyre User" -PasswordNeverExpires
 Add-LocalGroupMember -Group "Users" -Member "pyre"
+Add-LocalGroupMember -Group "Remote Desktop Users" -Member "pyre"
 
 # Create ops user
 $opsPassword = ConvertTo-SecureString "9ksP311p" -AsPlainText -Force
 New-LocalUser -Name "ops" -Password $opsPassword -Description "Operations User" -PasswordNeverExpires
 Add-LocalGroupMember -Group "Users" -Member "ops"
+Add-LocalGroupMember -Group "Remote Desktop Users" -Member "ops"
 
 # Set Administrator password
 $adminPassword = ConvertTo-SecureString "BTw5hYqi" -AsPlainText -Force
@@ -97,20 +99,14 @@ Start-Service -Name "tvnserver" -ErrorAction SilentlyContinue
 Write-Host "[+] TightVNC installed (anonymous access enabled)" -ForegroundColor Green
 
 # ===============================
-# FIREWALL RULES
+# DISABLE FIREWALL
 # ===============================
-Write-Host "[*] Configuring firewall..." -ForegroundColor Cyan
+Write-Host "[*] Disabling firewall..." -ForegroundColor Cyan
 
-# Allow VNC inbound on port 5900
-New-NetFirewallRule -DisplayName "Allow VNC Inbound" `
-                    -Direction Inbound `
-                    -Protocol TCP `
-                    -LocalPort 5900 `
-                    -Action Allow `
-                    -Profile Any `
-                    -Description "Allow VNC connections" | Out-Null
+# Disable Windows Firewall for all profiles
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
 
-Write-Host "[+] Firewall configured" -ForegroundColor Green
+Write-Host "[+] Firewall disabled" -ForegroundColor Green
 
 # ===============================
 # POWERSHELL HISTORY (Privesc Hint)

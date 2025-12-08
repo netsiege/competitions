@@ -2,19 +2,19 @@
     "systems": [
         {
             "hostname": "solaris",
-            "ip": "10.100.1.10"
+            "ip": "<SOLARIS_IP_ADDRESS>"
         },
         {
             "hostname": "forge",
-            "ip": "10.100.1.20"
+            "ip": "<FORGE_IP_ADDRESS>"
         },
         {
             "hostname": "orbital",
-            "ip": "10.100.1.30"
+            "ip": "<ORBITAL_IP_ADDRESS>"
         },
         {
             "hostname": "pyre",
-            "ip": "10.100.1.40"
+            "ip": "<PYRE_IP_ADDRESS>"
         },
         {
             "hostname": "starfall",

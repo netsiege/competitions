@@ -161,10 +161,10 @@ The internal API on `:5001` can make authenticated requests to other systems. Th
 ```json
 {
     "systems": [
-        {"hostname": "solaris", "ip": "10.100.1.10"},
-        {"hostname": "forge", "ip": "10.100.1.20"},
-        {"hostname": "orbital", "ip": "10.100.1.30"},
-        {"hostname": "pyre", "ip": "10.100.1.40"},
+        {"hostname": "solaris", "ip": "<SOLARIS_IP_ADDRESS>"},
+        {"hostname": "forge", "ip": "<FORGE_IP_ADDRESS>"},
+        {"hostname": "orbital", "ip": "<ORBITAL_IP_ADDRESS>"},
+        {"hostname": "pyre", "ip": "<PYRE_IP_ADDRESS>"},
         {"hostname": "starfall", "ip": "127.0.0.1"}
     ]
 }
