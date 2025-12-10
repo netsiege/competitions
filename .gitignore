@@ -172,3 +172,40 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Local .terraform directories
+.terraform/
+
+# .tfstate files and their backups
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+crash.*.log
+
+# Terraform plan files
+*tfplan*
+
+# Terraform CLI configuration files
+.terraformrc
+terraform.rc
+
+# Override files (if not intended for version control)
+example_override.tf
+
+# Optional: ignore graph output files
+*.dot
+
+# Optional: ignore plan files saved before destroying Terraform configuration
+# planout.
+
+# Variable files that may contain sensitive data (if not intended for version control)
+*.tfvars
+*.tfvars.json
+
+# Terraform dependency lock file (commit or ignore based on team preference)
+# .terraform.lock.hcl
+
+# other
+.DS_Store
