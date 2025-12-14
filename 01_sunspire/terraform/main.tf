@@ -2,7 +2,7 @@ terraform {
     required_providers {
         proxmox = {                   //< allows us to refer to path as "proxmox"
             source  = "telmate/proxmox" //< Grabs the proxmox provider support ("bgp/proxmox" is another provider) 
-            version = "3.0.2-rc04"       //< Enforce usage of pre-release to avoid fatal error present in 2.X versions. pre-rc7 versions are breaking.
+            version = "3.0.2-rc06"       //< Enforce usage of pre-release to avoid fatal error present in 2.X versions. pre-rc7 versions are breaking.
         }
     }
 }
@@ -22,23 +22,36 @@ resource "proxmox_vm_qemu" "vms" {
     target_node = var.proxmox_host
     clone       = each.value.os_type == "linux" ? var.ubuntu_template_name : var.windows_template_name
 
-    os_type     = "cloud-init"
-
     bios        = "seabios"
     memory      = each.value.memory
     scsihw      = "virtio-scsi-single"
     full_clone  = false
+    vmid        = each.value.vmid
 
     cpu {
         cores   = each.value.cores
         sockets = 1
     }
 
-    disk {
-        size     = each.value.disk_size
-        storage  = "pve-pool-730xd"
-        iothread = true
-        slot     = "scsi0"
+    # Primary disk and cloud-init drive
+    disks {
+        scsi {
+            scsi0 {
+                disk {
+                    size     = each.value.disk_size
+                    storage  = "pve-pool-730xd"
+                }
+            }
+        }
+        
+        # Cloud-init drive on IDE2
+        ide {
+            ide2 {
+                cloudinit {
+                    storage = "pve-pool-730xd"
+                }
+            }
+        }
     }
 
     network {
@@ -47,8 +60,12 @@ resource "proxmox_vm_qemu" "vms" {
         bridge = var.nic_name
     }
 
-    ciuser     = "ops"
+    # Cloud-init configuration
+    os_type    = "cloud-init"
+    agent      = 1
+    ciuser     = each.value
     cipassword = "9ksP311p"
-    boot       = "order=scsi0,net0"
+    boot       = "order=scsi0;ide2"
     ipconfig0  = "ip=${each.value.ip_address},gw=10.100.0.1"
+    tags       = ""
 }

@@ -30,35 +30,40 @@ variable "vms" {
         cores         = number
         memory        = number  # in MB
         disk_size     = string  # with unit (e.g., "10G")
+        vmid          = number
     }))
     default = {
         solaris = {
             os_type    = "linux"
-            ip_address = "10.100.7.50/24"
+            ip_address = "10.100.7.50/18"
             cores      = 2
             memory     = 2048
             disk_size  = "10G"
+            vmid       = 1014
         }
         helios = {
             os_type    = "windows"
-            ip_address = "10.100.7.51/24"
+            ip_address = "10.100.7.51/18"
             cores      = 4
             memory     = 4096
             disk_size  = "40G"
+            vmid       = 1015
         }
         orbital = {
             os_type    = "windows"
-            ip_address = "10.100.7.52/24"
+            ip_address = "10.100.7.52/18"
             cores      = 4
             memory     = 4096
             disk_size  = "40G"
+            vmid       = 1016
         }
         starfall = {
             os_type    = "linux"
-            ip_address = "10.100.7.53/24"
+            ip_address = "10.100.7.53/18"
             cores      = 2
             memory     = 2048
             disk_size  = "10G"
+            vmid       = 1017
         }
     }
 }
