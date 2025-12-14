@@ -63,7 +63,7 @@ resource "proxmox_vm_qemu" "vms" {
     # Cloud-init configuration
     os_type    = "cloud-init"
     agent      = 1
-    ciuser     = each.value
+    ciuser     = each.value.os_type == "linux" ? "root" : "Administrator"
     cipassword = "9ksP311p"
     boot       = "order=scsi0;ide2"
     ipconfig0  = "ip=${each.value.ip_address},gw=10.100.0.1"
