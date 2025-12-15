@@ -98,7 +98,7 @@ INSERT INTO thermal_readings (panel_id, timestamp, temperature, ambient_temp, ir
 (11, DATE_SUB(NOW(), INTERVAL 2 HOUR), 74.1, 30.5, 910.0);
 
 -- Create MySQL user for webapp
-CREATE USER IF NOT EXISTS 'pyre'@'localhost' IDENTIFIED BY 'h1ewFWZG';
-GRANT ALL PRIVILEGES ON pyrewatch.* TO 'pyre'@'localhost';
-GRANT FILE ON *.* TO 'pyre'@'localhost';
+CREATE USER IF NOT EXISTS 'pyre'@'%' IDENTIFIED BY 'h1ewFWZG';
+GRANT ALL PRIVILEGES ON pyrewatch.* TO 'pyre'@'%';
+GRANT FILE ON *.* TO 'pyre'@'%';
 FLUSH PRIVILEGES;
