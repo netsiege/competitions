@@ -27,6 +27,7 @@ variable "vms" {
     type = map(object({
         os_type       = string  # "linux" or "windows"
         ip_address    = string  # IP address with CIDR (e.g., "10.100.7.50/24")
+        macaddr       = string  # MAC address (e.g., "BC:24:11:3A:BE:FF")
         cores         = number
         memory        = number  # in MB
         disk_size     = string  # with unit (e.g., "10G")
@@ -35,7 +36,8 @@ variable "vms" {
     default = {
         solaris = {
             os_type    = "linux"
-            ip_address = "10.100.7.50/18"
+            ip_address = "10.100.7.40/18"
+            macaddr    = "BC:24:11:3A:BE:00"
             cores      = 2
             memory     = 2048
             disk_size  = "10G"
@@ -43,7 +45,8 @@ variable "vms" {
         }
         helios = {
             os_type    = "windows"
-            ip_address = "10.100.7.51/18"
+            ip_address = "10.100.7.41/18"
+            macaddr    = "BC:24:11:3A:BE:01"
             cores      = 4
             memory     = 4096
             disk_size  = "40G"
@@ -51,7 +54,8 @@ variable "vms" {
         }
         orbital = {
             os_type    = "windows"
-            ip_address = "10.100.7.52/18"
+            ip_address = "10.100.7.42/18"
+            macaddr    = "BC:24:11:3A:BE:02"
             cores      = 4
             memory     = 4096
             disk_size  = "40G"
@@ -59,7 +63,8 @@ variable "vms" {
         }
         starfall = {
             os_type    = "linux"
-            ip_address = "10.100.7.53/18"
+            ip_address = "10.100.7.43/18"
+            macaddr    = "BC:24:11:3A:BE:03"
             cores      = 2
             memory     = 2048
             disk_size  = "10G"

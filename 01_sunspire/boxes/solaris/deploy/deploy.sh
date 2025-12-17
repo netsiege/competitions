@@ -1,5 +1,7 @@
 #!/bin/sh
 
+export DEBIAN_FRONTEND=noninteractive
+
 # description
 echo "==============================="
 echo " SOLARIS "

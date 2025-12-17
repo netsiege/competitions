@@ -40,6 +40,7 @@ resource "proxmox_vm_qemu" "vms" {
                 disk {
                     size     = each.value.disk_size
                     storage  = "pve-pool-730xd"
+                    format = "qcow2"
                 }
             }
         }
@@ -58,6 +59,7 @@ resource "proxmox_vm_qemu" "vms" {
         id     = 0
         model  = "virtio"
         bridge = var.nic_name
+        macaddr = each.value.macaddr
     }
 
     # Cloud-init configuration
@@ -67,5 +69,6 @@ resource "proxmox_vm_qemu" "vms" {
     cipassword = "netsiege123!"
     boot       = "order=scsi0;ide2"
     ipconfig0  = "ip=${each.value.ip_address},gw=10.100.0.1"
+    nameserver = "10.100.0.1"
     tags       = ""
 }
