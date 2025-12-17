@@ -80,6 +80,7 @@ apt-get install -y python3 python3-pip python3-venv
 
 # Copy API to /root/forge-api
 cp -Rf ../../../apps/forge-api /root/
+rm /root/forge-api/README.md
 
 # Install dependencies
 cd /root/forge-api
