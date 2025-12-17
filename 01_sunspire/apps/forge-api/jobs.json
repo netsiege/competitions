@@ -1,0 +1,111 @@
+{
+    "facility": "Forge Manufacturing Center",
+    "queue_date": "2024-12-16",
+    "jobs": [
+        {
+            "id": "FORGE-2024-1247",
+            "name": "Solar Cell Assembly - Batch 47",
+            "type": "cell_assembly",
+            "status": "in_progress",
+            "priority": "normal",
+            "quantity": 500,
+            "unit": "cells",
+            "started": "2024-12-16T06:00:00Z",
+            "estimated_completion": "2024-12-16T14:00:00Z",
+            "assigned_line": "Assembly Line 2",
+            "operator": "chen.wei"
+        },
+        {
+            "id": "FORGE-2024-1248",
+            "name": "Inverter Housing Fabrication",
+            "type": "metal_fabrication",
+            "status": "in_progress",
+            "priority": "high",
+            "quantity": 75,
+            "unit": "housings",
+            "started": "2024-12-16T05:30:00Z",
+            "estimated_completion": "2024-12-16T11:30:00Z",
+            "assigned_line": "CNC Bay 1",
+            "operator": "rodriguez.m"
+        },
+        {
+            "id": "FORGE-2024-1249",
+            "name": "Panel Frame Cutting - Priority",
+            "type": "frame_cutting",
+            "status": "pending",
+            "priority": "urgent",
+            "quantity": 200,
+            "unit": "frames",
+            "scheduled_start": "2024-12-16T12:00:00Z",
+            "estimated_completion": "2024-12-16T18:00:00Z",
+            "assigned_line": "Cutting Station A",
+            "operator": "unassigned"
+        },
+        {
+            "id": "FORGE-2024-1250",
+            "name": "Junction Box Wiring",
+            "type": "electrical_assembly",
+            "status": "pending",
+            "priority": "normal",
+            "quantity": 350,
+            "unit": "boxes",
+            "scheduled_start": "2024-12-16T14:00:00Z",
+            "estimated_completion": "2024-12-16T20:00:00Z",
+            "assigned_line": "Assembly Line 4",
+            "operator": "kim.soo"
+        },
+        {
+            "id": "FORGE-2024-1251",
+            "name": "Glass Lamination Run",
+            "type": "lamination",
+            "status": "in_progress",
+            "priority": "normal",
+            "quantity": 120,
+            "unit": "panels",
+            "started": "2024-12-16T07:00:00Z",
+            "estimated_completion": "2024-12-16T15:00:00Z",
+            "assigned_line": "Lamination Chamber 1",
+            "operator": "patel.r"
+        },
+        {
+            "id": "FORGE-2024-1252",
+            "name": "Backsheet Application",
+            "type": "encapsulation",
+            "status": "pending",
+            "priority": "low",
+            "quantity": 100,
+            "unit": "panels",
+            "scheduled_start": "2024-12-17T06:00:00Z",
+            "estimated_completion": "2024-12-17T12:00:00Z",
+            "assigned_line": "Coating Line 2",
+            "operator": "unassigned"
+        },
+        {
+            "id": "FORGE-2024-1253",
+            "name": "Quality Control Testing",
+            "type": "testing",
+            "status": "in_progress",
+            "priority": "high",
+            "quantity": 50,
+            "unit": "panels",
+            "started": "2024-12-16T08:00:00Z",
+            "estimated_completion": "2024-12-16T16:00:00Z",
+            "assigned_line": "QC Station 1",
+            "operator": "tanaka.y"
+        },
+        {
+            "id": "FORGE-2024-1254",
+            "name": "Busbar Soldering - Helios Order",
+            "type": "soldering",
+            "status": "pending",
+            "priority": "urgent",
+            "quantity": 800,
+            "unit": "connections",
+            "scheduled_start": "2024-12-16T10:00:00Z",
+            "estimated_completion": "2024-12-16T18:00:00Z",
+            "assigned_line": "Soldering Bay 3",
+            "operator": "nguyen.t",
+            "notes": "Rush order for Helios facility - expedite"
+        }
+    ]
+}

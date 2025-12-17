@@ -1,0 +1,16 @@
+[Unit]
+Description=Forge Manufacturing Control API
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/root/forge-api
+ExecStart=/usr/bin/python3 /root/forge-api/app.py
+Restart=always
+RestartSec=5
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target

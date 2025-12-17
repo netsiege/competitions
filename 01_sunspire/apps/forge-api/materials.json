@@ -1,0 +1,126 @@
+{
+    "facility": "Forge Manufacturing Center",
+    "inventory_date": "2024-12-16",
+    "materials": [
+        {
+            "id": "MAT-001",
+            "name": "Monocrystalline Silicon Wafers",
+            "category": "photovoltaic",
+            "quantity": 2450,
+            "unit": "units",
+            "minimum_threshold": 500,
+            "supplier": "SunTech Materials",
+            "location": "Warehouse A, Rack 12"
+        },
+        {
+            "id": "MAT-002",
+            "name": "Polycrystalline Silicon Ingots",
+            "category": "photovoltaic",
+            "quantity": 180,
+            "unit": "kg",
+            "minimum_threshold": 200,
+            "supplier": "SunTech Materials",
+            "location": "Warehouse A, Rack 13"
+        },
+        {
+            "id": "MAT-003",
+            "name": "Copper Busbar Wire",
+            "category": "electrical",
+            "quantity": 3200,
+            "unit": "meters",
+            "minimum_threshold": 1000,
+            "supplier": "Helios Conductors",
+            "location": "Warehouse B, Rack 3"
+        },
+        {
+            "id": "MAT-004",
+            "name": "Tempered Solar Glass",
+            "category": "encapsulation",
+            "quantity": 890,
+            "unit": "panels",
+            "minimum_threshold": 300,
+            "supplier": "ClearView Industries",
+            "location": "Warehouse C, Bay 1"
+        },
+        {
+            "id": "MAT-005",
+            "name": "EVA Encapsulant Film",
+            "category": "encapsulation",
+            "quantity": 45,
+            "unit": "rolls",
+            "minimum_threshold": 50,
+            "supplier": "PolyBond Solutions",
+            "location": "Warehouse B, Rack 7"
+        },
+        {
+            "id": "MAT-006",
+            "name": "Aluminum Frame Extrusions",
+            "category": "structural",
+            "quantity": 1200,
+            "unit": "units",
+            "minimum_threshold": 400,
+            "supplier": "Orbital Metals",
+            "location": "Warehouse D, Rack 1"
+        },
+        {
+            "id": "MAT-007",
+            "name": "Junction Boxes (IP67)",
+            "category": "electrical",
+            "quantity": 2100,
+            "unit": "units",
+            "minimum_threshold": 500,
+            "supplier": "ConnectSafe Electric",
+            "location": "Warehouse B, Rack 9"
+        },
+        {
+            "id": "MAT-008",
+            "name": "Tedlar Backsheet Film",
+            "category": "encapsulation",
+            "quantity": 62,
+            "unit": "rolls",
+            "minimum_threshold": 30,
+            "supplier": "DuraFilm Corp",
+            "location": "Warehouse B, Rack 8"
+        },
+        {
+            "id": "MAT-009",
+            "name": "Silver Paste (Conductive)",
+            "category": "photovoltaic",
+            "quantity": 8,
+            "unit": "kg",
+            "minimum_threshold": 10,
+            "supplier": "PrecisionMet",
+            "location": "Secure Storage, Vault 2"
+        },
+        {
+            "id": "MAT-010",
+            "name": "Anti-Reflective Coating Solution",
+            "category": "photovoltaic",
+            "quantity": 25,
+            "unit": "liters",
+            "minimum_threshold": 15,
+            "supplier": "NanoCoat Labs",
+            "location": "Chemical Storage, Unit 4"
+        },
+        {
+            "id": "MAT-011",
+            "name": "Silicone Sealant (UV Resistant)",
+            "category": "assembly",
+            "quantity": 340,
+            "unit": "tubes",
+            "minimum_threshold": 100,
+            "supplier": "SealPro Industries",
+            "location": "Warehouse B, Rack 11"
+        },
+        {
+            "id": "MAT-012",
+            "name": "MC4 Connectors (Pairs)",
+            "category": "electrical",
+            "quantity": 4800,
+            "unit": "pairs",
+            "minimum_threshold": 1000,
+            "supplier": "ConnectSafe Electric",
+            "location": "Warehouse B, Rack 10"
+        }
+    ]
+}
