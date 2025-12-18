@@ -15,7 +15,7 @@ echo "[*] Creating users..."
 
 # Create pyre user (same password as forge user - password reuse)
 useradd -m -s /bin/bash pyre
-echo "pyre:h1ewFWZG" | chpasswd
+echo "pyre:mqD5uv0j" | chpasswd
 
 # Create ops user
 useradd -m -s /bin/bash ops

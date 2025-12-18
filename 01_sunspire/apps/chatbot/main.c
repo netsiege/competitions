@@ -20,7 +20,7 @@
 #define BUFFER_SIZE 1024
 #define MAX_CLIENTS 10
 
-const char *PASSWORD = "aDFld0ZXWkc=";
+const char *PASSWORD = "mqD5uv0j";
 
 typedef struct {
     const char *question;

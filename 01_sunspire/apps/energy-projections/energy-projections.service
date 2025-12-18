@@ -4,8 +4,8 @@ After=network.target
 
 [Service]
 Type=simple
-User=www-data
-Group=www-data
+User=crucible
+Group=crucible
 WorkingDirectory=/var/www/energy-projections
 ExecStart=/usr/bin/python3 /var/www/energy-projections/app.py
 Restart=always
