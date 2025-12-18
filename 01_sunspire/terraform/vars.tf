@@ -40,7 +40,7 @@ variable "vms" {
             macaddr    = "BC:24:11:3A:BE:00"
             cores      = 2
             memory     = 2048
-            disk_size  = "10G"
+            disk_size  = "20G"
             vmid       = 1014
         }
         helios = {
@@ -67,8 +67,53 @@ variable "vms" {
             macaddr    = "BC:24:11:3A:BE:03"
             cores      = 2
             memory     = 2048
-            disk_size  = "10G"
+            disk_size  = "20G"
             vmid       = 1017
+        }
+        forge = {
+            os_type    = "linux"
+            ip_address = "10.100.7.44/18"
+            macaddr    = "BC:24:11:3A:BE:04"
+            cores      = 2
+            memory     = 2048
+            disk_size  = "20G"
+            vmid       = 1018
+        }
+        pyre = {
+            os_type    = "linux"
+            ip_address = "10.100.7.45/18"
+            macaddr    = "BC:24:11:3A:BE:05"
+            cores      = 2
+            memory     = 2048
+            disk_size  = "20G"
+            vmid       = 1019
+        }
+        ember = {
+            os_type    = "windows"
+            ip_address = "10.100.7.46/18"
+            macaddr    = "BC:24:11:3A:BE:06"
+            cores      = 4
+            memory     = 4096
+            disk_size  = "40G"
+            vmid       = 1020
+        }
+        crucible = {
+            os_type    = "linux"
+            ip_address = "10.100.7.47/18"
+            macaddr    = "BC:24:11:3A:BE:07"
+            cores      = 2
+            memory     = 2048
+            disk_size  = "20G"
+            vmid       = 1021
+        }
+        inspire = {
+            os_type    = "linux"
+            ip_address = "10.100.7.48/18"
+            macaddr    = "BC:24:11:3A:BE:08"
+            cores      = 2
+            memory     = 2048
+            disk_size  = "20G"
+            vmid       = 1022
         }
     }
 }
