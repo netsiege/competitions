@@ -1,0 +1,16 @@
+[Unit]
+Description=Sunspire Energy Projections
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/energy-projections
+ExecStart=/usr/bin/python3 /var/www/energy-projections/app.py
+Restart=always
+RestartSec=5
+EnvironmentFile=/var/www/energy-projections/.env
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,17 @@
+# Dev Notes - Energy Projections
+
+## SSRF Endpoint
+
+For internal API calls to forge manufacturing system:
+- Endpoint: http://forge:4000/api/status
+- Auth: User-Agent must be "STARFALLER", token=ab5f4cad309
+
+Example:
+```
+curl -H "User-Agent: STARFALLER" "http://forge:4000/api/info?token=ab5f4cad309"
+```
+
+## TODO
+- [ ] Add authentication
+- [ ] Rate limiting
+- [ ] Input validation on template endpoint

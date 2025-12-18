@@ -1,0 +1,15 @@
+[Unit]
+Description=Sunspire Energy Support Chatbot
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/opt/chatbot
+ExecStart=/opt/chatbot/chatbot
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
