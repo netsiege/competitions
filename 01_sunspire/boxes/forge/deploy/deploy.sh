@@ -38,10 +38,19 @@ apt-get install -y openssh-server
 sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
 sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
 
+# Add authorized key for forge user (lateral movement from inspire)
+mkdir -p /home/forge/.ssh
+chmod 700 /home/forge/.ssh
+cat > /home/forge/.ssh/authorized_keys << 'EOF'
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA1/zzaiFvdi8X9nwzWyXoKY+/c5U6WRLKxerWHLjH9/
+EOF
+chmod 600 /home/forge/.ssh/authorized_keys
+chown -R forge:forge /home/forge/.ssh
+
 systemctl enable sshd
 systemctl start sshd
 
-echo "[+] SSH configured"
+echo "[+] SSH configured (with authorized_keys for lateral movement)"
 
 # ===============================
 # NGINX (Git HTTP Server)
@@ -216,4 +225,5 @@ echo "  - Files: /home/forge/ctrl.txt, /root/ctrl.txt"
 echo ""
 echo "Lateral Movement:"
 echo "  - forge → pyre: Password reuse (h1ewFWZG)"
+echo "  - inspire → forge: SSH key (found in windmilled dev_notes.txt)"
 echo ""

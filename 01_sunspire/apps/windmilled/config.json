@@ -1,0 +1,135 @@
+{
+  "version": "1.3.2",
+  "last_updated": "2024-12-17T06:00:00Z",
+  "turbines": [
+    {
+      "id": "WT-001",
+      "name": "Northern Ridge Alpha",
+      "location": "north",
+      "coordinates": {"lat": 34.0522, "lng": -118.2437},
+      "capacity_kw": 2500,
+      "status": "operational",
+      "rpm": 12.4,
+      "output_kw": 2100,
+      "wind_speed_ms": 8.2,
+      "installed": "2019-03-15"
+    },
+    {
+      "id": "WT-002",
+      "name": "Northern Ridge Beta",
+      "location": "north",
+      "coordinates": {"lat": 34.0535, "lng": -118.2450},
+      "capacity_kw": 2500,
+      "status": "operational",
+      "rpm": 11.8,
+      "output_kw": 1950,
+      "wind_speed_ms": 7.8,
+      "installed": "2019-03-15"
+    },
+    {
+      "id": "WT-003",
+      "name": "Southern Plains Alpha",
+      "location": "south",
+      "coordinates": {"lat": 33.9425, "lng": -118.4081},
+      "capacity_kw": 3000,
+      "status": "operational",
+      "rpm": 14.2,
+      "output_kw": 2750,
+      "wind_speed_ms": 9.5,
+      "installed": "2020-06-22"
+    },
+    {
+      "id": "WT-004",
+      "name": "Southern Plains Beta",
+      "location": "south",
+      "coordinates": {"lat": 33.9440, "lng": -118.4095},
+      "capacity_kw": 3000,
+      "status": "maintenance",
+      "rpm": 0,
+      "output_kw": 0,
+      "wind_speed_ms": 9.3,
+      "installed": "2020-06-22",
+      "maintenance_reason": "Gearbox inspection"
+    },
+    {
+      "id": "WT-005",
+      "name": "Eastern Heights Alpha",
+      "location": "east",
+      "coordinates": {"lat": 34.1478, "lng": -118.1445},
+      "capacity_kw": 2000,
+      "status": "operational",
+      "rpm": 10.5,
+      "output_kw": 1650,
+      "wind_speed_ms": 6.8,
+      "installed": "2018-11-10"
+    },
+    {
+      "id": "WT-006",
+      "name": "Western Valley Alpha",
+      "location": "west",
+      "coordinates": {"lat": 34.0195, "lng": -118.4912},
+      "capacity_kw": 2800,
+      "status": "operational",
+      "rpm": 13.1,
+      "output_kw": 2400,
+      "wind_speed_ms": 8.9,
+      "installed": "2021-02-28"
+    },
+    {
+      "id": "WT-007",
+      "name": "Western Valley Beta",
+      "location": "west",
+      "coordinates": {"lat": 34.0210, "lng": -118.4928},
+      "capacity_kw": 2800,
+      "status": "operational",
+      "rpm": 12.8,
+      "output_kw": 2350,
+      "wind_speed_ms": 8.7,
+      "installed": "2021-02-28"
+    },
+    {
+      "id": "WT-008",
+      "name": "Central Hub Turbine",
+      "location": "central",
+      "coordinates": {"lat": 34.0407, "lng": -118.2468},
+      "capacity_kw": 1500,
+      "status": "operational",
+      "rpm": 9.2,
+      "output_kw": 1100,
+      "wind_speed_ms": 5.5,
+      "installed": "2017-08-05"
+    }
+  ],
+  "maintenance_schedule": [
+    {
+      "turbine_id": "WT-004",
+      "type": "inspection",
+      "description": "Gearbox inspection and lubrication",
+      "scheduled": "2024-12-18T08:00:00Z",
+      "estimated_duration_hours": 4,
+      "technician": "Martinez, J."
+    },
+    {
+      "turbine_id": "WT-001",
+      "type": "routine",
+      "description": "Quarterly blade inspection",
+      "scheduled": "2024-12-20T06:00:00Z",
+      "estimated_duration_hours": 2,
+      "technician": "Chen, W."
+    },
+    {
+      "turbine_id": "WT-005",
+      "type": "upgrade",
+      "description": "Controller firmware update",
+      "scheduled": "2024-12-22T10:00:00Z",
+      "estimated_duration_hours": 1,
+      "technician": "Patel, R."
+    }
+  ],
+  "settings": {
+    "auto_shutdown_wind_speed_ms": 25,
+    "min_operational_wind_speed_ms": 3,
+    "reporting_interval_seconds": 300,
+    "alert_threshold_efficiency": 60
+  }
+}

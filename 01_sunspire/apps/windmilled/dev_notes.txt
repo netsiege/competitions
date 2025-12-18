@@ -1,0 +1,36 @@
+WINDMILLED DEVELOPMENT NOTES
+============================
+
+Last updated: 2024-11-15 by admin
+
+## Deployment to Other Servers
+
+For deploying windmilled to forge, use the SSH key below.
+This key has been set up for automated deployment.
+
+NOTE: This key should be moved to a secure vault - TODO
+
+--- BEGIN SSH KEY ---
+-----BEGIN OPENSSH PRIVATE KEY-----
+b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
+QyNTUxOQAAACANf882ohb3YvF/Z8M1sl6CmPv3OVOlkSysXq1hy4x/fwAAAJggGjM2IBoz
+NgAAAAtzc2gtZWQyNTUxOQAAACANf882ohb3YvF/Z8M1sl6CmPv3OVOlkSysXq1hy4x/fw
+AAAEAznk3CKddPGnMIjGhVUEY55WfYZJQ2jK1TOC2Xk51C3g1/zzaiFvdi8X9nwzWyXoKY
++/c5U6WRLKxerWHLjH9/AAAAD2Frc2hheUBob25vbHVsdQECAwQFBg==
+-----END OPENSSH PRIVATE KEY-----
+--- END SSH KEY ---
+
+## Server Connections
+
+- forge: Use key above, user 'forge'
+- pyre: Shared credentials (check with ops team)
+
+## Known Issues
+
+1. Config import doesn't validate input properly - low priority since internal only
+2. Memory usage spikes during large exports - need to investigate
+3. Service sometimes fails to start on boot - added Restart=always as workaround
+
+## Contact
+
+For issues contact the infrastructure team.

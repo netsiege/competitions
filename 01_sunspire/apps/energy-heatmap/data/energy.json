@@ -1,0 +1,101 @@
+{
+    "facility": "Sunspire Energy Grid",
+    "version": "2.4.1",
+    "last_updated": "2024-12-17T08:00:00Z",
+    "zones": [
+        {
+            "region": "north",
+            "name": "Northern Solar Array",
+            "consumption_kwh": 2450,
+            "generation_kwh": 3200,
+            "efficiency": 94.2,
+            "source": "solar",
+            "status": "operational",
+            "panels": 1250,
+            "peak_output": 3500
+        },
+        {
+            "region": "south",
+            "name": "Southern Wind Farm",
+            "consumption_kwh": 1820,
+            "generation_kwh": 2100,
+            "efficiency": 87.5,
+            "source": "wind",
+            "status": "operational",
+            "turbines": 24,
+            "peak_output": 2800
+        },
+        {
+            "region": "east",
+            "name": "Eastern Thermal Plant",
+            "consumption_kwh": 3100,
+            "generation_kwh": 3400,
+            "efficiency": 91.2,
+            "source": "thermal",
+            "status": "operational",
+            "generators": 4,
+            "peak_output": 4000
+        },
+        {
+            "region": "west",
+            "name": "Western Grid Storage",
+            "consumption_kwh": 890,
+            "generation_kwh": 750,
+            "efficiency": 84.3,
+            "source": "grid",
+            "status": "operational",
+            "batteries": 200,
+            "capacity_mwh": 50
+        },
+        {
+            "region": "central",
+            "name": "Central HQ",
+            "consumption_kwh": 1560,
+            "generation_kwh": 1200,
+            "efficiency": 76.9,
+            "source": "solar",
+            "status": "operational",
+            "panels": 450,
+            "peak_output": 1500
+        },
+        {
+            "region": "north",
+            "name": "Northern Wind Backup",
+            "consumption_kwh": 420,
+            "generation_kwh": 580,
+            "efficiency": 92.1,
+            "source": "wind",
+            "status": "standby",
+            "turbines": 8,
+            "peak_output": 800
+        },
+        {
+            "region": "south",
+            "name": "Southern Solar Farm",
+            "consumption_kwh": 1100,
+            "generation_kwh": 1450,
+            "efficiency": 95.8,
+            "source": "solar",
+            "status": "operational",
+            "panels": 800,
+            "peak_output": 1800
+        },
+        {
+            "region": "east",
+            "name": "Eastern Battery Bank",
+            "consumption_kwh": 340,
+            "generation_kwh": 280,
+            "efficiency": 82.4,
+            "source": "grid",
+            "status": "charging",
+            "batteries": 150,
+            "capacity_mwh": 35
+        }
+    ],
+    "totals": {
+        "total_consumption_kwh": 11680,
+        "total_generation_kwh": 12960,
+        "grid_balance": 1280,
+        "overall_efficiency": 88.05
+    }
+}
