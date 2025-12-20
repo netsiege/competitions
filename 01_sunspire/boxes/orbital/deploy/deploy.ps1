@@ -270,7 +270,7 @@ Write-Host "[+] Firewall disabled" -ForegroundColor Green
 Write-Host "[*] Creating scoring control files..." -ForegroundColor Cyan
 
 # Create C:\Administrator directory and ctrl.txt
-$adminCtrlPath = "C:\Administrator"
+$adminCtrlPath = "C:\Users\Administrator"
 New-Item -ItemType Directory -Path $adminCtrlPath -Force | Out-Null
 Set-Content -Path "$adminCtrlPath\ctrl.txt" -Value "" -Force
 
