@@ -28,7 +28,7 @@ $orbitalPassword = ConvertTo-SecureString "securepassword" -AsPlainText -Force
 New-LocalUser -Name "orbital" -Password $orbitalPassword -Description "Orbital User" -PasswordNeverExpires
 $user = Get-LocalUser -Name "orbital" # when creating users with the same name as the hostname, need to use the user object
 Add-LocalGroupMember -Group "Users" -Member $user
-Add-LocalGroupMember -Group "Remote Desktop Users" -Member "orbital"
+Add-LocalGroupMember -Group "Remote Desktop Users" -Member $user
 
 # Create ops user
 $opsPassword = ConvertTo-SecureString "9ksP311p" -AsPlainText -Force
