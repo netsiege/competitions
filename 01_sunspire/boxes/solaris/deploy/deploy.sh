@@ -64,7 +64,7 @@ User credentials backup:
 # Do not share this file!
 " > /tmp/backup_staging/credentials.txt
 
-cd /tmp/backup_staging
+cd /tmp/backup_staging # cd out
 apt-get install -y zip
 zip /srv/samba/public/backup.zip credentials.txt
 rm -rf /tmp/backup_staging
@@ -92,6 +92,9 @@ systemctl enable smbd
 systemctl restart smbd
 
 echo "[+] Samba configured with anonymous share"
+
+# cd back to deploy directory
+cd -
 
 # ===============================
 # APACHE + PHP WEBSITE (Arbitrary File Upload)

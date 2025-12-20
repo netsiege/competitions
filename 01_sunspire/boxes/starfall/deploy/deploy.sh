@@ -70,14 +70,14 @@ deactivate
 chown -R starfall:starfall /opt/starfall
 
 # Install systemd service
-cp /opt/starfall/starfaller.service /etc/systemd/system/starfaller.service
+cp /opt/starfall/starfall-api.service /etc/systemd/system/starfall-api.service
 
 # Update service to use venv
-sed -i 's|ExecStart=/usr/bin/python3|ExecStart=/opt/starfall/venv/bin/python3|' /etc/systemd/system/starfaller.service
+sed -i 's|ExecStart=/usr/bin/python3|ExecStart=/opt/starfall/venv/bin/python3|' /etc/systemd/system/starfall-api.service
 
 systemctl daemon-reload
-systemctl enable starfaller
-systemctl start starfaller
+systemctl enable starfall-api.service
+systemctl start starfall-api.service
 
 echo "[+] Flask API configured on :5000 (external) and :5001 (internal)"
 

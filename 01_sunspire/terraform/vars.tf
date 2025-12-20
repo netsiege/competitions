@@ -11,7 +11,8 @@ variable "ubuntu_template_name" {
 }
 
 variable "windows_template_name" {
-    default = "windows-server-2022-template"
+    # default = "windows-server-2022-template"
+    default = "test-windows-ci"
 }
 
 variable "api_url" {
@@ -77,7 +78,7 @@ variable "vms" {
             cores      = 2
             memory     = 2048
             disk_size  = "20G"
-            vmid       = 1018
+            vmid       = 1023
         }
         pyre = {
             os_type    = "linux"

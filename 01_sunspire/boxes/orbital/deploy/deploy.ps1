@@ -15,10 +15,19 @@ Write-Host "Orbital is a Windows file processing and scheduling server used by S
 # ===============================
 Write-Host "[*] Creating users..." -ForegroundColor Cyan
 
+# allow weak passwords by modifying local security policy
+secedit /export /cfg C:\secpol.cfg
+(Get-Content C:\secpol.cfg) -replace 'PasswordComplexity = 1', 'PasswordComplexity = 0' `
+                            -replace 'MinimumPasswordLength = \d+', 'MinimumPasswordLength = 0' | Set-Content C:\secpol.cfg
+secedit /configure /db $env:windir\security\local.sdb /cfg C:\secpol.cfg /areas SECURITYPOLICY
+gpupdate /force
+Remove-Item C:\secpol.cfg -Force
+
 # Create orbital user
 $orbitalPassword = ConvertTo-SecureString "securepassword" -AsPlainText -Force
 New-LocalUser -Name "orbital" -Password $orbitalPassword -Description "Orbital User" -PasswordNeverExpires
-Add-LocalGroupMember -Group "Users" -Member "orbital"
+$user = Get-LocalUser -Name "orbital" # when creating users with the same name as the hostname, need to use the user object
+Add-LocalGroupMember -Group "Users" -Member $user
 Add-LocalGroupMember -Group "Remote Desktop Users" -Member "orbital"
 
 # Create ops user
