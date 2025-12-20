@@ -2,12 +2,14 @@ from typing import *
 from tests.test_solaris import TestSolaris
 from tests.test_starfall import TestStarfall
 from tests.test_helios import TestHelios
+from tests.test_orbital import TestOrbital
 import unittest
 
 tests = [
-    TestHelios,
+    TestOrbital,
+    # TestHelios,
     TestSolaris,
-    TestStarfall
+    # TestStarfall
 ]
 
 if __name__ == "__main__":

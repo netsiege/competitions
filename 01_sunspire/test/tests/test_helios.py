@@ -9,6 +9,5 @@ class TestHelios(unittest.TestCase):
         result = test_smb_login(target_ip=self.helios_target_ip, username="helios", password="password")
         self.assertTrue(result.success, msg=result.message)
 
-
 if __name__ == "__main__":
     unittest.main()
