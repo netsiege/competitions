@@ -15,8 +15,16 @@ Write-Host "Helios is a Windows server that is primarily used for administration
 # ===============================
 Write-Host "[*] Creating users..." -ForegroundColor Cyan
 
+# allow weak passwords by modifying local security policy
+secedit /export /cfg C:\secpol.cfg
+(Get-Content C:\secpol.cfg) -replace 'PasswordComplexity = 1', 'PasswordComplexity = 0' `
+                            -replace 'MinimumPasswordLength = \d+', 'MinimumPasswordLength = 0' | Set-Content C:\secpol.cfg
+secedit /configure /db $env:windir\security\local.sdb /cfg C:\secpol.cfg /areas SECURITYPOLICY
+gpupdate /force
+Remove-Item C:\secpol.cfg -Force
+
 # Create helios user (weak password)
-$heliosPassword = ConvertTo-SecureString "Password1!" -AsPlainText -Force
+$heliosPassword = ConvertTo-SecureString "password" -AsPlainText -Force
 New-LocalUser -Name "helios" -Password $heliosPassword -Description "Helios User" -PasswordNeverExpires -ErrorAction SilentlyContinue
 Add-LocalGroupMember -Group "Users" -Member "helios" -ErrorAction SilentlyContinue
 Add-LocalGroupMember -Group "Remote Desktop Users" -Member "helios" -ErrorAction SilentlyContinue
@@ -174,7 +182,7 @@ Write-Host "[+] SSH keys configured for lateral movement" -ForegroundColor Green
 Write-Host "[*] Creating scoring control files..." -ForegroundColor Cyan
 
 # Create C:\Administrator directory and ctrl.txt
-$adminCtrlPath = "C:\Administrator"
+$adminCtrlPath = "C:\Users\Administrator"
 New-Item -ItemType Directory -Path $adminCtrlPath -Force | Out-Null
 Set-Content -Path "$adminCtrlPath\ctrl.txt" -Value "" -Force
 

@@ -8,7 +8,6 @@ if (!file_exists($target_dir)) {
 if(isset($_POST["submit"])) {
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
     
-    // VULNERABLE: No file type validation!
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
         echo "<html><head><style>body{font-family:Arial;background:#1a1a2e;color:#eee;padding:20px;}</style></head><body>";
         echo "<h2>File uploaded successfully!</h2>";
@@ -24,4 +23,4 @@ if(isset($_POST["submit"])) {
 } else {
     header("Location: index.php");
 }
-?>
+?>  

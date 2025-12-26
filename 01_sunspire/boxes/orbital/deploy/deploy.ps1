@@ -15,9 +15,18 @@ Write-Host "Orbital is a Windows file processing and scheduling server used by S
 # ===============================
 Write-Host "[*] Creating users..." -ForegroundColor Cyan
 
+# allow weak passwords by modifying local security policy
+secedit /export /cfg C:\secpol.cfg
+(Get-Content C:\secpol.cfg) -replace 'PasswordComplexity = 1', 'PasswordComplexity = 0' `
+                            -replace 'MinimumPasswordLength = \d+', 'MinimumPasswordLength = 0' | Set-Content C:\secpol.cfg
+secedit /configure /db $env:windir\security\local.sdb /cfg C:\secpol.cfg /areas SECURITYPOLICY
+gpupdate /force
+Remove-Item C:\secpol.cfg -Force
+
 # Create orbital user
-$orbitalPassword = ConvertTo-SecureString "Secure#Pass1" -AsPlainText -Force
+$orbitalPassword = ConvertTo-SecureString "securepassword" -AsPlainText -Force
 New-LocalUser -Name "orbital" -Password $orbitalPassword -Description "Orbital User" -PasswordNeverExpires -ErrorAction SilentlyContinue
+
 Add-LocalGroupMember -Group "Users" -Member "orbital" -ErrorAction SilentlyContinue
 Add-LocalGroupMember -Group "Remote Desktop Users" -Member "orbital" -ErrorAction SilentlyContinue
 
@@ -40,6 +49,38 @@ Write-Host "[*] Configuring SMB share..." -ForegroundColor Cyan
 
 # Create share directory
 $sharePath = "C:\Shares\public"
+
+# Create SMB share with anonymous access
+New-SmbShare -Name "public" -Path $sharePath -FullAccess "Everyone" -Description "Public Share" | Out-Null
+
+# Configure SMB to allow guest access and disable security signatures
+Set-SmbClientConfiguration -EnableInsecureGuestLogons $true -Force
+Set-SmbClientConfiguration -RequireSecuritySignature $false -Force
+
+# Make share directory is set so that Everyone has full control
+$Acl = Get-Acl $sharePath
+$Ar = New-Object System.Security.AccessControl.FileSystemAccessRule("Everyone", "FullControl", "ContainerInherit,ObjectInherit", "None", "Allow")
+$Acl.SetAccessRule($Ar)
+Set-Acl $sharePath $Acl
+
+# Enable guest account and set to never expire
+Set-LocalUser -Name "Guest" -AccountNeverExpires $true
+Enable-LocalUser -Name "Guest"
+
+# Enable guest access for SMB
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" -Name "AllowInsecureGuestAuth" -Value 1 -Type DWord
+
+# Export policy
+secedit /export /cfg C:\sec_smb.cfg
+# Modify policy to allow anonymous access and enumeration
+(Get-Content C:\sec_smb.cfg) -replace 'EveryoneIncludesAnonymous = 0', 'EveryoneIncludesAnonymous = 1' `
+                            -replace 'RestrictAnonymous = 1', 'RestrictAnonymous = 0' | Set-Content C:\sec_smb.cfg
+# Re-import and update
+secedit /configure /db $env:windir\security\local.sdb /cfg C:\sec_smb.cfg /areas SECURITYPOLICY
+gpupdate /force
+Remove-Item C:\sec_smb.cfg
+
+
 New-Item -ItemType Directory -Path $sharePath -Force | Out-Null
 
 # Create MD5 hashes file (one hash is for orbital user password)
@@ -60,7 +101,7 @@ Set-Content -Path "$sharePath\readme.txt" -Value "Orbital File Server - Public S
 Set-Content -Path "$sharePath\maintenance.log" -Value "Last maintenance: 2025-01-15`nNext scheduled: 2025-02-15" -Force
 
 # Create SMB share with anonymous access
-New-SmbShare -Name "public" -Path $sharePath -FullAccess "Everyone" -Description "Public Share" -ErrorAction SilentlyContinue | Out-Null
+New-SmbShare -Name "public" -Path $sharePath -FullAccess "Everyone" -Description "Public Share" | Out-Null
 
 # Enable guest access for SMB
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" -Name "AllowInsecureGuestAuth" -Value 1 -Type DWord
@@ -239,7 +280,7 @@ Write-Host "[+] Firewall disabled" -ForegroundColor Green
 Write-Host "[*] Creating scoring control files..." -ForegroundColor Cyan
 
 # Create C:\Administrator directory and ctrl.txt
-$adminCtrlPath = "C:\Administrator"
+$adminCtrlPath = "C:\Users\Administrator"
 New-Item -ItemType Directory -Path $adminCtrlPath -Force | Out-Null
 Set-Content -Path "$adminCtrlPath\ctrl.txt" -Value "" -Force
 

@@ -11,7 +11,8 @@ variable "ubuntu_template_name" {
 }
 
 variable "windows_template_name" {
-    default = "windows-server-2022-template"
+    # default = "windows-server-2022-template"
+    default = "test-windows-ci"
 }
 
 variable "api_url" {
