@@ -16,16 +16,16 @@ Write-Host "Orbital is a Windows file processing and scheduling server used by S
 Write-Host "[*] Creating users..." -ForegroundColor Cyan
 
 # Create orbital user
-$orbitalPassword = ConvertTo-SecureString "securepassword" -AsPlainText -Force
-New-LocalUser -Name "orbital" -Password $orbitalPassword -Description "Orbital User" -PasswordNeverExpires
-Add-LocalGroupMember -Group "Users" -Member "orbital"
-Add-LocalGroupMember -Group "Remote Desktop Users" -Member "orbital"
+$orbitalPassword = ConvertTo-SecureString "Secure#Pass1" -AsPlainText -Force
+New-LocalUser -Name "orbital" -Password $orbitalPassword -Description "Orbital User" -PasswordNeverExpires -ErrorAction SilentlyContinue
+Add-LocalGroupMember -Group "Users" -Member "orbital" -ErrorAction SilentlyContinue
+Add-LocalGroupMember -Group "Remote Desktop Users" -Member "orbital" -ErrorAction SilentlyContinue
 
 # Create ops user
 $opsPassword = ConvertTo-SecureString "9ksP311p" -AsPlainText -Force
-New-LocalUser -Name "ops" -Password $opsPassword -Description "Operations User" -PasswordNeverExpires
-Add-LocalGroupMember -Group "Users" -Member "ops"
-Add-LocalGroupMember -Group "Remote Desktop Users" -Member "ops"
+New-LocalUser -Name "ops" -Password $opsPassword -Description "Operations User" -PasswordNeverExpires -ErrorAction SilentlyContinue
+Add-LocalGroupMember -Group "Users" -Member "ops" -ErrorAction SilentlyContinue
+Add-LocalGroupMember -Group "Remote Desktop Users" -Member "ops" -ErrorAction SilentlyContinue
 
 # Set Administrator password
 $adminPassword = ConvertTo-SecureString "5EVB7Zmp" -AsPlainText -Force
@@ -60,7 +60,7 @@ Set-Content -Path "$sharePath\readme.txt" -Value "Orbital File Server - Public S
 Set-Content -Path "$sharePath\maintenance.log" -Value "Last maintenance: 2025-01-15`nNext scheduled: 2025-02-15" -Force
 
 # Create SMB share with anonymous access
-New-SmbShare -Name "public" -Path $sharePath -FullAccess "Everyone" -Description "Public Share" | Out-Null
+New-SmbShare -Name "public" -Path $sharePath -FullAccess "Everyone" -Description "Public Share" -ErrorAction SilentlyContinue | Out-Null
 
 # Enable guest access for SMB
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" -Name "AllowInsecureGuestAuth" -Value 1 -Type DWord
@@ -78,7 +78,7 @@ New-Item -ItemType Directory -Path $backupDir -Force | Out-Null
 
 # Copy the backup agent executable
 # Note: backup.exe should be pre-compiled from orbital-backup Go project
-Copy-Item -Path "..\..\..\apps\orbital-backup\backup.exe" -Destination "$backupDir\backup.exe" -Force -ErrorAction SilentlyContinue
+Copy-Item -Path "C:\sunspire\apps\orbital-backup\backup.exe" -Destination "$backupDir\backup.exe" -Force -ErrorAction SilentlyContinue
 
 # If backup.exe doesn't exist, create a dummy placeholder
 if (-not (Test-Path "$backupDir\backup.exe")) {
@@ -144,6 +144,7 @@ $trigger = New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (Ne
 $principal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -LogonType ServiceAccount -RunLevel Highest
 $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries
 
+Unregister-ScheduledTask -TaskName "SolarTelemetry" -Confirm:$false -ErrorAction SilentlyContinue
 Register-ScheduledTask -TaskName "SolarTelemetry" -Action $action -Trigger $trigger -Principal $principal -Settings $settings -Description "Collects system telemetry metrics" | Out-Null
 
 Write-Host "[+] Scheduled task created (world-writable script)" -ForegroundColor Green
@@ -190,11 +191,15 @@ prompt for credentials:i:0
 "@
 Set-Content -Path "$orbitalDocs\helios-admin.rdp" -Value $rdpContent -Force
 
-# Set ownership to orbital
-$acl = Get-Acl $orbitalDocs
-$accessRule = New-Object System.Security.AccessControl.FileSystemAccessRule("orbital", "FullControl", "ContainerInherit,ObjectInherit", "None", "Allow")
-$acl.SetAccessRule($accessRule)
-Set-Acl -Path $orbitalDocs -AclObject $acl
+# Set ownership to orbital (if user exists)
+try {
+    $acl = Get-Acl $orbitalDocs
+    $accessRule = New-Object System.Security.AccessControl.FileSystemAccessRule("orbital", "FullControl", "ContainerInherit,ObjectInherit", "None", "Allow")
+    $acl.SetAccessRule($accessRule)
+    Set-Acl -Path $orbitalDocs -AclObject $acl
+} catch {
+    Write-Host "    Note: Could not set ACL for orbital user" -ForegroundColor Yellow
+}
 
 Write-Host "[+] RDP file created for lateral movement" -ForegroundColor Green
 
@@ -278,7 +283,7 @@ Write-Host "  - RDP (Remote Desktop on :3389)"
 Write-Host "  - MSSQL (Pending - run Install-MSSQL.ps1)"
 Write-Host ""
 Write-Host "Users:" -ForegroundColor Cyan
-Write-Host "  - orbital:securepassword"
+Write-Host "  - orbital:Secure#Pass1"
 Write-Host "  - ops:9ksP311p"
 Write-Host "  - Administrator:5EVB7Zmp"
 Write-Host ""

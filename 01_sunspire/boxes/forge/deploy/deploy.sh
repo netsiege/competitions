@@ -47,8 +47,8 @@ EOF
 chmod 600 /home/forge/.ssh/authorized_keys
 chown -R forge:forge /home/forge/.ssh
 
-systemctl enable sshd
-systemctl start sshd
+systemctl enable ssh
+systemctl start ssh
 
 echo "[+] SSH configured (with authorized_keys for lateral movement)"
 
@@ -60,7 +60,7 @@ echo "[*] Installing Nginx..."
 apt-get install -y nginx git
 
 # Copy nginx config
-cp nginx-git.conf /etc/nginx/sites-available/git
+cp /opt/sunspire/boxes/forge/deploy/nginx-git.conf /etc/nginx/sites-available/git
 ln -sf /etc/nginx/sites-available/git /etc/nginx/sites-enabled/git
 rm -f /etc/nginx/sites-enabled/default
 
@@ -77,8 +77,8 @@ echo "[+] Nginx configured"
 echo "[*] Creating Git HTTP repository..."
 
 # Run the init-repo script
-chmod +x init-repo.sh
-./init-repo.sh
+chmod +x /opt/sunspire/boxes/forge/deploy/init-repo.sh
+/opt/sunspire/boxes/forge/deploy/init-repo.sh
 
 echo "[+] Git HTTP repository created"
 
@@ -90,15 +90,22 @@ echo "[*] Installing Forge API..."
 apt-get install -y python3 python3-pip python3-venv
 
 # Copy API to /root/forge-api
-cp -Rf ../../../apps/forge-api /root/
+cp -Rf /opt/sunspire/apps/forge-api /root/
 rm /root/forge-api/README.md
 
-# Install dependencies
+# Install dependencies using venv
 cd /root/forge-api
-pip3 install -r requirements.txt --break-system-packages
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+deactivate
 
 # Install systemd service
 cp forge-api.service /etc/systemd/system/
+
+# Update service to use venv
+sed -i 's|ExecStart=.*python3|ExecStart=/root/forge-api/venv/bin/python3|' /etc/systemd/system/forge-api.service
+
 systemctl daemon-reload
 systemctl enable forge-api
 systemctl start forge-api
@@ -167,7 +174,7 @@ echo "[+] Manufacturing scripts repository created (hooks writable)"
 echo "[*] Setting up root cron job..."
 
 # Copy cron script
-cp root-cron.sh /usr/local/bin/forge-build.sh
+cp /opt/sunspire/boxes/forge/deploy/root-cron.sh /usr/local/bin/forge-build.sh
 chmod +x /usr/local/bin/forge-build.sh
 
 # Add cron job for root - runs every 5 minutes

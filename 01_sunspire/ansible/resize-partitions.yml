@@ -1,0 +1,176 @@
+---
+# Ansible playbook to resize root partitions on VMs after Terraform provisioning
+# Usage: ansible-playbook -i inventory.ini resize-partitions.yml
+
+- name: Resize root partitions on Linux VMs
+  hosts: linux
+  become: yes
+  gather_facts: yes
+  tasks:
+    - name: Install required packages
+      apt:
+        name:
+          - cloud-guest-utils
+          - parted
+        state: present
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+
+    - name: Get root device
+      shell: findmnt -n -o SOURCE /
+      register: root_device
+      changed_when: false
+
+    - name: Check if root is on LVM
+      set_fact:
+        is_lvm: "{{ '/dev/mapper/' in root_device.stdout or '/dev/dm-' in root_device.stdout }}"
+
+    # ===== LVM-based systems (Ubuntu default) =====
+    - name: Get LVM physical volume device
+      shell: pvs --noheadings -o pv_name | head -1 | tr -d ' '
+      register: pv_device
+      when: is_lvm
+      changed_when: false
+
+    - name: Get physical disk from PV
+      shell: |
+        pv="{{ pv_device.stdout }}"
+        # Extract base disk (e.g., /dev/sda from /dev/sda3)
+        echo "$pv" | sed 's/[0-9]*$//'
+      register: physical_disk
+      when: is_lvm
+      changed_when: false
+
+    - name: Get partition number from PV
+      shell: |
+        pv="{{ pv_device.stdout }}"
+        echo "$pv" | grep -o '[0-9]*$'
+      register: partition_num
+      when: is_lvm
+      changed_when: false
+
+    - name: Grow physical partition containing LVM PV
+      command: growpart {{ physical_disk.stdout }} {{ partition_num.stdout }}
+      register: growpart_result
+      when: is_lvm
+      changed_when: "'CHANGED' in growpart_result.stdout"
+      failed_when:
+        - growpart_result.rc != 0
+        - "'NOCHANGE' not in growpart_result.stdout"
+
+    - name: Resize LVM physical volume
+      command: pvresize {{ pv_device.stdout }}
+      when: is_lvm
+      register: pvresize_result
+      changed_when: "'successfully resized' in pvresize_result.stdout or pvresize_result.rc == 0"
+
+    - name: Get VG and LV names
+      shell: lvs --noheadings -o vg_name,lv_name $(findmnt -n -o SOURCE /) | awk '{print $1, $2}'
+      register: lv_info
+      when: is_lvm
+      changed_when: false
+
+    - name: Extend logical volume to use all free space
+      command: lvextend -l +100%FREE /dev/{{ lv_info.stdout.split()[0] }}/{{ lv_info.stdout.split()[1] }}
+      when: is_lvm
+      register: lvextend_result
+      changed_when: "'successfully resized' in lvextend_result.stdout"
+      failed_when:
+        - lvextend_result.rc != 0
+        - "'matches existing size' not in lvextend_result.stderr"
+        - "'unchanged' not in lvextend_result.stderr"
+
+    - name: Resize ext4 filesystem (LVM)
+      command: resize2fs {{ root_device.stdout }}
+      when: 
+        - is_lvm
+        - ansible_mounts | selectattr('mount', 'equalto', '/') | map(attribute='fstype') | first == 'ext4'
+
+    - name: Resize XFS filesystem (LVM)
+      command: xfs_growfs /
+      when:
+        - is_lvm
+        - ansible_mounts | selectattr('mount', 'equalto', '/') | map(attribute='fstype') | first == 'xfs'
+
+    # ===== Non-LVM systems (simple partitions) =====
+    - name: Extract disk and partition number (non-LVM)
+      set_fact:
+        root_disk: "{{ root_device.stdout | regex_replace('p?[0-9]+$', '') }}"
+        root_partition: "{{ root_device.stdout | regex_search('[0-9]+$') }}"
+      when: not is_lvm
+
+    - name: Grow partition (non-LVM)
+      command: growpart {{ root_disk }} {{ root_partition }}
+      register: growpart_simple
+      when: not is_lvm
+      changed_when: "'CHANGED' in growpart_simple.stdout"
+      failed_when:
+        - growpart_simple.rc != 0
+        - "'NOCHANGE' not in growpart_simple.stdout"
+
+    - name: Resize ext4 filesystem (non-LVM)
+      command: resize2fs {{ root_device.stdout }}
+      when:
+        - not is_lvm
+        - ansible_mounts | selectattr('mount', 'equalto', '/') | map(attribute='fstype') | first == 'ext4'
+
+    - name: Resize XFS filesystem (non-LVM)
+      command: xfs_growfs /
+      when:
+        - not is_lvm
+        - ansible_mounts | selectattr('mount', 'equalto', '/') | map(attribute='fstype') | first == 'xfs'
+
+    # ===== Final output =====
+    - name: Display new disk space
+      command: df -h /
+      register: disk_space
+      changed_when: false
+
+    - name: Show disk space
+      debug:
+        msg: "{{ disk_space.stdout_lines }}"
+
+
+- name: Resize root partitions on Windows VMs
+  hosts: windows
+  gather_facts: yes
+  tasks:
+    - name: Get C drive current size
+      win_shell: |
+        $drive = Get-Partition -DriveLetter C
+        $size = Get-PartitionSupportedSize -DriveLetter C
+        [PSCustomObject]@{
+          CurrentSize = [math]::Round($drive.Size / 1GB, 2)
+          MaxSize = [math]::Round($size.SizeMax / 1GB, 2)
+        } | ConvertTo-Json
+      register: drive_info
+
+    - name: Parse drive info
+      set_fact:
+        drive_data: "{{ drive_info.stdout | from_json }}"
+
+    - name: Display current vs max size
+      debug:
+        msg: "C: drive is {{ drive_data.CurrentSize }}GB, can expand to {{ drive_data.MaxSize }}GB"
+
+    - name: Extend C drive to maximum size
+      win_shell: |
+        $size = Get-PartitionSupportedSize -DriveLetter C
+        if ($size.SizeMax -gt (Get-Partition -DriveLetter C).Size) {
+          Resize-Partition -DriveLetter C -Size $size.SizeMax
+          "RESIZED"
+        } else {
+          "NO_CHANGE"
+        }
+      register: resize_result
+      changed_when: "'RESIZED' in resize_result.stdout"
+
+    - name: Get final C drive size
+      win_shell: |
+        $drive = Get-Volume -DriveLetter C
+        "C: drive size: $([math]::Round($drive.Size / 1GB, 2))GB, Free: $([math]::Round($drive.SizeRemaining / 1GB, 2))GB"
+      register: final_size
+
+    - name: Show final disk space
+      debug:
+        msg: "{{ final_size.stdout }}"

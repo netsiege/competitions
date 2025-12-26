@@ -37,8 +37,8 @@ apt-get install -y openssh-server
 # Enable password authentication
 sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
 sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
-systemctl enable sshd
-systemctl start sshd
+systemctl enable ssh
+systemctl start ssh
 
 # ===============================
 # energy-projections service
@@ -46,11 +46,15 @@ systemctl start sshd
 echo "[*] Configuring energy-projections service..."
 
 apt-get install -y python3 python3-pip python3-venv
-cp -Rf ../../../apps/energy-projections /var/www/energy-projections
+mkdir -p /var/www
+cp -Rf /opt/sunspire/apps/energy-projections /var/www/energy-projections
 chown -R crucible:crucible /var/www/energy-projections
 
 cd /var/www/energy-projections
-pip3 install -r requirements.txt --break-system-packages
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+deactivate
 
 cp /var/www/energy-projections/energy-projections.service /etc/systemd/system/energy-projections.service
 systemctl daemon-reload
@@ -69,7 +73,7 @@ echo "[*] Configuring chatbot service..."
 apt-get install -y build-essential
 
 # Copy chatbot source to /tmp and build
-CHATBOT_SRC="$(pwd)/../../../apps/chatbot"
+CHATBOT_SRC="/opt/sunspire/apps/chatbot"
 if [ -d "$CHATBOT_SRC" ]; then
 	echo "[+] Found chatbot source at $CHATBOT_SRC"
 	mkdir -p /opt/chatbot

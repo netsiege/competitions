@@ -16,22 +16,22 @@ Write-Host "Helios is a Windows server that is primarily used for administration
 Write-Host "[*] Creating users..." -ForegroundColor Cyan
 
 # Create helios user (weak password)
-$heliosPassword = ConvertTo-SecureString "password" -AsPlainText -Force
-New-LocalUser -Name "helios" -Password $heliosPassword -Description "Helios User" -PasswordNeverExpires
-Add-LocalGroupMember -Group "Users" -Member "helios"
-Add-LocalGroupMember -Group "Remote Desktop Users" -Member "helios"
+$heliosPassword = ConvertTo-SecureString "Password1!" -AsPlainText -Force
+New-LocalUser -Name "helios" -Password $heliosPassword -Description "Helios User" -PasswordNeverExpires -ErrorAction SilentlyContinue
+Add-LocalGroupMember -Group "Users" -Member "helios" -ErrorAction SilentlyContinue
+Add-LocalGroupMember -Group "Remote Desktop Users" -Member "helios" -ErrorAction SilentlyContinue
 
 # Create pyre user (same password as pyre user on pyre server - password reuse)
 $pyrePassword = ConvertTo-SecureString "h1ewFWZG" -AsPlainText -Force
-New-LocalUser -Name "pyre" -Password $pyrePassword -Description "Pyre User" -PasswordNeverExpires
-Add-LocalGroupMember -Group "Users" -Member "pyre"
-Add-LocalGroupMember -Group "Remote Desktop Users" -Member "pyre"
+New-LocalUser -Name "pyre" -Password $pyrePassword -Description "Pyre User" -PasswordNeverExpires -ErrorAction SilentlyContinue
+Add-LocalGroupMember -Group "Users" -Member "pyre" -ErrorAction SilentlyContinue
+Add-LocalGroupMember -Group "Remote Desktop Users" -Member "pyre" -ErrorAction SilentlyContinue
 
 # Create ops user
 $opsPassword = ConvertTo-SecureString "9ksP311p" -AsPlainText -Force
-New-LocalUser -Name "ops" -Password $opsPassword -Description "Operations User" -PasswordNeverExpires
-Add-LocalGroupMember -Group "Users" -Member "ops"
-Add-LocalGroupMember -Group "Remote Desktop Users" -Member "ops"
+New-LocalUser -Name "ops" -Password $opsPassword -Description "Operations User" -PasswordNeverExpires -ErrorAction SilentlyContinue
+Add-LocalGroupMember -Group "Users" -Member "ops" -ErrorAction SilentlyContinue
+Add-LocalGroupMember -Group "Remote Desktop Users" -Member "ops" -ErrorAction SilentlyContinue
 
 # Set Administrator password
 $adminPassword = ConvertTo-SecureString "BTw5hYqi" -AsPlainText -Force
@@ -157,7 +157,7 @@ New-Item -ItemType Directory -Path $heliosSshPath -Force | Out-Null
 
 # Copy SSH keys from credentials directory
 # These keys can be used to SSH into starfall
-Copy-Item -Path "..\..\..\credentials\sunspire_key\id_rsa" -Destination "$heliosSshPath\id_rsa" -Force
+Copy-Item -Path "C:\sunspire\credentials\sunspire_key\id_rsa" -Destination "$heliosSshPath\id_rsa" -Force
 
 # Create a readme hint
 $sshReadme = @"

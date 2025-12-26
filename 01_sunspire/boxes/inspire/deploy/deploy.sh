@@ -38,8 +38,8 @@ apt-get install -y openssh-server
 sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
 sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
 
-systemctl enable sshd
-systemctl start sshd
+systemctl enable ssh
+systemctl start ssh
 
 echo "[+] SSH configured"
 
@@ -114,7 +114,8 @@ echo "[*] Installing Apache and PHP..."
 apt-get install -y apache2 php php-mysql php-json jq
 
 # Copy Energy Heatmap application
-cp -Rf ../../../apps/energy-heatmap /var/www/html/
+cp -Rf /opt/sunspire/apps/energy-heatmap /var/www/html/
+rm -rf /var/www/html/data
 mv /var/www/html/energy-heatmap/* /var/www/html/
 rm -rf /var/www/html/energy-heatmap
 rm -f /var/www/html/index.html
@@ -138,15 +139,22 @@ echo "[*] Installing Windmilled API..."
 apt-get install -y python3 python3-pip python3-venv
 
 # Copy Windmilled to /root (runs as root - vulnerable!)
-cp -Rf ../../../apps/windmilled /root/
+cp -Rf /opt/sunspire/apps/windmilled /root/
 rm -f /root/windmilled/README.md
 
-# Install dependencies
+# Install dependencies using venv
 cd /root/windmilled
-pip3 install -r requirements.txt --break-system-packages
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+deactivate
 
 # Install systemd service
 cp windmilled.service /etc/systemd/system/
+
+# Update service to use venv
+sed -i 's|ExecStart=.*python3|ExecStart=/root/windmilled/venv/bin/python3|' /etc/systemd/system/windmilled.service
+
 systemctl daemon-reload
 systemctl enable windmilled
 systemctl start windmilled

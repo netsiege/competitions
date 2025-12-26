@@ -1,0 +1,108 @@
+---
+# Sunspire Log Fetcher Playbook
+# Downloads deploy logs from all VMs
+#
+# Usage:
+#   ansible-playbook -i inventory.ini fetch-logs.yml
+#   ansible-playbook -i inventory.ini fetch-logs.yml --limit linux
+#   ansible-playbook -i inventory.ini fetch-logs.yml --limit windows
+
+- name: Setup log directory
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Get timestamp
+      set_fact:
+        log_timestamp: "{{ lookup('pipe', 'date +%Y%m%d_%H%M%S') }}"
+
+    - name: Create local logs directory
+      file:
+        path: "{{ playbook_dir }}/../deploy-logs/{{ log_timestamp }}"
+        state: directory
+      register: logs_dir
+
+    - name: Set logs directory fact
+      set_fact:
+        local_logs_dir: "{{ logs_dir.path }}"
+        cacheable: yes
+
+
+- name: Fetch logs from Linux VMs
+  hosts: linux
+  gather_facts: no
+  vars:
+    remote_log: "/var/log/deploy-{{ inventory_hostname }}.log"
+
+  tasks:
+    - name: Check if log file exists
+      stat:
+        path: "{{ remote_log }}"
+      register: log_stat
+
+    - name: Fetch log file
+      fetch:
+        src: "{{ remote_log }}"
+        dest: "{{ hostvars['localhost']['local_logs_dir'] }}/{{ inventory_hostname }}.log"
+        flat: yes
+      when: log_stat.stat.exists
+      register: fetch_result
+
+    - name: Report log fetched
+      debug:
+        msg: "Log fetched from {{ inventory_hostname }}"
+      when: log_stat.stat.exists
+
+    - name: Report log not found
+      debug:
+        msg: "Log file not found on {{ inventory_hostname }}"
+      when: not log_stat.stat.exists
+
+
+- name: Fetch logs from Windows VMs
+  hosts: windows
+  gather_facts: no
+  vars:
+    remote_log: "C:\\Windows\\Temp\\deploy-{{ inventory_hostname }}.log"
+
+  tasks:
+    - name: Check if log file exists
+      win_stat:
+        path: "{{ remote_log }}"
+      register: log_stat
+
+    - name: Fetch log file
+      fetch:
+        src: "{{ remote_log }}"
+        dest: "{{ hostvars['localhost']['local_logs_dir'] }}/{{ inventory_hostname }}.log"
+        flat: yes
+      when: log_stat.stat.exists
+      register: fetch_result
+
+    - name: Report log fetched
+      debug:
+        msg: "Log fetched from {{ inventory_hostname }}"
+      when: log_stat.stat.exists
+
+    - name: Report log not found
+      debug:
+        msg: "Log file not found on {{ inventory_hostname }}"
+      when: not log_stat.stat.exists
+
+
+- name: Summary
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: List downloaded logs
+      find:
+        paths: "{{ local_logs_dir }}"
+        patterns: "*.log"
+      register: log_files
+
+    - name: Display summary
+      debug:
+        msg: |
+          ========================================
+          Logs downloaded: {{ log_files.files | length }}
+          Location: {{ local_logs_dir }}
+          ========================================

@@ -7,10 +7,9 @@ Type=simple
 User=crucible
 Group=crucible
 WorkingDirectory=/var/www/energy-projections
-ExecStart=/usr/bin/python3 /var/www/energy-projections/app.py
+ExecStart=/var/www/energy-projections/venv/bin/python /var/www/energy-projections/app.py
 Restart=always
 RestartSec=5
-EnvironmentFile=/var/www/energy-projections/.env
 
 [Install]
 WantedBy=multi-user.target

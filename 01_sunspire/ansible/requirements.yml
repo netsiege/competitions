@@ -1,0 +1,12 @@
+---
+# Ansible Galaxy requirements for Sunspire deployment
+# Install with: ansible-galaxy collection install -r requirements.yml
+
+collections:
+  # Required for Windows PSRP connection
+  - name: ansible.windows
+    version: ">=2.0.0"
+  
+  # Required for PSRP connection plugin
+  - name: community.windows
+    version: ">=2.0.0"

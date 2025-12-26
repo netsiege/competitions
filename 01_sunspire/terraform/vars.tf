@@ -77,7 +77,7 @@ variable "vms" {
             cores      = 2
             memory     = 2048
             disk_size  = "20G"
-            vmid       = 1018
+            vmid       = 1023
         }
         pyre = {
             os_type    = "linux"

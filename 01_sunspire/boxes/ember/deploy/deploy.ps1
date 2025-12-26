@@ -20,13 +20,13 @@ Write-Host "[*] Creating users..."
 
 # Create ember user
 $EmberPassword = ConvertTo-SecureString "J4f9juEr" -AsPlainText -Force
-New-LocalUser -Name "ember" -Password $EmberPassword -FullName "Ember User" -Description "Legacy admin account" -PasswordNeverExpires
-Add-LocalGroupMember -Group "Remote Desktop Users" -Member "ember"
+New-LocalUser -Name "ember" -Password $EmberPassword -FullName "Ember User" -Description "Legacy admin account" -PasswordNeverExpires -ErrorAction SilentlyContinue
+Add-LocalGroupMember -Group "Remote Desktop Users" -Member "ember" -ErrorAction SilentlyContinue
 
 # Create ops user
 $OpsPassword = ConvertTo-SecureString "9ksP311p" -AsPlainText -Force
-New-LocalUser -Name "ops" -Password $OpsPassword -FullName "Operations" -Description "Operations account" -PasswordNeverExpires
-Add-LocalGroupMember -Group "Remote Desktop Users" -Member "ops"
+New-LocalUser -Name "ops" -Password $OpsPassword -FullName "Operations" -Description "Operations account" -PasswordNeverExpires -ErrorAction SilentlyContinue
+Add-LocalGroupMember -Group "Remote Desktop Users" -Member "ops" -ErrorAction SilentlyContinue
 
 # Set Administrator password
 $AdminPassword = ConvertTo-SecureString "RM1dT8zj" -AsPlainText -Force
@@ -79,32 +79,61 @@ Write-Host "[*] Installing PHP..."
 $PhpPath = "C:\PHP"
 New-Item -ItemType Directory -Path $PhpPath -Force | Out-Null
 
-# Extract PHP (assumes php.zip is in same directory as deploy.ps1)
-$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-if (Test-Path "$ScriptDir\php.zip") {
-    Expand-Archive -Path "$ScriptDir\php.zip" -DestinationPath $PhpPath -Force
+# Check for local php.zip first
+$PhpZipPath = "C:\sunspire\boxes\ember\deploy\php.zip"
+if (-not (Test-Path $PhpZipPath)) {
+    # Download PHP from official source if not present
+    Write-Host "[*] Downloading PHP 8.1 from official source..."
+    $PhpUrl = "https://windows.php.net/downloads/releases/php-8.1.34-nts-Win32-vs16-x64.zip"
+    $TempPhpZip = "$env:TEMP\php-latest.zip"
     
-    # Create php.ini from production template
-    if (Test-Path "$PhpPath\php.ini-production") {
-        Copy-Item "$PhpPath\php.ini-production" "$PhpPath\php.ini"
+    try {
+        # Use TLS 1.2 for secure download
+        [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12
+        Invoke-WebRequest -Uri $PhpUrl -OutFile $TempPhpZip -UseBasicParsing -TimeoutSec 300
+        $PhpZipPath = $TempPhpZip
+        Write-Host "[+] PHP downloaded successfully"
+    } catch {
+        Write-Host "[!] Failed to download PHP: $($_.Exception.Message)"
+        Write-Host "[!] Attempting alternative download method..."
+        try {
+            (New-Object System.Net.WebClient).DownloadFile($PhpUrl, $TempPhpZip)
+            $PhpZipPath = $TempPhpZip
+            Write-Host "[+] PHP downloaded successfully (WebClient)"
+        } catch {
+            Write-Host "[!] Alternative download also failed: $($_.Exception.Message)"
+            $PhpZipPath = $null
+        }
     }
-} else {
-    Write-Host "[!] WARNING: php.zip not found in deploy directory"
-    Write-Host "[!] Please download PHP and place it there, then re-run this section"
 }
 
-# Configure IIS FastCGI for PHP
-if (Test-Path "$PhpPath\php-cgi.exe") {
-    # Add PHP handler
-    & "$env:windir\system32\inetsrv\appcmd.exe" set config /section:system.webServer/fastCGI "/+[fullPath='$PhpPath\php-cgi.exe']"
-    & "$env:windir\system32\inetsrv\appcmd.exe" set config /section:system.webServer/handlers "/+[name='PHP_via_FastCGI',path='*.php',verb='*',modules='FastCgiModule',scriptProcessor='$PhpPath\php-cgi.exe',resourceType='Either']"
-    
-    # Set index.php as default document
-    & "$env:windir\system32\inetsrv\appcmd.exe" set config /section:defaultDocument "/+files.[value='index.php']"
-    
-    Write-Host "[+] PHP configured with IIS"
+if ($PhpZipPath -and (Test-Path $PhpZipPath)) {
+    try {
+        Expand-Archive -Path $PhpZipPath -DestinationPath $PhpPath -Force
+        
+        # Create php.ini from production template
+        if (Test-Path "$PhpPath\php.ini-production") {
+            Copy-Item "$PhpPath\php.ini-production" "$PhpPath\php.ini"
+        }
+        
+        # Configure IIS FastCGI for PHP
+        if (Test-Path "$PhpPath\php-cgi.exe") {
+            # Add PHP handler
+            & "$env:windir\system32\inetsrv\appcmd.exe" set config /section:system.webServer/fastCGI "/+[fullPath='$PhpPath\php-cgi.exe']"
+            & "$env:windir\system32\inetsrv\appcmd.exe" set config /section:system.webServer/handlers "/+[name='PHP_via_FastCGI',path='*.php',verb='*',modules='FastCgiModule',scriptProcessor='$PhpPath\php-cgi.exe',resourceType='Either']"
+            
+            # Set index.php as default document
+            & "$env:windir\system32\inetsrv\appcmd.exe" set config /section:defaultDocument "/+files.[value='index.php']"
+            
+            Write-Host "[+] PHP configured with IIS"
+        } else {
+            Write-Host "[!] php-cgi.exe not found in extracted PHP"
+        }
+    } catch {
+        Write-Host "[!] Error extracting or configuring PHP: $_"
+    }
 } else {
-    Write-Host "[!] php-cgi.exe not found - PHP not configured"
+    Write-Host "[!] PHP zip file not available - PHP will not be configured"
 }
 
 # ===============================
@@ -114,9 +143,9 @@ Write-Host "[*] Deploying website..."
 
 $WebRoot = "C:\inetpub\wwwroot"
 
-# Copy website files (assumes running from deploy directory)
-Copy-Item -Path "$ScriptDir\..\..\..\apps\ember-site\index.php" -Destination "$WebRoot\index.php" -Force
-Copy-Item -Path "$ScriptDir\..\..\..\apps\ember-site\info.php" -Destination "$WebRoot\info.php" -Force
+# Copy website files
+Copy-Item -Path "C:\sunspire\apps\ember-site\index.php" -Destination "$WebRoot\index.php" -Force
+Copy-Item -Path "C:\sunspire\apps\ember-site\info.php" -Destination "$WebRoot\info.php" -Force
 
 # Remove default IIS files
 Remove-Item -Path "$WebRoot\iisstart.htm" -Force -ErrorAction SilentlyContinue
@@ -133,8 +162,8 @@ Write-Host "[*] Creating SMB share..."
 $ScriptsPath = "C:\Scripts"
 New-Item -ItemType Directory -Path $ScriptsPath -Force | Out-Null
 
-# Copy maintenance script (from deploy directory)
-Copy-Item -Path "$ScriptDir\maintenance.ps1" -Destination "$ScriptsPath\maintenance.ps1" -Force
+# Copy maintenance script
+Copy-Item -Path "C:\sunspire\boxes\ember\deploy\maintenance.ps1" -Destination "$ScriptsPath\maintenance.ps1" -Force
 
 # Create additional dummy scripts to make share look more legitimate
 $BackupScript = @'
@@ -207,7 +236,7 @@ $Acl.SetAccessRule($AccessRule)
 Set-Acl -Path $ScriptsPath -AclObject $Acl
 
 # Create SMB share with anonymous access
-New-SmbShare -Name "Scripts" -Path $ScriptsPath -FullAccess "Everyone" -Description "Maintenance scripts"
+New-SmbShare -Name "Scripts" -Path $ScriptsPath -FullAccess "Everyone" -Description "Maintenance scripts" -ErrorAction SilentlyContinue
 
 # Enable anonymous SMB access
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" -Name "RestrictNullSessAccess" -Value 0 -Type DWord
@@ -238,6 +267,7 @@ $Trigger = New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (Ne
 $Principal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -LogonType ServiceAccount -RunLevel Highest
 $Settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable
 
+Unregister-ScheduledTask -TaskName "SystemMaintenance" -Confirm:$false -ErrorAction SilentlyContinue
 Register-ScheduledTask -TaskName "SystemMaintenance" -Action $Action -Trigger $Trigger -Principal $Principal -Settings $Settings -Description "Automated system maintenance"
 
 Write-Host "[+] Scheduled task created (runs as SYSTEM every 5 minutes)"

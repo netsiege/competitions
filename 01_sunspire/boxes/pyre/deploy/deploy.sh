@@ -38,8 +38,8 @@ apt-get install -y openssh-server
 sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
 sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
 
-systemctl enable sshd
-systemctl start sshd
+systemctl enable ssh
+systemctl start ssh
 
 echo "[+] SSH configured"
 
@@ -52,7 +52,7 @@ echo "[*] Installing Apache, PHP, and MySQL..."
 apt-get install -y apache2 php php-mysql libapache2-mod-php mysql-server
 
 # Copy webapp to webroot
-cp -Rf ../../../apps/pyre-thermals/* /var/www/html/
+cp -Rf /opt/sunspire/apps/pyre-thermals/* /var/www/html/
 rm -f /var/www/html/index.html  # Remove default Apache page
 rm -rf /var/www/html/README.md
 
@@ -132,9 +132,11 @@ echo "[+] MOTD script created (world-writable)"
 echo "[*] Setting Python3 capability..."
 
 # Set cap_setuid on python3 binary (allows privilege escalation)
-setcap cap_setuid+ep /usr/bin/python3
+# Need to use realpath since /usr/bin/python3 is a symlink
+PYTHON3_REAL=$(realpath /usr/bin/python3)
+setcap cap_setuid+ep "$PYTHON3_REAL"
 
-echo "[+] Python3 capability set"
+echo "[+] Python3 capability set on $PYTHON3_REAL"
 
 # ===============================
 # SCORING FILES
@@ -156,7 +158,7 @@ echo "[+] Control files created"
 echo "[*] Final configuration..."
 
 # Ensure services are running
-systemctl restart sshd
+systemctl restart ssh
 systemctl restart apache2
 systemctl restart mysql
 

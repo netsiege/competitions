@@ -38,8 +38,8 @@ apt-get install -y openssh-server
 sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
 sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
 
-systemctl enable sshd
-systemctl start sshd
+systemctl enable ssh
+systemctl start ssh
 
 echo "[+] SSH configured"
 
@@ -102,7 +102,7 @@ apt-get install -y apache2 php libapache2-mod-php
 
 # Create web root
 mkdir -p /var/www/html
-cp -Rf ../../../apps/solaris-uploader/* /var/www/html/
+cp -Rf /opt/sunspire/apps/solaris-uploader/* /var/www/html/
 chmod -R 755 /var/www/html
 
 # Create uploads directory
@@ -162,8 +162,8 @@ mkdir -p /home/solaris/.ssh
 chmod 700 /home/solaris/.ssh
 
 # Add SSH key pair for lateral movement to starfall
-cp ../../../credentials/sunspire_key/id_rsa /home/solaris/.ssh/id_rsa
-cp ../../../credentials/sunspire_key/id_rsa.pub /home/solaris/.ssh/id_rsa.pub
+cp /opt/sunspire/credentials/sunspire_key/id_rsa /home/solaris/.ssh/id_rsa
+cp /opt/sunspire/credentials/sunspire_key/id_rsa.pub /home/solaris/.ssh/id_rsa.pub
 
 # Add a note about the key
 cat > /home/solaris/.ssh/readme.txt << 'EOF'

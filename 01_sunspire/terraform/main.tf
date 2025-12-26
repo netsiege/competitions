@@ -22,6 +22,9 @@ resource "proxmox_vm_qemu" "vms" {
     target_node = var.proxmox_host
     clone       = each.value.os_type == "linux" ? var.ubuntu_template_name : var.windows_template_name
 
+    force_create        = true
+    clone_wait          = 15    # Wait 15 seconds after cloning before applying config
+    additional_wait     = 15    # Additional wait time for VM to stabilize
     bios        = "seabios"
     memory      = each.value.memory
     scsihw      = "virtio-scsi-single"
