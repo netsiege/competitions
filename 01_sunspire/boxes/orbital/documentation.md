@@ -11,8 +11,8 @@
 | Difficulty | Medium |
 | OS | Windows Server 2022 |
 | Services | SMB, MSSQL, RDP |
-| Initial Access | Anonymous SMB Share, MSSQL with blank sa password |
-| Privilege Escalation | Scheduled Task (world-writable script), Unquoted Service Path |
+| Initial Access | Anonymous SMB Share |
+| Privilege Escalation | Scheduled Task (world-writable script), Weak Service Permissions |
 | Lateral Movement | .rdp file → helios |
 
 ---
@@ -102,8 +102,8 @@ A scheduled task runs a world-writable PowerShell script as SYSTEM every 3 minut
    ```
 4. Wait up to 3 minutes for the task to execute as SYSTEM
 
-#### Option 2: Unquoted Service Path
-The SunSpire Backup Agent service has an unquoted path with spaces.
+#### Option 2: Weak Service Permissions (SunspireBackup)
+The SunspireBackup service executable is located in a world-writable directory.
 
 1. Check service path:
    ```powershell

@@ -21,7 +21,9 @@ Write-Host "[*] Creating users..."
 # Create ember user
 $EmberPassword = ConvertTo-SecureString "J4f9juEr" -AsPlainText -Force
 New-LocalUser -Name "ember" -Password $EmberPassword -FullName "Ember User" -Description "Legacy admin account" -PasswordNeverExpires -ErrorAction SilentlyContinue
-Add-LocalGroupMember -Group "Remote Desktop Users" -Member "ember" -ErrorAction SilentlyContinue
+$user = Get-LocalUser -Name "ember" # when creating users with the same name as the hostname, need to use the user object
+Add-LocalGroupMember -Group "Remote Desktop Users" -Member $user -ErrorAction SilentlyContinue
+Add-LocalGroupMember -Group "Remote Management Users" -Member $user -ErrorAction SilentlyContinue
 
 # Create ops user
 $OpsPassword = ConvertTo-SecureString "9ksP311p" -AsPlainText -Force

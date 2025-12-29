@@ -26,9 +26,11 @@ Remove-Item C:\secpol.cfg -Force
 # Create orbital user
 $orbitalPassword = ConvertTo-SecureString "securepassword" -AsPlainText -Force
 New-LocalUser -Name "orbital" -Password $orbitalPassword -Description "Orbital User" -PasswordNeverExpires -ErrorAction SilentlyContinue
-
-Add-LocalGroupMember -Group "Users" -Member "orbital" -ErrorAction SilentlyContinue
-Add-LocalGroupMember -Group "Remote Desktop Users" -Member "orbital" -ErrorAction SilentlyContinue
+$user = Get-LocalUser -Name "orbital" # when creating users with the same name as the hostname, need to use the user object
+Add-LocalGroupMember -Group "Users" -Member $user -ErrorAction SilentlyContinue
+Add-LocalGroupMember -Group "Remote Desktop Users" -Member $user -ErrorAction SilentlyContinue
+Add-LocalGroupMember -Group "Remote Management Users" -Member $user -ErrorAction SilentlyContinue
+Add-LocalGroupMember -Group "Backup Operators" -Member $user -ErrorAction SilentlyContinue
 
 # Create ops user
 $opsPassword = ConvertTo-SecureString "9ksP311p" -AsPlainText -Force

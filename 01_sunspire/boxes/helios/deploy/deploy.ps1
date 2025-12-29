@@ -27,7 +27,9 @@ Remove-Item C:\secpol.cfg -Force
 $heliosPassword = ConvertTo-SecureString "password" -AsPlainText -Force
 New-LocalUser -Name "helios" -Password $heliosPassword -Description "Helios User" -PasswordNeverExpires -ErrorAction SilentlyContinue
 Add-LocalGroupMember -Group "Users" -Member "helios" -ErrorAction SilentlyContinue
-Add-LocalGroupMember -Group "Remote Desktop Users" -Member "helios" -ErrorAction SilentlyContinue
+$user = Get-LocalUser -Name "helios" # when creating users with the same name as the hostname, need to use the user object
+Add-LocalGroupMember -Group "Remote Desktop Users" -Member $user -ErrorAction SilentlyContinue
+Add-LocalGroupMember -Group "Remote Management Users" -Member $user -ErrorAction SilentlyContinue
 
 # Create pyre user (same password as pyre user on pyre server - password reuse)
 $pyrePassword = ConvertTo-SecureString "h1ewFWZG" -AsPlainText -Force
