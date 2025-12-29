@@ -19,7 +19,7 @@ Write-Host "[*] Creating users..." -ForegroundColor Cyan
 secedit /export /cfg C:\secpol.cfg
 (Get-Content C:\secpol.cfg) -replace 'PasswordComplexity = 1', 'PasswordComplexity = 0' `
                             -replace 'MinimumPasswordLength = \d+', 'MinimumPasswordLength = 0' | Set-Content C:\secpol.cfg
-secedit /configure /db $env:windir\security\local.sdb /cfg C:\secpol.cfg /areas SECURITYPOLICY
+secedit /configure /db C:\Windows\security\local.sdb /cfg C:\secpol.cfg /areas SECURITYPOLICY
 gpupdate /force
 Remove-Item C:\secpol.cfg -Force
 
@@ -76,10 +76,9 @@ secedit /export /cfg C:\sec_smb.cfg
 (Get-Content C:\sec_smb.cfg) -replace 'EveryoneIncludesAnonymous = 0', 'EveryoneIncludesAnonymous = 1' `
                             -replace 'RestrictAnonymous = 1', 'RestrictAnonymous = 0' | Set-Content C:\sec_smb.cfg
 # Re-import and update
-secedit /configure /db $env:windir\security\local.sdb /cfg C:\sec_smb.cfg /areas SECURITYPOLICY
+secedit /configure /db C:\Windows\security\local.sdb /cfg C:\sec_smb.cfg /areas SECURITYPOLICY
 gpupdate /force
 Remove-Item C:\sec_smb.cfg
-
 
 New-Item -ItemType Directory -Path $sharePath -Force | Out-Null
 
@@ -109,7 +108,7 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstatio
 Write-Host "[+] SMB share configured" -ForegroundColor Green
 
 # ===============================
-# SUNSPIRE BACKUP AGENT (Unquoted Service Path)
+# SUNSPIRE BACKUP AGENT (Weak Permissions on Service Path)
 # ===============================
 Write-Host "[*] Installing Sunspire Backup Agent..." -ForegroundColor Cyan
 
@@ -124,13 +123,10 @@ Copy-Item -Path "C:\sunspire\apps\orbital-backup\backup.exe" -Destination "$back
 # If backup.exe doesn't exist, create a dummy placeholder
 if (-not (Test-Path "$backupDir\backup.exe")) {
     Write-Host "[!] backup.exe not found, creating placeholder..." -ForegroundColor Yellow
-    # Create a minimal batch file as placeholder
     Set-Content -Path "$backupDir\backup.bat" -Value "@echo Backup service running" -Force
 }
 
-# Register service with UNQUOTED PATH (vulnerability!)
-# The path "C:\Program Files\Sunspire Backup\backup.exe" without quotes
-# allows hijacking via C:\Program.exe
+# Register service
 $serviceName = "SunspireBackup"
 $serviceDisplayName = "Sunspire Backup Agent"
 $servicePath = "C:\Program Files\Sunspire Backup\backup.exe"
@@ -139,12 +135,25 @@ $servicePath = "C:\Program Files\Sunspire Backup\backup.exe"
 & sc.exe create $serviceName binPath= $servicePath start= auto DisplayName= $serviceDisplayName | Out-Null
 & sc.exe description $serviceName "Backs up SMB share contents periodically" | Out-Null
 
-# Make C:\Program Files\Sunspire Backup writable by Users (to allow placing Sunspire.exe)
+# Make C:\Program Files\Sunspire Backup writable by Users (to allow replacing backup.exe)
 $acl = Get-Acl "C:\Program Files\Sunspire Backup"
-$accessRule = New-Object System.Security.AccessControl.FileSystemAccessRule("Users", "Write", "Allow")
+$accessRule = New-Object System.Security.AccessControl.FileSystemAccessRule("Everyone", "Write", "Allow")
 $acl.SetAccessRule($accessRule)
 Set-Acl -Path "C:\Program Files\Sunspire Backup" -AclObject $acl -ErrorAction SilentlyContinue
-Write-Host "[+] Sunspire Backup Agent installed (unquoted service path)" -ForegroundColor Green
+Write-Host "[+] Sunspire Backup Agent installed" -ForegroundColor Green
+
+# start the service
+Start-Service -Name $serviceName -ErrorAction SilentlyContinue
+
+secedit /export /cfg "C:\policy.inf"
+# 2. Add the user 'orbital' to the SeShutdownPrivilege line
+$mapping = Get-Content "C:\policy.inf"
+$mapping = $mapping -replace 'SeShutdownPrivilege = ', 'SeShutdownPrivilege = BUILTIN\Users,'
+$mapping | Set-Content "C:\policy.inf"
+# 3. Apply the updated policy back to the system
+secedit /configure /db "C:\Windows\security\local.sdb" /cfg "C:\policy.inf" /overwrite
+# 4. Cleanup
+Remove-Item "C:\policy.inf"
 
 # ===============================
 # SCHEDULED TASK (SolarTelemetry - World-Writable Script)
@@ -201,7 +210,7 @@ New-Item -ItemType Directory -Path $orbitalDocs -Force | Out-Null
 
 # Create .rdp file pointing to helios
 $rdpContent = @"
-password 51:b:6800310065007700460057005a004700
+# password: aDFld0ZXWkc=
 screen mode id:i:1
 use multimon:i:0
 desktopwidth:i:1920
@@ -225,7 +234,7 @@ disable menu anims:i:1
 disable themes:i:0
 disable cursor setting:i:0
 bitmapcachepersistenable:i:1
-full address:s:<HELIOS_IP_ADDRESS>
+full address:s:10.100.7.41
 username:s:pyre
 domain:s:
 prompt for credentials:i:0
@@ -324,18 +333,18 @@ Write-Host "  - RDP (Remote Desktop on :3389)"
 Write-Host "  - MSSQL (Pending - run Install-MSSQL.ps1)"
 Write-Host ""
 Write-Host "Users:" -ForegroundColor Cyan
-Write-Host "  - orbital:Secure#Pass1"
+Write-Host "  - orbital:securepassword"
 Write-Host "  - ops:9ksP311p"
 Write-Host "  - Administrator:5EVB7Zmp"
 Write-Host ""
 Write-Host "Attack Vectors:" -ForegroundColor Cyan
 Write-Host "  - Initial Access: Anonymous SMB share with MD5 hashes"
-Write-Host "  - Initial Access: MSSQL sa with blank password + xp_cmdshell"
+Write-Host "  - Initial Access: "
 Write-Host "  - Privesc: Scheduled task SolarTelemetry runs world-writable script as SYSTEM"
-Write-Host "  - Privesc: Unquoted service path for Sunspire Backup Agent"
-Write-Host "  - Lateral Movement: .rdp file to helios in C:\Users\orbital\Documents\"
+Write-Host "  - Privesc: Weak permissions for Sunspire Backup Agent executable"
+Write-Host "  - Lateral Movement: .rdp file with sensitive information to helios in C:\Users\orbital\Documents\"
 Write-Host ""
 Write-Host "Scoring:" -ForegroundColor Cyan
-Write-Host "  - Services: SMB, MSSQL"
+Write-Host "  - Services: SMB"
 Write-Host "  - Files: C:\Administrator\ctrl.txt, C:\Users\orbital\ctrl.txt"
 Write-Host ""

