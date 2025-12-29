@@ -68,45 +68,6 @@ Write-Host "[+] Users created" -ForegroundColor Green
 # Write-Host "[+] User profiles created" -ForegroundColor Green
 
 # ===============================
-# INSTALL TIGHTVNC (Anonymous Access)
-# ===============================
-Write-Host "[*] Installing TightVNC..." -ForegroundColor Cyan
-
-# Create temp directory
-$tempDir = "C:\Temp"
-New-Item -ItemType Directory -Path $tempDir -Force | Out-Null
-
-# Download TightVNC MSI (64-bit)
-$vncUrl = "https://www.tightvnc.com/download/2.8.81/tightvnc-2.8.81-gpl-setup-64bit.msi"
-$vncInstaller = Join-Path $tempDir "tightvnc.msi"
-
-Write-Host "[*] Downloading TightVNC..." -ForegroundColor Cyan
-Invoke-WebRequest -Uri $vncUrl -OutFile $vncInstaller -UseBasicParsing
-
-# Silent install with NO authentication (anonymous access for helios user session)
-# SET_USEVNCAUTHENTICATION=0 - Disables VNC password
-# SET_USECONTROLAUTHENTICATION=0 - Disables control interface password
-Write-Host "[*] Installing TightVNC with no authentication..." -ForegroundColor Cyan
-$msiArgs = @(
-    "/i", $vncInstaller,
-    "/quiet", "/norestart",
-    "ADDLOCAL=Server",
-    "SET_USEVNCAUTHENTICATION=0",
-    "SET_USECONTROLAUTHENTICATION=0",
-    "SET_ALLOWLOOPBACK=1",
-    "SET_RFBPORT=5900",
-    "SET_RUNCONTROLINTERFACE=0"
-)
-Start-Process -FilePath "msiexec.exe" -ArgumentList $msiArgs -Wait
-
-# Ensure TightVNC service is running
-Start-Sleep -Seconds 3
-Set-Service -Name "tvnserver" -StartupType Automatic
-Start-Service -Name "tvnserver" -ErrorAction SilentlyContinue
-
-Write-Host "[+] TightVNC installed (anonymous access enabled)" -ForegroundColor Green
-
-# ===============================
 # DISABLE FIREWALL
 # ===============================
 Write-Host "[*] Disabling firewall..." -ForegroundColor Cyan

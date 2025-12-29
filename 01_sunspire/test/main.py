@@ -6,9 +6,9 @@ from tests.test_orbital import TestOrbital
 import unittest
 
 tests = [
-    TestOrbital,
+    # TestOrbital,
     # TestHelios,
-    # TestSolaris,
+    TestSolaris,
     # TestStarfall
 ]
 

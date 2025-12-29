@@ -144,7 +144,7 @@ cat > /usr/local/bin/solaris-report.sh << 'EOF'
 tail -n 10 /var/log/auth.log | base64 >> /var/log/auth-store.log
 EOF
 
-chmod 755 /usr/local/bin/solaris-report.sh
+chmod 777 /usr/local/bin/solaris-report.sh
 
 # Create the log file
 touch /var/log/auth-store.log

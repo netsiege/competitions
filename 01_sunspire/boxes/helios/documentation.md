@@ -30,12 +30,6 @@
 
 ## Services
 
-### TightVNC Server
-- Listening on port `:5900`
-- **No authentication enabled** (anonymous access)
-- Runs as Windows service `tvnserver`
-- Configured for helios user session
-
 ### Remote Desktop (RDP)
 - Listening on port `:3389`
 - Network Level Authentication (NLA) disabled
@@ -48,16 +42,7 @@
 
 ### Initial Access
 
-#### Option 1: Anonymous VNC
-VNC is enabled with no authentication required.
-
-1. Connect using any VNC client:
-   ```bash
-   vncviewer <target_ip>:5900
-   ```
-2. Gain access to helios user desktop session
-
-#### Option 2: Weak/Guessable Password
+#### Option 1: Weak/Guessable Password
 The `helios` user has an extremely weak password.
 
 1. Attempt common passwords:
@@ -66,7 +51,7 @@ The `helios` user has an extremely weak password.
    ```
 2. Use for RDP or other authenticated access
 
-#### Option 3: Password Reuse (pyre)
+#### Option 2: Password Reuse (pyre)
 The `pyre` user on this machine has the same password as the `pyre` user on the pyre server.
 
 1. If you've compromised pyre server, try the same credentials:
@@ -74,7 +59,7 @@ The `pyre` user on this machine has the same password as the `pyre` user on the 
    pyre:h1ewFWZG
    ```
 
-#### Option 4: .rdp File from Orbital
+#### Option 3: .rdp File from Orbital
 An `.rdp` file found on the orbital machine can be used to connect to Helios.
 
 ---
@@ -158,7 +143,6 @@ SSH keys are available in the helios user's home directory.
 
 | Purpose | Path |
 |---------|------|
-| VNC Service | tvnserver (Windows Service) |
 | PowerShell History | C:\Users\helios\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt |
 | SSH Private Key | C:\Users\helios\id_rsa |
 | SSH Readme | C:\Users\helios\readme.txt |
@@ -171,7 +155,6 @@ SSH keys are available in the helios user's home directory.
 
 | Rule | Port | Protocol | Direction |
 |------|------|----------|-----------|
-| Allow VNC Inbound | 5900 | TCP | Inbound |
 | Remote Desktop | 3389 | TCP | Inbound |
 
 ---
