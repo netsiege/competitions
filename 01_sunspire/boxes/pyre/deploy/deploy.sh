@@ -51,6 +51,9 @@ echo "[*] Installing Apache, PHP, and MySQL..."
 # Install packages
 apt-get install -y apache2 php php-mysql libapache2-mod-php mysql-server
 
+# Create webroot if it doesn't exist
+mkdir -p /var/www/html
+
 # Copy webapp to webroot
 cp -Rf /opt/sunspire/apps/pyre-thermals/* /var/www/html/
 rm -f /var/www/html/index.html  # Remove default Apache page

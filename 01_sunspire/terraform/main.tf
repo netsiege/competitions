@@ -23,7 +23,7 @@ resource "proxmox_vm_qemu" "vms" {
     clone       = each.value.os_type == "linux" ? var.ubuntu_template_name : var.windows_template_name
 
     force_create        = true
-    clone_wait          = 15    # Wait 15 seconds after cloning before applying config
+    clone_wait          = 40    # Wait 40 seconds after cloning before applying config
     additional_wait     = 15    # Additional wait time for VM to stabilize
     bios        = "seabios"
     memory      = each.value.memory
@@ -69,7 +69,7 @@ resource "proxmox_vm_qemu" "vms" {
     os_type    = "cloud-init"
     agent      = 1
     ciuser     = each.value.os_type == "linux" ? "root" : "Administrator"
-    cipassword = "netsiege123!"
+    cipassword = "Netsiege123!"
     boot       = "order=scsi0;ide2"
     ipconfig0  = "ip=${each.value.ip_address},gw=10.100.0.1"
     nameserver = "10.100.0.1"

@@ -16,6 +16,11 @@
     archive_path: "{{ playbook_dir }}/../{{ archive_name }}"
 
   tasks:
+    - name: Check if archive exists
+      stat:
+        path: "{{ archive_path }}"
+      register: archive_exists
+
     - name: Create deployment archive
       archive:
         path:
@@ -24,11 +29,12 @@
           - "{{ playbook_dir }}/../credentials"
         dest: "{{ archive_path }}"
         format: gz
+      when: not archive_exists.stat.exists
       register: archive_result
 
-    - name: Archive created
+    - name: Archive status
       debug:
-        msg: "Archive created at {{ archive_path }} ({{ archive_result.state }})"
+        msg: "{{ 'Archive created at ' + archive_path if archive_result.changed | default(false) else 'Using existing archive at ' + archive_path }}"
 
 
 - name: Deploy to Linux VMs
