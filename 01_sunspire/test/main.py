@@ -7,8 +7,8 @@ import unittest
 
 tests = [
     # TestOrbital,
-    # TestHelios,
-    TestSolaris,
+    TestHelios,
+    # TestSolaris,
     # TestStarfall
 ]
 
