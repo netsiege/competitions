@@ -1,6 +1,6 @@
 import unittest
 from libraries.http_tests import check_http_payload_200
-from libraries.ssh_tests import test_ssh_login
+from libraries.ssh_tests import test_ssh_login, test_ssh_key_login
 from libraries.cmd_tests import test_cmd_execution_over_ssh
 
 class TestStarfall(unittest.TestCase):
@@ -45,6 +45,18 @@ class TestStarfall(unittest.TestCase):
         )
         # print(result)
         self.assertTrue(result.success, msg=result.message)
-                        
+
+    # check if SSH key based login from helios to starfall is possible (sunspire_key)
+    def test_3_starfall_ssh_key_login(self):
+        result = test_ssh_key_login(
+            target_ip=self.starfall_target_ip,
+            username="starfall",
+            private_key_str="custom/assets/sunspire.key",
+            port=22,
+        )
+
+        self.assertTrue(result.success, msg=result.message)
+
+
 if __name__ == "__main__":
     unittest.main()
