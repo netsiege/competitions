@@ -2,6 +2,8 @@ import unittest
 from libraries.smb_share_tests import test_smb_share_exists, test_smb_file_access, test_smb_file_contents
 from libraries.smb_login_tests import test_smb_login
 from libraries.cmd_tests import test_cmd_execution_over_psrp
+import pymssql
+from core.test_structs import AttackResult
 
 class TestOrbital(unittest.TestCase):
     orbital_target_ip = "10.100.7.42"
@@ -80,3 +82,25 @@ class TestOrbital(unittest.TestCase):
             expected_output="SeShutdownPrivilege"
         )
         self.assertTrue(result.success, msg=result.message)
+
+    # Test MSSQL sa account with empty password
+    def test_3_orbital_mssql_sa_empty_password(self):
+        try:
+            conn = pymssql.connect(
+                server=self.orbital_target_ip,
+                user='sa',
+                password='',
+                database='master',
+                port=1433,
+                timeout=10
+            )
+            cursor = conn.cursor()
+            cursor.execute('SELECT @@VERSION')
+            version = cursor.fetchone()
+            conn.close()
+            
+            result = AttackResult(success=True, message=f"Successfully connected to MSSQL with blank sa password. Version: {version[0][:50]}")
+            self.assertTrue(result.success, msg=result.message)
+        except Exception as e:
+            result = AttackResult(success=False, message=f"Failed to connect to MSSQL with blank sa password: {str(e)}")
+            self.assertTrue(result.success, msg=result.message)

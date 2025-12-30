@@ -273,6 +273,9 @@ Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 Set-Service -Name "TermService" -StartupType Automatic
 Start-Service -Name "TermService" -ErrorAction SilentlyContinue
 
+# Configure LocalAccountTokenFilterPolicy to grant administrative rights remotely to local users
+Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System' -Name "LocalAccountTokenFilterPolicy" -Value 1 -Type DWord
+
 Write-Host "[+] Remote Desktop enabled" -ForegroundColor Green
 
 # ===============================
@@ -316,10 +319,18 @@ Get-ScheduledTask -TaskName "ServerManager" -ErrorAction SilentlyContinue | Disa
 Write-Host "[+] Windows settings configured" -ForegroundColor Green
 
 # ===============================
-# MSSQL INSTALLATION (PLACEHOLDER)
+# MSSQL INSTALLATION
 # ===============================
-Write-Host "[*] MSSQL installation..." -ForegroundColor Yellow
-Write-Host "[!] MSSQL installation is handled separately - see Install-MSSQL.ps1" -ForegroundColor Yellow
+Write-Host "[*] Installing MSSQL..." -ForegroundColor Cyan
+
+$installMssqlPath = "$PSScriptRoot\Install-MSSQL.ps1"
+
+if (Test-Path $installMssqlPath) {
+    & $installMssqlPath
+    Write-Host "[+] MSSQL installation complete. Logs in $centralLogPath" -ForegroundColor Green
+} else {
+    Write-Host "[!] Install-MSSQL.ps1 not found at $installMssqlPath" -ForegroundColor Yellow
+}
 
 # ===============================
 # FINAL SUMMARY

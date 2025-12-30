@@ -16,11 +16,6 @@
     archive_path: "{{ playbook_dir }}/../{{ archive_name }}"
 
   tasks:
-    - name: Check if archive exists
-      stat:
-        path: "{{ archive_path }}"
-      register: archive_exists
-
     - name: Create deployment archive
       archive:
         path:
@@ -29,7 +24,6 @@
           - "{{ playbook_dir }}/../credentials"
         dest: "{{ archive_path }}"
         format: gz
-      when: not archive_exists.stat.exists
       register: archive_result
 
     - name: Archive status
@@ -126,33 +120,13 @@
       args:
         chdir: "{{ remote_dir }}"
 
-    - name: Remove archive after extraction
-      win_file:
-        path: "{{ remote_dir }}\\{{ archive_name }}"
-        state: absent
-
-    - name: Create deploy wrapper script
-      win_copy:
-        content: |
-          Set-ExecutionPolicy Bypass -Scope Process -Force
-          Set-Location '{{ remote_dir }}\boxes\{{ inventory_hostname }}\deploy'
-          & '.\deploy.ps1' *> '{{ log_dir }}\deploy-{{ inventory_hostname }}.log'
-        dest: "{{ log_dir }}\\deploy-wrapper-{{ inventory_hostname }}.ps1"
-
     - name: Run deploy script
       win_shell: |
-        powershell.exe -ExecutionPolicy Bypass -File "{{ log_dir }}\deploy-wrapper-{{ inventory_hostname }}.ps1"
+        Set-ExecutionPolicy Bypass -Scope Process -Force
+        Set-Location '{{ remote_dir }}\boxes\{{ inventory_hostname }}\deploy'
+        & '.\deploy.ps1' *> '{{ log_dir }}\deploy-{{ inventory_hostname }}.log'
       async: 1800
       poll: 30
-
-    - name: Clean up
-      win_file:
-        path: "{{ item }}"
-        state: absent
-      loop:
-        - "{{ log_dir }}\\deploy-wrapper-{{ inventory_hostname }}.ps1"
-        - "{{ remote_dir }}"
-      ignore_errors: yes
 
     - name: Deployment complete
       debug:

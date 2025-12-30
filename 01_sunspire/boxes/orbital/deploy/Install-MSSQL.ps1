@@ -77,66 +77,61 @@ if (!$iso_drive) {
 Write-Host "[+] ISO mounted at: $iso_drive" -ForegroundColor Green
 
 # ===============================
-# INSTALL SQL SERVER
+# CHECK IF SQL SERVER IS ALREADY INSTALLED
 # ===============================
-Write-Host "[*] Installing SQL Server..." -ForegroundColor Cyan
+$registryPath = "HKLM:\SOFTWARE\Microsoft\Microsoft SQL Server"
+$instancesPath = Join-Path $registryPath "Instance Names\SQL"
 
-# Build installation command
-# IMPORTANT: Using blank sa password for CTF vulnerability
-$cmd = @(
-    "${iso_drive}setup.exe"
-    '/Q'                                    # Silent install
-    '/INDICATEPROGRESS'                     # Show progress
-    '/IACCEPTSQLSERVERLICENSETERMS'         # Accept license
-    '/ACTION=install'                       # Install action
-    '/UPDATEENABLED=false'                  # No updates
-    '/FEATURES=SQLEngine'                   # Database engine only
-    "/INSTANCENAME=$InstanceName"           # Instance name
-    '/SECURITYMODE=SQL'                     # Mixed mode authentication
-    '/SAPWD=""'                             # BLANK SA PASSWORD (vulnerability!)
-    "/SQLSYSADMINACCOUNTS=""BUILTIN\Administrators"""
-    '/SQLSVCSTARTUPTYPE=automatic'
-    '/AGTSVCSTARTUPTYPE=automatic'
-    '/TCPENABLED=1'                         # Enable TCP/IP
-    '/NPENABLED=1'                          # Enable Named Pipes
-)
-
-# Remove empty arguments
-$cmd = $cmd -notmatch '/.+?=("")?$'
-
-Write-Host "[*] Running SQL Server setup..." -ForegroundColor Cyan
-Invoke-Expression "$cmd"
-
-if ($LastExitCode -and $LastExitCode -ne 3010 -and $LastExitCode -ne 0) {
-    # Try alternative: install with simple password, then change to blank
-    Write-Host "[!] Blank password failed, trying alternative method..." -ForegroundColor Yellow
-    
-    $cmd = @(
-        "${iso_drive}setup.exe"
-        '/Q'
-        '/INDICATEPROGRESS'
-        '/IACCEPTSQLSERVERLICENSETERMS'
-        '/ACTION=install'
-        '/UPDATEENABLED=false'
-        '/FEATURES=SQLEngine'
-        "/INSTANCENAME=$InstanceName"
-        '/SECURITYMODE=SQL'
-        '/SAPWD="TempP@ss123"'              # Temporary password
-        "/SQLSYSADMINACCOUNTS=""BUILTIN\Administrators"""
-        '/SQLSVCSTARTUPTYPE=automatic'
-        '/AGTSVCSTARTUPTYPE=automatic'
-        '/TCPENABLED=1'
-        '/NPENABLED=1'
-    )
-    
-    Invoke-Expression "$cmd"
-    
-    if ($LastExitCode -and $LastExitCode -ne 3010 -and $LastExitCode -ne 0) {
-        throw "SQL Server installation failed, exit code: $LastExitCode"
+$mssqlInstalled = $false
+if (Test-Path $instancesPath) {
+    $instances = Get-Item $instancesPath -ErrorAction SilentlyContinue
+    if ($instances.ValueCount -gt 0) {
+        Write-Host "[*] SQL Server instances already installed:" -ForegroundColor Cyan
+        $instances.GetValueNames() | ForEach-Object {
+            Write-Host "    - $_" -ForegroundColor Cyan
+        }
+        $mssqlInstalled = $true
     }
 }
 
-Write-Host "[+] SQL Server installed" -ForegroundColor Green
+# ===============================
+# INSTALL SQL SERVER
+# ===============================
+if (-not $mssqlInstalled) {
+    Write-Host "[*] Installing SQL Server..." -ForegroundColor Cyan
+
+    # Build installation command
+    # Install with Windows auth only to avoid DPAPI profile errors, enable SQL auth post-install
+    $cmd = @(
+        "${iso_drive}setup.exe"
+        '/Q'                                    # Silent install
+        '/INDICATEPROGRESS'                     # Show progress
+        '/IACCEPTSQLSERVERLICENSETERMS'         # Accept license
+        '/ACTION=install'                       # Install action
+        '/UPDATEENABLED=false'                  # No updates
+        '/FEATURES=SQLEngine'                   # Database engine only
+        "/INSTANCENAME=$InstanceName"           # Instance name
+        "/SQLSYSADMINACCOUNTS=""BUILTIN\Administrators"""
+        '/SQLSVCACCOUNT="NT AUTHORITY\\SYSTEM"'
+        '/AGTSVCACCOUNT="NT AUTHORITY\\SYSTEM"'
+        '/SQLSVCSTARTUPTYPE=automatic'
+        '/AGTSVCSTARTUPTYPE=automatic'
+        '/TCPENABLED=1'                         # Enable TCP/IP
+        '/NPENABLED=1'                          # Enable Named Pipes
+    )
+
+    Write-Host "[*] Running SQL Server setup..." -ForegroundColor Cyan
+    $setupCmd = $cmd -join ' '
+    Invoke-Expression $setupCmd
+
+    if ($LastExitCode -and $LastExitCode -ne 3010 -and $LastExitCode -ne 0) {
+        throw "SQL Server installation failed, exit code: $LastExitCode"
+    }
+
+    Write-Host "[+] SQL Server installed" -ForegroundColor Green
+} else {
+    Write-Host "[+] SQL Server already installed, skipping installation step" -ForegroundColor Green
+}
 
 # Wait for services to start
 Write-Host "[*] Waiting for SQL Server services..." -ForegroundColor Cyan
@@ -164,26 +159,68 @@ if (-not $sqlcmd) {
 
 # SQL commands to configure the server
 $sqlConfig = @"
+-- Enable Mixed Mode authentication and create sa login with blank password
+USE [master]
+GO
+
+-- Enable Mixed Mode authentication
+EXEC xp_instance_regwrite N'HKEY_LOCAL_MACHINE', N'Software\Microsoft\MSSQLServer\MSSQLServer', N'LoginMode', REG_DWORD, 2
+GO
+
+-- Configure sa account (VULNERABILITY!)
+-- First set a temporary password, enable, then set to blank
+ALTER LOGIN [sa] WITH PASSWORD=N'temp_pass_123'
+GO
+
+ALTER LOGIN [sa] ENABLE
+GO
+
+-- Now set blank password (SQL Server allows this after enabling with temp password)
+ALTER LOGIN [sa] WITH PASSWORD=N''
+GO
+
+-- Ensure sa has sysadmin role using sp_addsrvrolemember
+EXEC sp_addsrvrolemember @loginame = N'sa', @rolename = N'sysadmin'
+GO
+
 -- Enable xp_cmdshell (VULNERABILITY!)
 EXEC sp_configure 'show advanced options', 1;
 RECONFIGURE;
 EXEC sp_configure 'xp_cmdshell', 1;
 RECONFIGURE;
 
--- Set sa password to blank (VULNERABILITY!)
-ALTER LOGIN sa WITH PASSWORD = '';
-ALTER LOGIN sa ENABLE;
-
 -- Allow remote connections
 EXEC sp_configure 'remote access', 1;
 RECONFIGURE;
+GO
 "@
 
 $configFile = "$Env:TEMP\sql_config.sql"
 Set-Content -Path $configFile -Value $sqlConfig
 
-Write-Host "[*] Enabling xp_cmdshell and configuring sa account..." -ForegroundColor Cyan
+Write-Host "[*] Enabling Mixed Mode auth, xp_cmdshell, and configuring sa account..." -ForegroundColor Cyan
 & $sqlcmd -S "localhost" -E -i $configFile
+
+# Restart SQL Server for Mixed Mode auth to take effect
+Write-Host "[*] Restarting SQL Server to apply authentication mode change..." -ForegroundColor Cyan
+Restart-Service -Name 'MSSQLSERVER' -Force
+Start-Sleep -Seconds 10
+
+# Ensure sa account is enabled after restart
+$enableSa = @"
+USE [master]
+GO
+ALTER LOGIN [sa] ENABLE
+GO
+ALTER LOGIN [sa] WITH PASSWORD=N'', CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF
+GO
+"@
+
+$enableSaFile = "$Env:TEMP\enable_sa.sql"
+Set-Content -Path $enableSaFile -Value $enableSa
+
+Write-Host "[*] Ensuring sa account is enabled..." -ForegroundColor Cyan
+& $sqlcmd -S "localhost" -E -i $enableSaFile
 
 Write-Host "[+] SQL Server configured" -ForegroundColor Green
 
