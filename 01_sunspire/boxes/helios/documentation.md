@@ -10,8 +10,8 @@
 |----------|-------|
 | Difficulty | Easy |
 | OS | Windows Server 2022 |
-| Services | VNC, RDP |
-| Initial Access | Anonymous VNC, Weak Password, Password Reuse, .rdp from orbital |
+| Services | IIS, RDP |
+| Initial Access | IIS directory browsing, Weak Password, Password Reuse, .rdp from orbital |
 | Privilege Escalation | PowerShell History, Environment Variable |
 | Lateral Movement | SSH Keys → starfall |
 
@@ -62,6 +62,8 @@ The `pyre` user on this machine has the same password as the `pyre` user on the 
 #### Option 3: .rdp File from Orbital
 An `.rdp` file found on the orbital machine can be used to connect to Helios.
 
+### Option 4: Directory Browsing
+The IIS web server has directory browsing enabled on port `:80`. The credentials for the `helios` user can be found in a text file (credentials.txt).
 ---
 
 ### Privilege Escalation
@@ -130,7 +132,7 @@ SSH keys are available in the helios user's home directory.
 ## Scoring
 
 ### Services
-- [ ] VNC (TightVNC on :5900)
+- [ ] IIS (Directory browsing on :80)
 - [ ] RDP (Remote Desktop on :3389)
 
 ### Control Files
