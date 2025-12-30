@@ -41,6 +41,15 @@ apt-get install -y openssh-server
 sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
 sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
 
+mkdir -p /home/starfall/.ssh
+chmod 700 /home/starfall/.ssh
+chown starfall:starfall /home/starfall/.ssh
+cat > /home/starfall/.ssh/authorized_keys << 'EOF'
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJwGUYZInw55DPkeGffuXk00FTjOaL31Uy1vjhEe3azD
+EOF
+chmod 600 /home/starfall/.ssh/authorized_keys
+chown -R starfall:starfall /home/starfall/.ssh
+
 systemctl enable ssh
 systemctl start ssh
 
