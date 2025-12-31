@@ -10,7 +10,8 @@ def check_http_payload_200(
     port: int = 80, 
     verb: str = "GET", 
     form_data: dict = {}, 
-    files: Dict[str, Union[str, bytes, BinaryIO]] = {}
+    files: Dict[str, Union[str, bytes, BinaryIO]] = {},
+    headers: dict = {}
 ) -> AttackResult:
     """
     Check if a specific payload can be sent to an HTTP endpoint.
@@ -65,10 +66,11 @@ def check_http_payload_200(
                     url, 
                     data={**params, **form_data}, 
                     files=processed_files if processed_files else None,
-                    timeout=5
+                    timeout=5,
+                    headers=headers
                 )
             elif verb == "GET":
-                response = requests.get(url, params={**params, **form_data}, timeout=5)
+                response = requests.get(url, params={**params, **form_data}, timeout=5, headers=headers)
             else:
                 return AttackResult(success=False, message=f"Unsupported HTTP verb: {verb}")
 
