@@ -1,6 +1,7 @@
 import unittest
 import mysql.connector
 from libraries.cmd_tests import test_cmd_execution_over_ssh
+from libraries.ssh_tests import test_ssh_key_login
 
 class TestInspire(unittest.TestCase):
     inspire_target_ip = "10.100.7.48"
@@ -73,4 +74,32 @@ class TestInspire(unittest.TestCase):
             expected_output="6755"
         )
 
+        _ = test_cmd_execution_over_ssh(
+            target_ip=self.inspire_target_ip,
+            username="root",
+            password="Mc8HYoDw",
+            command="chmod 0755 /bin/bash",
+        )
+
         self.assertTrue(result.success, msg="Internal API not vulnerable to config import RCE")
+
+    def test_3_inspire_ssh_key_to_forge(self):
+        result = test_ssh_key_login(
+            target_ip="10.100.7.44",
+            username="forge",
+            private_key_str="custom/assets/forge.key",
+            port=22,
+        )
+
+        self.assertTrue(result.success, msg=result.message)
+
+    def test_3_crucible_password_hash_in_bashrc(self):
+        result = test_cmd_execution_over_ssh(
+            target_ip=self.inspire_target_ip,
+            username="root",
+            password="Mc8HYoDw",
+            command="cat ~/.bashrc",
+            expected_output="ec75b28fe9581b2921669e223875138a"
+        )
+
+        self.assertTrue(result.success, msg=result.message)
