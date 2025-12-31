@@ -64,8 +64,8 @@ CREATE USER IF NOT EXISTS 'inspire'@'localhost' IDENTIFIED BY 'aN8ivVL3';
 GRANT ALL PRIVILEGES ON sunspire_energy.* TO 'inspire'@'localhost';
 
 -- Enable anonymous login (vulnerability!)
-CREATE USER IF NOT EXISTS ''@'localhost' IDENTIFIED BY '';
-GRANT SELECT ON sunspire_energy.* TO ''@'localhost';
+CREATE USER IF NOT EXISTS ''@'%' IDENTIFIED BY '';
+GRANT SELECT ON sunspire_energy.* TO ''@'%';
 
 -- Create credentials table (discoverable via anonymous access)
 USE sunspire_energy;
@@ -103,6 +103,12 @@ INSERT INTO energy_readings (region, timestamp, solar_output_mw, wind_output_mw,
 
 FLUSH PRIVILEGES;
 EOF
+
+# Configure MySQL to listen on all interfaces
+sed -i 's/^bind-address\s*=.*/bind-address = 0.0.0.0/' /etc/mysql/mysql.conf.d/mysqld.cnf
+# If bind-address is not present, add it
+grep -q '^bind-address' /etc/mysql/mysql.conf.d/mysqld.cnf || echo 'bind-address = 0.0.0.0' >> /etc/mysql/mysql.conf.d/mysqld.cnf
+systemctl restart mysql
 
 echo "[+] MySQL configured (anonymous access enabled)"
 
@@ -172,7 +178,7 @@ echo "[*] Setting up lateral movement artifacts..."
 cat >> /root/.bashrc << 'EOF'
 
 # TODO: Remove this - temporary note for crucible server rebuild
-# crucible root hash: hawaiiec75b28fe9581b2921669e223875138arocks
+# crucible root hash: ec75b28fe9581b2921669e223875138a
 # Generated for emergency access, need to update to: Fj9kL2mN
 EOF
 
