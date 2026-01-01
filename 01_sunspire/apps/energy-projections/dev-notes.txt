@@ -3,7 +3,7 @@
 ## SSRF Endpoint
 
 For internal API calls to forge manufacturing system:
-- Endpoint: http://forge:4000/api/status
+- Endpoint: http://forge:4000/api/
 - Auth: User-Agent must be "STARFALLER", token=ab5f4cad309
 
 Example:

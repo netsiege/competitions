@@ -67,7 +67,6 @@ Day 7: Solar 1,350 MW | Wind 700 MW | Demand 1,920 MW
 
 @app.route('/report')
 def report():
-    # VULNERABILITY: SSTI - user input rendered directly
     template = request.args.get('template', '')
     
     if not template:
@@ -82,7 +81,6 @@ def report():
         '''
         return render_template_string(TEMPLATE_BASE % content)
     
-    # Vulnerable: renders user-supplied template
     try:
         result = render_template_string(template)
         content = f'''

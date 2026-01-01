@@ -69,12 +69,12 @@ def check_http_payload_200(
                     timeout=5,
                     headers=headers
                 )
-                print(response.url)
-                print(response.content)
+                # print(response.url)
+                # print(response.content)
             elif verb == "GET":
                 response = requests.get(url, params={**params, **form_data}, timeout=5, headers=headers)
-                print(response.url)
-                print(response.content)
+                # print(response.url)
+                # print(response.content)
             else:
                 return AttackResult(success=False, message=f"Unsupported HTTP verb: {verb}")
 

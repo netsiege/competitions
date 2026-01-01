@@ -7,6 +7,7 @@ from tests.test_forge import TestForge
 from tests.test_pyre import TestPyre
 from tests.test_ember import TestEmber
 from tests.test_inspire import TestInspire
+from tests.test_crucible import TestCrucible
 import unittest
 
 tests = [
@@ -17,7 +18,8 @@ tests = [
     # TestForge,
     # TestPyre,
     # TestEmber,
-    TestInspire,
+    # TestInspire,
+    TestCrucible,
 ]
 
 if __name__ == "__main__":
