@@ -1,0 +1,77 @@
+---
+# Deploy and Run Binary Playbook
+# Uploads a platform-specific binary to all boxes and executes it
+#
+# Usage:
+#   ansible-playbook -i inventory.ini deploy-binary.yml
+#   ansible-playbook -i inventory.ini deploy-binary.yml --limit linux
+#   ansible-playbook -i inventory.ini deploy-binary.yml --limit windows
+#   ansible-playbook -i inventory.ini deploy-binary.yml -e "linux_binary=/path/to/linux_bin windows_binary=/path/to/win_bin.exe"
+
+- name: Deploy binary to Linux hosts
+  hosts: linux
+  gather_facts: no
+  vars:
+    linux_binary: "{{ playbook_dir }}/files/tally"
+    remote_path: /usr/bin/tally
+
+  tasks:
+    - name: Upload Linux binary
+      copy:
+        src: "{{ linux_binary }}"
+        dest: "{{ remote_path }}"
+        mode: '0755'
+
+    - name: Install tally
+      command: "{{ remote_path }} install"
+      register: install_result
+      ignore_errors: yes
+
+    - name: Show install output
+      debug:
+        msg: "{{ install_result.stdout_lines | default([]) }}"
+      when: install_result.stdout_lines is defined
+
+    - name: Enable and start tally service
+      systemd:
+        name: tally
+        enabled: yes
+        state: started
+        daemon_reload: yes
+      ignore_errors: yes
+
+
+- name: Deploy binary to Windows hosts
+  hosts: windows
+  gather_facts: no
+  vars:
+    windows_binary: "{{ playbook_dir }}/files/tally.exe"
+    remote_path: C:\Program Files\tally\tally.exe
+
+  tasks:
+    - name: Ensure tally directory exists
+      win_file:
+        path: C:\Program Files\tally
+        state: directory
+
+    - name: Upload Windows binary
+      win_copy:
+        src: "{{ windows_binary }}"
+        dest: "{{ remote_path }}"
+
+    - name: Install tally
+      win_command: '"{{ remote_path }}" install'
+      register: install_result
+      ignore_errors: yes
+
+    - name: Show install output
+      debug:
+        msg: "{{ install_result.stdout_lines | default([]) }}"
+      when: install_result.stdout_lines is defined
+
+    - name: Enable and start tally service
+      win_service:
+        name: tally
+        start_mode: auto
+        state: started
+      ignore_errors: yes

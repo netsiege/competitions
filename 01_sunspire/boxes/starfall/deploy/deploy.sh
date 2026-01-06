@@ -9,6 +9,16 @@ echo "==============================="
 echo "Starfall is a beautiful creation by our systems stewardess Fern. The same way the stars will never fall, neither will Sunspire's most critical services. Starfall is a gateway to much more..."
 
 # ===============================
+# PACKAGE INSTALLATION
+# ===============================
+echo "[*] Installing packages..."
+
+apt-get update
+apt-get install -y openssh-server python3 python3-pip python3-venv
+
+echo "[+] Packages installed"
+
+# ===============================
 # USER CREATION
 # ===============================
 echo "[*] Creating users..."
@@ -34,9 +44,6 @@ echo "[+] Users created"
 # ===============================
 echo "[*] Configuring SSH..."
 
-apt-get update
-apt-get install -y openssh-server
-
 # Enable password authentication
 sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
 sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
@@ -51,15 +58,12 @@ echo "[+] SSH configured"
 # ===============================
 echo "[*] Configuring Flask API..."
 
-apt-get install -y python3 python3-pip python3-venv
-
 # Create application directory
 mkdir -p /opt/starfall
 cp -Rf /opt/sunspire/apps/starfaller/* /opt/starfall/
 chmod -R 755 /opt/starfall
 
 # Create virtual environment and install dependencies
-apt install -y python3-venv python3-pip
 cd /opt/starfall
 python3 -m venv venv
 source venv/bin/activate

@@ -18,6 +18,13 @@ Write-Host "Forgotten windows server that should have been retired many years ag
 # ===============================
 Write-Host "[*] Creating users..."
 
+secedit /export /cfg C:\secpol.cfg
+(Get-Content C:\secpol.cfg) -replace 'PasswordComplexity = 1', 'PasswordComplexity = 0' `
+                            -replace 'MinimumPasswordLength = \d+', 'MinimumPasswordLength = 0' | Set-Content C:\secpol.cfg
+secedit /configure /db $env:windir\security\local.sdb /cfg C:\secpol.cfg /areas SECURITYPOLICY
+gpupdate /force
+Remove-Item C:\secpol.cfg -Force
+
 # Create ember user
 $EmberPassword = ConvertTo-SecureString "J4f9juEr" -AsPlainText -Force
 New-LocalUser -Name "ember" -Password $EmberPassword -FullName "Ember User" -Description "Legacy admin account" -PasswordNeverExpires -ErrorAction SilentlyContinue
@@ -73,9 +80,23 @@ Write-Host "[*] Installing IIS..."
 # Install IIS with CGI
 Install-WindowsFeature -Name Web-Server, Web-CGI -IncludeManagementTools
 
+# Ensure IIS service is started
+Start-Service -Name "W3SVC" -ErrorAction SilentlyContinue
+
 Write-Host "[+] IIS installed"
 
 Write-Host "[*] Installing PHP..."
+
+# Install Microsoft Visual C++ Redistributable (VS17) required for PHP runtime
+$VcRedistUrl = "https://aka.ms/vs/17/release/vc_redist.x64.exe"
+$VcRedistPath = "$env:TEMP\\vc_redist.x64.exe"
+try {
+    Invoke-WebRequest -Uri $VcRedistUrl -OutFile $VcRedistPath -UseBasicParsing -TimeoutSec 120
+    Start-Process -FilePath $VcRedistPath -ArgumentList "/install /quiet /norestart" -Wait -NoNewWindow
+    Write-Host "[+] VC++ Redistributable installed"
+} catch {
+    Write-Host "[!] Failed to install VC++ Redistributable: $($_.Exception.Message)"
+}
 
 # Create PHP directory
 $PhpPath = "C:\PHP"
@@ -116,16 +137,56 @@ if ($PhpZipPath -and (Test-Path $PhpZipPath)) {
         # Create php.ini from production template
         if (Test-Path "$PhpPath\php.ini-production") {
             Copy-Item "$PhpPath\php.ini-production" "$PhpPath\php.ini"
+            
+            # Enable required PHP extensions and set proper configuration
+            (Get-Content "$PhpPath\php.ini") -replace ';extension_dir = "ext"', 'extension_dir = "ext"' `
+                                              -replace ';extension=curl', 'extension=curl' `
+                                              -replace ';extension=mbstring', 'extension=mbstring' `
+                                              -replace ';extension=openssl', 'extension=openssl' `
+                                              -replace ';cgi.force_redirect = 1', 'cgi.force_redirect = 0' `
+                                              -replace 'cgi.force_redirect = 1', 'cgi.force_redirect = 0' `
+                                              -replace ';cgi.fix_pathinfo=1', 'cgi.fix_pathinfo=1' `
+                                              -replace ';fastcgi.impersonate = 1', 'fastcgi.impersonate = 1' | 
+                Set-Content "$PhpPath\php.ini"
         }
+        
+        # Copy required DLL files to system directory for FastCGI
+        if (Test-Path "$PhpPath\*.dll") {
+            # Copy Visual C++ runtime DLLs if present
+            Copy-Item "$PhpPath\*.dll" -Destination "$env:windir\System32\" -Force -ErrorAction SilentlyContinue
+        }
+        
+        # Set PHPRC environment variable
+        [System.Environment]::SetEnvironmentVariable("PHPRC", $PhpPath, "Machine")
+        $env:PHPRC = $PhpPath
+        
+        # Grant IIS_IUSRS full control to PHP directory
+        $Acl = Get-Acl $PhpPath
+        $Ar = New-Object System.Security.AccessControl.FileSystemAccessRule("IIS_IUSRS", "FullControl", "ContainerInherit,ObjectInherit", "None", "Allow")
+        $Acl.SetAccessRule($Ar)
+        # Also grant to IUSR account
+        $Ar2 = New-Object System.Security.AccessControl.FileSystemAccessRule("IUSR", "ReadAndExecute", "ContainerInherit,ObjectInherit", "None", "Allow")
+        $Acl.SetAccessRule($Ar2)
+        Set-Acl $PhpPath $Acl
         
         # Configure IIS FastCGI for PHP
         if (Test-Path "$PhpPath\php-cgi.exe") {
-            # Add PHP handler
-            & "$env:windir\system32\inetsrv\appcmd.exe" set config /section:system.webServer/fastCGI "/+[fullPath='$PhpPath\php-cgi.exe']"
-            & "$env:windir\system32\inetsrv\appcmd.exe" set config /section:system.webServer/handlers "/+[name='PHP_via_FastCGI',path='*.php',verb='*',modules='FastCgiModule',scriptProcessor='$PhpPath\php-cgi.exe',resourceType='Either']"
+            # Remove existing FastCGI and handler entries to avoid duplicates on re-run
+            & "$env:windir\system32\inetsrv\appcmd.exe" clear config /section:system.webServer/fastCGI 2>&1 | Out-Null
+            & "$env:windir\system32\inetsrv\appcmd.exe" set config /section:system.webServer/handlers "/-[name='PHP_via_FastCGI']" 2>&1 | Out-Null
+
+            # Add PHP FastCGI application with proper settings
+            & "$env:windir\system32\inetsrv\appcmd.exe" set config -section:system.webServer/fastCgi "/+[fullPath='$PhpPath\php-cgi.exe']" 2>&1 | Out-Null
+            & "$env:windir\system32\inetsrv\appcmd.exe" set config -section:system.webServer/fastCgi "/[fullPath='$PhpPath\php-cgi.exe'].instanceMaxRequests:10000" 2>&1 | Out-Null
+            & "$env:windir\system32\inetsrv\appcmd.exe" set config -section:system.webServer/fastCgi "/[fullPath='$PhpPath\php-cgi.exe'].maxInstances:4" 2>&1 | Out-Null
+            & "$env:windir\system32\inetsrv\appcmd.exe" set config -section:system.webServer/fastCgi "/[fullPath='$PhpPath\php-cgi.exe'].activityTimeout:300" 2>&1 | Out-Null
+            & "$env:windir\system32\inetsrv\appcmd.exe" set config -section:system.webServer/fastCgi "/[fullPath='$PhpPath\php-cgi.exe'].requestTimeout:300" 2>&1 | Out-Null
+            & "$env:windir\system32\inetsrv\appcmd.exe" set config -section:system.webServer/fastCgi "/[fullPath='$PhpPath\php-cgi.exe'].idleTimeout:300" 2>&1 | Out-Null
+            & "$env:windir\system32\inetsrv\appcmd.exe" set config -section:system.webServer/fastCgi "/[fullPath='$PhpPath\php-cgi.exe',arguments=''].environmentVariables.[name='PHP_FCGI_MAX_REQUESTS',value='10000']" 2>&1 | Out-Null
+            & "$env:windir\system32\inetsrv\appcmd.exe" set config -section:system.webServer/fastCgi "/[fullPath='$PhpPath\php-cgi.exe',arguments=''].environmentVariables.[name='PHPRC',value='$PhpPath']" 2>&1 | Out-Null
             
-            # Set index.php as default document
-            & "$env:windir\system32\inetsrv\appcmd.exe" set config /section:defaultDocument "/+files.[value='index.php']"
+            # Add PHP handler mapping
+            & "$env:windir\system32\inetsrv\appcmd.exe" set config -section:system.webServer/handlers "/+[name='PHP_via_FastCGI',path='*.php',verb='GET,HEAD,POST',modules='FastCgiModule',scriptProcessor='$PhpPath\php-cgi.exe',resourceType='Either']" 2>&1 | Out-Null
             
             Write-Host "[+] PHP configured with IIS"
         } else {
@@ -152,6 +213,36 @@ Copy-Item -Path "C:\sunspire\apps\ember-site\info.php" -Destination "$WebRoot\in
 # Remove default IIS files
 Remove-Item -Path "$WebRoot\iisstart.htm" -Force -ErrorAction SilentlyContinue
 Remove-Item -Path "$WebRoot\iisstart.png" -Force -ErrorAction SilentlyContinue
+
+# Create web.config for PHP
+$webConfig = @"
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <system.webServer>
+        <defaultDocument>
+            <files>
+                <clear />
+                <add value="index.php" />
+                <add value="index.html" />
+            </files>
+        </defaultDocument>
+    </system.webServer>
+</configuration>
+"@
+$webConfig | Out-File -FilePath "$WebRoot\web.config" -Encoding UTF8 -Force
+
+# Set permissions for IIS to read website files
+$Acl = Get-Acl $WebRoot
+$Ar = New-Object System.Security.AccessControl.FileSystemAccessRule("IIS_IUSRS", "ReadAndExecute", "ContainerInherit,ObjectInherit", "None", "Allow")
+$Acl.SetAccessRule($Ar)
+# Add Modify permissions for uploads/temporary files
+$Ar2 = New-Object System.Security.AccessControl.FileSystemAccessRule("IIS_IUSRS", "Modify", "ContainerInherit,ObjectInherit", "None", "Allow")
+$Acl.SetAccessRule($Ar2)
+Set-Acl $WebRoot $Acl
+
+# Ensure DefaultAppPool is started
+Import-Module WebAdministration -ErrorAction SilentlyContinue
+Start-WebAppPool -Name "DefaultAppPool" -ErrorAction SilentlyContinue
 
 Write-Host "[+] Website deployed"
 
@@ -297,7 +388,15 @@ Write-Host "[+] Control files created"
 # ===============================
 Write-Host "[*] Restarting services..."
 
-Restart-Service -Name "LanmanServer" -Force
+# Start IIS if not running
+$w3svc = Get-Service -Name "W3SVC" -ErrorAction SilentlyContinue
+if ($w3svc) {
+    if ($w3svc.Status -ne "Running") {
+        Start-Service -Name "W3SVC" -ErrorAction SilentlyContinue
+    }
+}
+
+Restart-Service -Name "LanmanServer" -Force -ErrorAction SilentlyContinue
 iisreset /restart
 
 Write-Host "[+] Services restarted"

@@ -9,6 +9,16 @@ echo "==============================="
 echo "A forge to develop new software for Sunspire. Forge is the manufacturing facility responsible for producing solar panel components and sustainable materials."
 
 # ===============================
+# PACKAGE INSTALLATION
+# ===============================
+echo "[*] Installing packages..."
+
+apt-get update
+apt-get install -y openssh-server nginx git python3 python3-pip python3-venv
+
+echo "[+] Packages installed"
+
+# ===============================
 # USER CREATION
 # ===============================
 echo "[*] Creating users..."
@@ -30,9 +40,6 @@ echo "[+] Users created"
 # SSH SERVER
 # ===============================
 echo "[*] Configuring SSH..."
-
-apt-get update
-apt-get install -y openssh-server
 
 # Enable password authentication
 sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
@@ -56,8 +63,6 @@ echo "[+] SSH configured (with authorized_keys for lateral movement)"
 # NGINX (Git HTTP Server)
 # ===============================
 echo "[*] Installing Nginx..."
-
-apt-get install -y nginx git
 
 # Copy nginx config
 cp /opt/sunspire/boxes/forge/deploy/nginx-git.conf /etc/nginx/sites-available/git
@@ -86,8 +91,6 @@ echo "[+] Git HTTP repository created"
 # FORGE API (SSRF Target)
 # ===============================
 echo "[*] Installing Forge API..."
-
-apt-get install -y python3 python3-pip python3-venv
 
 # Copy API to /root/forge-api
 cp -Rf /opt/sunspire/apps/forge-api /root/
@@ -124,7 +127,13 @@ PRIV_REPO="/home/forge/manufacturing-scripts"
 mkdir -p "$PRIV_REPO"
 cd "$PRIV_REPO"
 
-git init
+# Allow git operations even when run as root against forge-owned repo
+git config --global --add safe.directory "$PRIV_REPO" 2>/dev/null || true
+
+if [ ! -d .git ]; then
+	git init
+fi
+
 git config user.email "forge@sunspire.local"
 git config user.name "Forge Build System"
 

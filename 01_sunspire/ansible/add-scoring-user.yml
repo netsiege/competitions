@@ -1,0 +1,59 @@
+---
+# Add scoring user across all boxes
+# Usage examples:
+#   ansible-playbook -i inventory.ini add-scoring-user.yml
+#   ansible-playbook -i inventory.ini add-scoring-user.yml -e "scoring_user=scoring scoring_password=Str0ngPass!"
+#   ansible-playbook -i inventory.ini add-scoring-user.yml --limit linux
+#   ansible-playbook -i inventory.ini add-scoring-user.yml --limit windows
+
+- name: Add scoring user to Linux hosts
+  hosts: linux
+  become: yes
+  gather_facts: no
+  vars:
+    scoring_user: scoring_user
+    scoring_password: Scoring123!
+    scoring_pubkey: ""  # optional: set to a public key string to install authorized_keys
+
+  tasks:
+    - name: Ensure scoring user exists
+      user:
+        name: "{{ scoring_user }}"
+        password: "{{ scoring_password | password_hash('sha512') }}"
+        shell: /bin/bash
+        create_home: yes
+        state: present
+
+    - name: Install scoring authorized key (optional)
+      authorized_key:
+        user: "{{ scoring_user }}"
+        key: "{{ scoring_pubkey }}"
+      when: scoring_pubkey | length > 0
+
+
+- name: Add scoring user to Windows hosts
+  hosts: windows
+  gather_facts: no
+  vars:
+    scoring_user: scoring_user
+    scoring_password: Scoring123!
+
+  tasks:
+    - name: Ensure scoring user exists
+      win_user:
+        name: "{{ scoring_user }}"
+        password: "{{ scoring_password }}"
+        state: present
+        password_never_expires: yes
+
+    - name: Add scoring user to Remote Desktop Users group
+      win_group_membership:
+        name: "Remote Desktop Users"
+        members: "{{ scoring_user }}"
+        state: present
+
+    - name: Add scoring user to Users group
+      win_group_membership:
+        name: "Users"
+        members: "{{ scoring_user }}"
+        state: present

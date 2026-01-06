@@ -9,6 +9,16 @@ echo "==============================="
 echo "Solaris is an old file sharing server. It represents reliability, stability, warmth, and a touch of nostalgia of what used to be."
 
 # ===============================
+# PACKAGE INSTALLATION
+# ===============================
+echo "[*] Installing packages..."
+
+apt-get update
+apt-get install -y openssh-server samba zip apache2 php libapache2-mod-php
+
+echo "[+] Packages installed"
+
+# ===============================
 # USER CREATION
 # ===============================
 echo "[*] Creating users..."
@@ -31,9 +41,6 @@ echo "[+] Users created"
 # ===============================
 echo "[*] Configuring SSH..."
 
-apt-get update
-apt-get install -y openssh-server
-
 # Enable password authentication
 sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
 sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
@@ -47,8 +54,6 @@ echo "[+] SSH configured"
 # SAMBA SMB (Anonymous Share)
 # ===============================
 echo "[*] Configuring Samba..."
-
-apt-get install -y samba
 
 # Create share directory
 mkdir -p /srv/samba/public
@@ -65,7 +70,6 @@ User credentials backup:
 " > /tmp/backup_staging/credentials.txt
 
 cd /tmp/backup_staging # cd out
-apt-get install -y zip
 zip /srv/samba/public/backup.zip credentials.txt
 rm -rf /tmp/backup_staging
 
@@ -100,8 +104,6 @@ cd -
 # APACHE + PHP WEBSITE (Arbitrary File Upload)
 # ===============================
 echo "[*] Configuring Apache with PHP..."
-
-apt-get install -y apache2 php libapache2-mod-php
 
 # Create web root
 mkdir -p /var/www/html

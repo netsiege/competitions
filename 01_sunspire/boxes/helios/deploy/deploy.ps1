@@ -190,16 +190,6 @@ Get-ScheduledTask -TaskName "ServerManager" -ErrorAction SilentlyContinue | Disa
 Write-Host "[+] Windows settings configured" -ForegroundColor Green
 
 # ===============================
-# CLEANUP
-# ===============================
-Write-Host "[*] Cleaning up..." -ForegroundColor Cyan
-
-# Remove installer
-Remove-Item -Path $vncInstaller -Force -ErrorAction SilentlyContinue
-
-Write-Host "[+] Cleanup complete" -ForegroundColor Green
-
-# ===============================
 # FINAL SUMMARY
 # ===============================
 Write-Host ""
@@ -208,7 +198,6 @@ Write-Host " HELIOS DEPLOYMENT COMPLETE   " -ForegroundColor Yellow
 Write-Host "===============================" -ForegroundColor Yellow
 Write-Host ""
 Write-Host "Services:" -ForegroundColor Cyan
-Write-Host "  - VNC (TightVNC on :5900, no authentication)"
 Write-Host "  - RDP (Remote Desktop on :3389)"
 Write-Host ""
 Write-Host "Users:" -ForegroundColor Cyan
@@ -218,7 +207,6 @@ Write-Host "  - ops:9ksP311p"
 Write-Host "  - Administrator:BTw5hYqi"
 Write-Host ""
 Write-Host "Attack Vectors:" -ForegroundColor Cyan
-Write-Host "  - Initial Access: Anonymous VNC (no auth)"
 Write-Host "  - Initial Access: Weak password for helios user"
 Write-Host "  - Initial Access: Password reuse (pyre user)"
 Write-Host "  - Initial Access: .rdp file from orbital"
@@ -227,6 +215,6 @@ Write-Host "  - Privesc: Environment variable ADMIN_BACKUP_KEY contains admin pa
 Write-Host "  - Lateral Movement: SSH keys in C:\Users\helios\.ssh\ for starfall"
 Write-Host ""
 Write-Host "Scoring:" -ForegroundColor Cyan
-Write-Host "  - Services: VNC, RDP"
+Write-Host "  - Services: RDP"
 Write-Host "  - Files: C:\Administrator\ctrl.txt, C:\Users\helios\ctrl.txt"
 Write-Host ""

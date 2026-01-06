@@ -112,8 +112,8 @@ if (-not $mssqlInstalled) {
         '/FEATURES=SQLEngine'                   # Database engine only
         "/INSTANCENAME=$InstanceName"           # Instance name
         "/SQLSYSADMINACCOUNTS=""BUILTIN\Administrators"""
-        '/SQLSVCACCOUNT="NT AUTHORITY\\SYSTEM"'
-        '/AGTSVCACCOUNT="NT AUTHORITY\\SYSTEM"'
+        '/SQLSVCACCOUNT="NT Service\\MSSQLSERVER"'
+        '/AGTSVCACCOUNT="NT Service\\SQLSERVERAGENT"'
         '/SQLSVCSTARTUPTYPE=automatic'
         '/AGTSVCSTARTUPTYPE=automatic'
         '/TCPENABLED=1'                         # Enable TCP/IP

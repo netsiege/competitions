@@ -40,7 +40,7 @@ variable "vms" {
             ip_address = "10.100.7.40/18"
             macaddr    = "BC:24:11:3A:BE:00"
             cores      = 2
-            memory     = 2048
+            memory     = 4096
             disk_size  = "20G"
             vmid       = 1014
         }
@@ -49,7 +49,7 @@ variable "vms" {
             ip_address = "10.100.7.41/18"
             macaddr    = "BC:24:11:3A:BE:01"
             cores      = 4
-            memory     = 4096
+            memory     = 6144
             disk_size  = "40G"
             vmid       = 1015
         }
@@ -58,7 +58,7 @@ variable "vms" {
             ip_address = "10.100.7.42/18"
             macaddr    = "BC:24:11:3A:BE:02"
             cores      = 4
-            memory     = 4096
+            memory     = 6144
             disk_size  = "40G"
             vmid       = 1016
         }
@@ -67,7 +67,7 @@ variable "vms" {
             ip_address = "10.100.7.43/18"
             macaddr    = "BC:24:11:3A:BE:03"
             cores      = 2
-            memory     = 2048
+            memory     = 4096
             disk_size  = "20G"
             vmid       = 1017
         }
@@ -76,7 +76,7 @@ variable "vms" {
             ip_address = "10.100.7.44/18"
             macaddr    = "BC:24:11:3A:BE:04"
             cores      = 2
-            memory     = 2048
+            memory     = 4096
             disk_size  = "20G"
             vmid       = 1023
         }
@@ -85,7 +85,7 @@ variable "vms" {
             ip_address = "10.100.7.45/18"
             macaddr    = "BC:24:11:3A:BE:05"
             cores      = 2
-            memory     = 2048
+            memory     = 4096
             disk_size  = "20G"
             vmid       = 1019
         }
@@ -94,7 +94,7 @@ variable "vms" {
             ip_address = "10.100.7.46/18"
             macaddr    = "BC:24:11:3A:BE:06"
             cores      = 4
-            memory     = 4096
+            memory     = 6144
             disk_size  = "40G"
             vmid       = 1020
         }
@@ -103,7 +103,7 @@ variable "vms" {
             ip_address = "10.100.7.47/18"
             macaddr    = "BC:24:11:3A:BE:07"
             cores      = 2
-            memory     = 2048
+            memory     = 4096
             disk_size  = "20G"
             vmid       = 1021
         }
@@ -112,7 +112,7 @@ variable "vms" {
             ip_address = "10.100.7.48/18"
             macaddr    = "BC:24:11:3A:BE:08"
             cores      = 2
-            memory     = 2048
+            memory     = 4096
             disk_size  = "20G"
             vmid       = 1022
         }

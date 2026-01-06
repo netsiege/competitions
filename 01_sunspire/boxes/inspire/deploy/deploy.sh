@@ -9,6 +9,16 @@ echo "==============================="
 echo "A solar weather and energy forecasting server for Sunspire. Inspire monitors weather patterns and predicts optimal energy generation across the solar grid."
 
 # ===============================
+# PACKAGE INSTALLATION
+# ===============================
+echo "[*] Installing packages..."
+
+apt-get update
+apt-get install -y openssh-server mysql-server apache2 php php-mysql php-json jq python3 python3-pip python3-venv
+
+echo "[+] Packages installed"
+
+# ===============================
 # USER CREATION
 # ===============================
 echo "[*] Creating users..."
@@ -31,9 +41,6 @@ echo "[+] Users created"
 # ===============================
 echo "[*] Configuring SSH..."
 
-apt-get update
-apt-get install -y openssh-server
-
 # Enable password authentication
 sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
 sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
@@ -47,8 +54,6 @@ echo "[+] SSH configured"
 # MYSQL (Initial Access - Anonymous Login)
 # ===============================
 echo "[*] Installing MySQL..."
-
-apt-get install -y mysql-server
 
 # Start MySQL
 systemctl enable mysql
@@ -111,8 +116,6 @@ echo "[+] MySQL configured (anonymous access enabled)"
 # ===============================
 echo "[*] Installing Apache and PHP..."
 
-apt-get install -y apache2 php php-mysql php-json jq
-
 # Copy Energy Heatmap application
 cp -Rf /opt/sunspire/apps/energy-heatmap /var/www/html/
 rm -rf /var/www/html/data
@@ -135,8 +138,6 @@ echo "[+] Energy Heatmap installed"
 # WINDMILLED API (Privesc - Pickle Deserialization)
 # ===============================
 echo "[*] Installing Windmilled API..."
-
-apt-get install -y python3 python3-pip python3-venv
 
 # Copy Windmilled to /root (runs as root - vulnerable!)
 cp -Rf /opt/sunspire/apps/windmilled /root/

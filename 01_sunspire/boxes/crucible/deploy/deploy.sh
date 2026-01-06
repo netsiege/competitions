@@ -9,6 +9,16 @@ echo "==============================="
 echo "idk"
 
 # ===============================
+# PACKAGE INSTALLATION
+# ===============================
+echo "[*] Installing packages..."
+
+apt-get update
+apt-get install -y openssh-server python3 python3-pip python3-venv build-essential
+
+echo "[+] Packages installed"
+
+# ===============================
 # USER CREATION
 # ===============================
 echo "[*] Creating users..."
@@ -31,9 +41,6 @@ echo "[+] Users created"
 # ===============================
 echo "[*] Configuring SSH..."
 
-apt-get update
-apt-get install -y openssh-server
-
 # Enable password authentication
 sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
 sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
@@ -45,7 +52,6 @@ systemctl start ssh
 # ===============================
 echo "[*] Configuring energy-projections service..."
 
-apt-get install -y python3 python3-pip python3-venv
 mkdir -p /var/www
 cp -Rf /opt/sunspire/apps/energy-projections /var/www/energy-projections
 chown -R crucible:crucible /var/www/energy-projections
@@ -69,8 +75,6 @@ echo "[+] energy-projections service configured"
 # chatbot service
 # ===============================
 echo "[*] Configuring chatbot service..."
-# Install build dependencies
-apt-get install -y build-essential
 
 # Copy chatbot source to /tmp and build
 CHATBOT_SRC="/opt/sunspire/apps/chatbot"

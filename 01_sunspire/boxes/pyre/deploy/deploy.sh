@@ -9,6 +9,16 @@ echo "==============================="
 echo "Pyre is Sunspire's thermal management and safety monitoring system. Like a controlled flame, it keeps watch over the heat that powers our infrastructure."
 
 # ===============================
+# PACKAGE INSTALLATION
+# ===============================
+echo "[*] Installing packages..."
+
+apt-get update
+apt-get install -y openssh-server apache2 php php-mysql libapache2-mod-php mysql-server
+
+echo "[+] Packages installed"
+
+# ===============================
 # USER CREATION
 # ===============================
 echo "[*] Creating users..."
@@ -31,9 +41,6 @@ echo "[+] Users created"
 # ===============================
 echo "[*] Configuring SSH..."
 
-apt-get update
-apt-get install -y openssh-server
-
 # Enable password authentication
 sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
 sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
@@ -47,9 +54,6 @@ echo "[+] SSH configured"
 # APACHE + PHP + MYSQL
 # ===============================
 echo "[*] Installing Apache, PHP, and MySQL..."
-
-# Install packages
-apt-get install -y apache2 php php-mysql libapache2-mod-php mysql-server
 
 # Create webroot if it doesn't exist
 mkdir -p /var/www/html

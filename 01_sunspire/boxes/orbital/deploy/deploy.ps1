@@ -51,6 +51,7 @@ Write-Host "[*] Configuring SMB share..." -ForegroundColor Cyan
 
 # Create share directory
 $sharePath = "C:\Shares\public"
+New-Item -Path $sharePath -ItemType Directory -Force | Out-Null
 
 # Create SMB share with anonymous access
 New-SmbShare -Name "public" -Path $sharePath -FullAccess "Everyone" -Description "Public Share" | Out-Null
@@ -66,7 +67,7 @@ $Acl.SetAccessRule($Ar)
 Set-Acl $sharePath $Acl
 
 # Enable guest account and set to never expire
-Set-LocalUser -Name "Guest" -AccountNeverExpires $true
+Set-LocalUser -Name "Guest" -AccountNeverExpires
 Enable-LocalUser -Name "Guest"
 
 # Enable guest access for SMB
