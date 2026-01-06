@@ -80,6 +80,34 @@ Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
 Write-Host "[+] Firewall disabled" -ForegroundColor Green
 
 # ===============================
+# INSTALL IIS, ADD FILES, ENABLE DIRECTORY BROWSING
+# ===============================
+Write-Host "[*] Installing and configuring IIS..." -ForegroundColor Cyan
+# Install IIS
+Install-WindowsFeature -Name Web-Server -IncludeManagementTools
+# Add files to IIS root
+$iisRoot = "C:\inetpub\wwwroot"
+Set-Content -Path "$iisRoot\index.html" -Value "<html><body><h1>Welcome to Helios Server</h1><p>This is the default IIS page.</p></body></html>" -Force
+Set-Content -Path "$iisRoot\readme.txt" -Value "This is the Helios server IIS web root. Directory browsing is enabled." -Force
+Set-Content -Path "$iisRoot\notes.txt" -Value "Note: The helios user has a weak password" -Force
+Set-Content -Path "$iisRoot\credentials.txt" -Value "DARKSIDE, Classof07, password, Kassidy, nirvana, babyblue, myspace1" -Force
+# enable directory browsing
+Write-Host "[*] Enabling directory browsing in IIS..." -ForegroundColor Cyan
+Set-WebConfigurationProperty -filter /system.webServer/directoryBrowse -name enabled -value True
+
+# disable default document to force directory listing
+Set-WebConfigurationProperty -filter /system.webServer/defaultDocument -name enabled -value False -PSPath "IIS:\Sites\Default Web Site"
+Remove-WebConfigurationProperty -filter /system.webServer/defaultDocument/files -name . -atElement @{value="index.html"}
+
+# verify 
+$status = Get-WebConfigurationProperty -filter /system.webServer/directoryBrowse -name enabled
+Write-Host "Directory Browsing is now set to: $($status.Value)" -ForegroundColor Green
+
+Write-Host "[*] Restarting IIS..." -ForegroundColor Cyan
+Reset-IISServerManager
+Write-Host "[+] IIS installed and configured" -ForegroundColor Green
+
+# ===============================
 # POWERSHELL HISTORY (Privesc Hint)
 # ===============================
 Write-Host "[*] Planting PowerShell history..." -ForegroundColor Cyan
@@ -207,6 +235,7 @@ Write-Host "  - ops:9ksP311p"
 Write-Host "  - Administrator:BTw5hYqi"
 Write-Host ""
 Write-Host "Attack Vectors:" -ForegroundColor Cyan
+Write-Host "  - Initial Access: Directory browsing"
 Write-Host "  - Initial Access: Weak password for helios user"
 Write-Host "  - Initial Access: Password reuse (pyre user)"
 Write-Host "  - Initial Access: .rdp file from orbital"

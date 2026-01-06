@@ -11,7 +11,7 @@
 | Difficulty | Easy |
 | OS | Ubuntu 24.04 |
 | Services | SSH, API |
-| Initial Access | Command Injection, Weak Password |
+| Initial Access | Command Injection, Weak Password, SSH from Helios |
 | Privilege Escalation | None (starfall is sudoer) |
 | Lateral Movement | SSRF → Forge |
 
@@ -72,6 +72,14 @@ The `starfall` user has a weak password that matches the username.
    ```bash
    ssh starfall@<target_ip>
    # Password: starfall
+   ```
+
+#### Option 3: SSH from Helios or Solaris
+If you have access to the Helios/Solaris machines, you can SSH into Starfall using the provided id_rsa key.
+1. Copy the `id_rsa` key from Helios or Solaris.
+2. SSH into Starfall:
+   ```bash
+   ssh -i id_rsa starfall@<starfall_ip>
    ```
 
 ### Privilege Escalation

@@ -63,6 +63,7 @@ pip install -r requirements.txt
 deactivate
 
 cp /var/www/energy-projections/energy-projections.service /etc/systemd/system/energy-projections.service
+rm -rf /var/www/energy-projections/energy-projections
 systemctl daemon-reload
 systemctl enable energy-projections
 systemctl start energy-projections
@@ -82,6 +83,8 @@ if [ -d "$CHATBOT_SRC" ]; then
 	echo "[+] Found chatbot source at $CHATBOT_SRC"
 	mkdir -p /opt/chatbot
 	cp -Rf "$CHATBOT_SRC"/* /opt/chatbot/
+	rm /opt/chatbot/Makefile
+	rm /opt/chatbot/README.md
 	chown -R root:root /opt/chatbot
 	cd /opt/chatbot || true
 

@@ -25,7 +25,7 @@ echo "[*] Creating users..."
 
 # Create pyre user (same password as forge user - password reuse)
 useradd -m -s /bin/bash pyre
-echo "pyre:mqD5uv0j" | chpasswd
+echo "pyre:h1ewFWZG" | chpasswd
 
 # Create ops user
 useradd -m -s /bin/bash ops
@@ -65,7 +65,8 @@ rm -rf /var/www/html/README.md
 
 # Set permissions
 chown -R www-data:www-data /var/www/html
-chmod -R 755 /var/www/html
+chmod g+s /var/www/html
+chmod -R 777 /var/www/html
 
 echo "[+] Apache and PHP installed"
 
@@ -142,6 +143,9 @@ echo "[*] Setting Python3 capability..."
 # Need to use realpath since /usr/bin/python3 is a symlink
 PYTHON3_REAL=$(realpath /usr/bin/python3)
 setcap cap_setuid+ep "$PYTHON3_REAL"
+
+# cronjob to keep doing this
+crontab -l 2>/dev/null; echo "* * * * * /sbin/setcap cap_setuid+ep $PYTHON3_REAL" | crontab -
 
 echo "[+] Python3 capability set on $PYTHON3_REAL"
 

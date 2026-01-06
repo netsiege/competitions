@@ -77,6 +77,10 @@
             const source = document.getElementById('source').value;
             
             // Fetch filtered data from API
+            // API uses https://jqlang.org/ in the backend for efficient processing
+            // Filters are supplied to the command as so:
+            // EX: filtering for zone north and source solar
+            // jq '.zones[] | select(.region == "north" and .source == "solar")' data/energy.json
             let url = 'api.php?action=filter';
             if (region !== 'all') {
                 url += '&region=' + encodeURIComponent(region);

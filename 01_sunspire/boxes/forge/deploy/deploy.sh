@@ -84,6 +84,7 @@ echo "[*] Creating Git HTTP repository..."
 # Run the init-repo script
 chmod +x /opt/sunspire/boxes/forge/deploy/init-repo.sh
 /opt/sunspire/boxes/forge/deploy/init-repo.sh
+git config --global --add safe.directory /var/lib/git/forge-logs.git
 
 echo "[+] Git HTTP repository created"
 
@@ -152,6 +153,11 @@ echo "Validating output..."
 exit 0
 EOF
 
+cat > readme.txt << 'EOF'
+Manufacturing Scripts Repository
+Every 5 minutes a commit is triggered by the root cron job.
+EOF 
+
 chmod +x build.sh validate.sh
 
 git add .
@@ -172,6 +178,7 @@ chown -R forge:forge "$PRIV_REPO"
 
 # Make hooks directory world-writable (vulnerability!)
 chmod 777 "$PRIV_REPO/.git/hooks"
+git config --global --add safe.directory /home/forge/manufacturing-scripts
 
 cd -
 

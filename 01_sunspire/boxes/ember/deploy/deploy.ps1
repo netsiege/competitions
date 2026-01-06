@@ -199,6 +199,30 @@ if ($PhpZipPath -and (Test-Path $PhpZipPath)) {
     Write-Host "[!] PHP zip file not available - PHP will not be configured"
 }
 
+$VcRedistUrl = "https://aka.ms/vs/17/release/vc_redist.x64.exe"
+$VcRedistExe = "$env:TEMP\vc_redist.x64.exe"
+if (-not (Test-Path $VcRedistExe)) {
+    Invoke-WebRequest -Uri $VcRedistUrl -OutFile $VcRedistExe -UseBasicParsing -TimeoutSec 120
+}
+Start-Process $VcRedistExe -ArgumentList "/quiet", "/norestart" -Wait
+# ...existing code...
+if (Test-Path "$PhpPath\php-cgi.exe") {
+    # Clean previous handler to avoid dupes
+    & "$env:windir\system32\inetsrv\appcmd.exe" set config /section:system.webServer/handlers "/-[name='PHP_via_FastCGI']" 2>$null
+    & "$env:windir\system32\inetsrv\appcmd.exe" set config /section:system.webServer/fastCgi "/-[fullPath='$PhpPath\php-cgi.exe']" 2>$null
+
+    # Register FastCGI
+    & "$env:windir\system32\inetsrv\appcmd.exe" set config /section:system.webServer/fastCgi "/+[fullPath='$PhpPath\php-cgi.exe',arguments='']"
+    & "$env:windir\system32\inetsrv\appcmd.exe" set config /section:system.webServer/handlers "/+[name='PHP_via_FastCGI',path='*.php',verb='*',modules='FastCgiModule',scriptProcessor='$PhpPath\php-cgi.exe',resourceType='Either']"
+
+    # Set index.php as default document
+    & "$env:windir\system32\inetsrv\appcmd.exe" set config /section:defaultDocument "/+files.[value='index.php']"
+} else {
+    Write-Host "[!] php-cgi.exe not found in extracted PHP"
+}
+
+iisreset /restart
+
 # ===============================
 # DEPLOY WEBSITE
 # ===============================
@@ -330,6 +354,8 @@ Set-Acl -Path $ScriptsPath -AclObject $Acl
 
 # Create SMB share with anonymous access
 New-SmbShare -Name "Scripts" -Path $ScriptsPath -FullAccess "Everyone" -Description "Maintenance scripts" -ErrorAction SilentlyContinue
+Set-SmbClientConfiguration -EnableInsecureGuestLogons $true -Force
+Set-SmbClientConfiguration -RequireSecuritySignature $false -Force
 
 # Enable anonymous SMB access
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" -Name "RestrictNullSessAccess" -Value 0 -Type DWord
@@ -337,6 +363,20 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Par
 # Allow anonymous access to the share
 Grant-SmbShareAccess -Name "Scripts" -AccountName "Anonymous Logon" -AccessRight Full -Force
 Grant-SmbShareAccess -Name "Scripts" -AccountName "Everyone" -AccessRight Full -Force
+
+Set-LocalUser -Name "Guest" -AccountNeverExpires $true
+Enable-LocalUser -Name "Guest"
+
+# Export policy
+secedit /export /cfg C:\sec_smb.cfg
+# Modify policy to allow anonymous access and enumeration
+(Get-Content C:\sec_smb.cfg) -replace 'EveryoneIncludesAnonymous = 0', 'EveryoneIncludesAnonymous = 1' `
+                            -replace 'RestrictAnonymous = 1', 'RestrictAnonymous = 0' | Set-Content C:\sec_smb.cfg
+# Re-import and update
+secedit /configure /db C:\Windows\security\local.sdb /cfg C:\sec_smb.cfg /areas SECURITYPOLICY
+gpupdate /force
+Remove-Item C:\sec_smb.cfg
+
 
 # Add to null session shares
 $NullShares = (Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" -Name "NullSessionShares" -ErrorAction SilentlyContinue).NullSessionShares

@@ -3,13 +3,23 @@ from tests.test_solaris import TestSolaris
 from tests.test_starfall import TestStarfall
 from tests.test_helios import TestHelios
 from tests.test_orbital import TestOrbital
+from tests.test_forge import TestForge
+from tests.test_pyre import TestPyre
+from tests.test_ember import TestEmber
+from tests.test_inspire import TestInspire
+from tests.test_crucible import TestCrucible
 import unittest
 
 tests = [
-    TestOrbital,
+    # TestOrbital,
     # TestHelios,
     # TestSolaris,
-    # TestStarfall
+    # TestStarfall,
+    # TestForge,
+    # TestPyre,
+    # TestEmber,
+    # TestInspire,
+    TestCrucible,
 ]
 
 if __name__ == "__main__":
