@@ -75,17 +75,25 @@ echo "[+] Apache and PHP installed"
 # ===============================
 echo "[*] Configuring MySQL..."
 
+# Disable AppArmor for MySQL to allow INTO OUTFILE to write to /var/www/html
+if [ -f /etc/apparmor.d/usr.sbin.mysqld ]; then
+    ln -sf /etc/apparmor.d/usr.sbin.mysqld /etc/apparmor.d/disable/ 2>/dev/null || true
+    apparmor_parser -R /etc/apparmor.d/usr.sbin.mysqld 2>/dev/null || true
+fi
+
 # Start MySQL service
 systemctl start mysql
 systemctl enable mysql
 
 # Configure secure_file_priv to allow file writes
 # This enables the INTO OUTFILE SQL injection vector
-cat >> /etc/mysql/mysql.conf.d/mysqld.cnf << 'EOF'
+if ! grep -q "secure_file_priv = \"\"" /etc/mysql/mysql.conf.d/mysqld.cnf 2>/dev/null; then
+    cat >> /etc/mysql/mysql.conf.d/mysqld.cnf << 'EOF'
 
 # Allow MySQL to write files anywhere (for export features)
 secure_file_priv = ""
 EOF
+fi
 
 # Restart MySQL to apply config
 systemctl restart mysql

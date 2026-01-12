@@ -1,0 +1,101 @@
+---
+# Sunspire Cleanup Playbook
+# Removes all Ansible deployment artifacts from target VMs
+#
+# Usage:
+#   ansible-playbook -i inventory.ini cleanup.yml
+#   ansible-playbook -i inventory.ini cleanup.yml --limit linux
+#   ansible-playbook -i inventory.ini cleanup.yml --limit windows
+
+- name: Cleanup Linux VMs
+  hosts: linux
+  gather_facts: no
+  vars:
+    remote_dir: /opt/sunspire
+    log_dir: /var/log
+
+  tasks:
+    - name: Remove sunspire deployment directory
+      file:
+        path: "{{ remote_dir }}"
+        state: absent
+      ignore_errors: yes
+
+    - name: Remove deploy log
+      file:
+        path: "{{ log_dir }}/deploy-{{ inventory_hostname }}.log"
+        state: absent
+      ignore_errors: yes
+
+    - name: Remove any leftover archive in /tmp
+      file:
+        path: /tmp/sunspire.tar.gz
+        state: absent
+      ignore_errors: yes
+
+    - name: Remove ansible temp directory
+      file:
+        path: /root/.ansible
+        state: absent
+      ignore_errors: yes
+
+    - name: Remove ansible facts cache
+      file:
+        path: /tmp/ansible_facts
+        state: absent
+      ignore_errors: yes
+
+    - name: Cleanup complete
+      debug:
+        msg: "Ansible artifacts cleaned up on {{ inventory_hostname }}"
+
+
+- name: Cleanup Windows VMs
+  hosts: windows
+  gather_facts: no
+  vars:
+    remote_dir: C:\sunspire
+    log_dir: C:\Windows\Temp
+
+  tasks:
+    - name: Remove sunspire deployment directory
+      win_file:
+        path: "{{ remote_dir }}"
+        state: absent
+      ignore_errors: yes
+
+    - name: Remove deploy log
+      win_file:
+        path: "{{ log_dir }}\\deploy-{{ inventory_hostname }}.log"
+        state: absent
+      ignore_errors: yes
+
+    - name: Remove ansible temp and cache files
+      win_shell: |
+        Remove-Item -Path "$env:TEMP\ansible*" -Recurse -Force -ErrorAction SilentlyContinue
+        Remove-Item -Path "$env:TEMP\.ansible*" -Recurse -Force -ErrorAction SilentlyContinue
+        Remove-Item -Path "$env:USERPROFILE\.ansible" -Recurse -Force -ErrorAction SilentlyContinue
+        Remove-Item -Path "C:\Users\Administrator\.ansible" -Recurse -Force -ErrorAction SilentlyContinue
+      ignore_errors: yes
+
+    - name: Cleanup complete
+      debug:
+        msg: "Ansible artifacts cleaned up on {{ inventory_hostname }}"
+
+
+- name: Cleanup localhost archive
+  hosts: localhost
+  gather_facts: no
+  vars:
+    archive_path: "{{ playbook_dir }}/../sunspire.tar.gz"
+
+  tasks:
+    - name: Remove local deployment archive
+      file:
+        path: "{{ archive_path }}"
+        state: absent
+      ignore_errors: yes
+
+    - name: Local cleanup complete
+      debug:
+        msg: "Local sunspire.tar.gz archive removed"

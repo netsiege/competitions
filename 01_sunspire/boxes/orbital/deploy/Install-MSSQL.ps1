@@ -14,9 +14,6 @@
 #>
 
 param(
-    # Path to ISO file, downloads SQL Server 2019 Developer if not specified
-    [string] $IsoPath = $ENV:SQLSERVER_ISOPATH,
-    
     # Instance name
     [string] $InstanceName = 'MSSQLSERVER',
     
@@ -33,107 +30,94 @@ Write-Host "   MSSQL SERVER INSTALLATION  " -ForegroundColor Yellow
 Write-Host "===============================" -ForegroundColor Yellow
 
 # ===============================
-# DOWNLOAD ISO IF NOT PROVIDED
-# ===============================
-if (!$IsoPath) {
-    Write-Host "[*] Downloading SQL Server 2019 Developer Edition..." -ForegroundColor Cyan
-    
-    $IsoPath = "https://download.microsoft.com/download/7/c/1/7c14e92e-bdcb-4f89-b7cf-93543e7112d1/SQLServer2019-x64-ENU-Dev.iso"
-    $saveDir = Join-Path $Env:TEMP $scriptName
-    New-Item $saveDir -ItemType Directory -ErrorAction SilentlyContinue | Out-Null
-    
-    $isoName = $IsoPath -split '/' | Select-Object -Last 1
-    $savePath = Join-Path $saveDir $isoName
-    
-    if (Test-Path $savePath) {
-        Write-Host "[*] ISO already downloaded: $savePath" -ForegroundColor Cyan
-    } else {
-        Write-Host "[*] Downloading to: $savePath" -ForegroundColor Cyan
-        Invoke-WebRequest $IsoPath -OutFile $savePath -UseBasicParsing
-    }
-    
-    $IsoPath = $savePath
-}
-
-Write-Host "[*] ISO Path: $IsoPath" -ForegroundColor Cyan
-
-# ===============================
-# MOUNT ISO
-# ===============================
-Write-Host "[*] Mounting ISO..." -ForegroundColor Cyan
-
-$volume = Mount-DiskImage $IsoPath -StorageType ISO -PassThru | Get-Volume
-$iso_drive = if ($volume) {
-    $volume.DriveLetter + ':'
-} else {
-    # Fallback for Windows Sandbox
-    Get-PSDrive | Where-Object { $_.Description -like 'sql*' } | Select-Object -ExpandProperty Root
-}
-
-if (!$iso_drive) { 
-    throw "Can't find mounted ISO drive" 
-}
-
-Write-Host "[+] ISO mounted at: $iso_drive" -ForegroundColor Green
-
-# ===============================
 # CHECK IF SQL SERVER IS ALREADY INSTALLED
 # ===============================
-$registryPath = "HKLM:\SOFTWARE\Microsoft\Microsoft SQL Server"
-$instancesPath = Join-Path $registryPath "Instance Names\SQL"
+if (Get-Service -Name 'MSSQLSERVER' -ErrorAction SilentlyContinue) {
+    Write-Host "[+] SQL Server already installed, skipping installation step" -ForegroundColor Green
+} else {
+    # ===============================
+    # DOWNLOAD ISO
+    # ===============================
+    $isoUrl = "https://download.microsoft.com/download/7/c/1/7c14e92e-bdcb-4f89-b7cf-93543e7112d1/SQLServer2019-x64-ENU-Dev.iso"
+    $saveDir = Join-Path $Env:TEMP $scriptName
+    New-Item $saveDir -ItemType Directory -ErrorAction SilentlyContinue | Out-Null
+    $IsoPath = Join-Path $saveDir "SQLServer2019-x64-ENU-Dev.iso"
+    $minIsoSize = 1500MB  # SQL Server ISO should be ~1.5GB+
 
-$mssqlInstalled = $false
-if (Test-Path $instancesPath) {
-    $instances = Get-Item $instancesPath -ErrorAction SilentlyContinue
-    if ($instances.ValueCount -gt 0) {
-        Write-Host "[*] SQL Server instances already installed:" -ForegroundColor Cyan
-        $instances.GetValueNames() | ForEach-Object {
-            Write-Host "    - $_" -ForegroundColor Cyan
+    if (Test-Path $IsoPath) {
+        $fileSize = (Get-Item $IsoPath).Length
+        if ($fileSize -lt $minIsoSize) {
+            Write-Host "[!] ISO file appears corrupted (size: $([math]::Round($fileSize/1MB))MB), re-downloading..." -ForegroundColor Yellow
+            Dismount-DiskImage -ImagePath $IsoPath -ErrorAction SilentlyContinue
+            Remove-Item $IsoPath -Force -ErrorAction SilentlyContinue
+        } else {
+            Write-Host "[*] ISO already present: $IsoPath" -ForegroundColor Cyan
         }
-        $mssqlInstalled = $true
     }
-}
 
-# ===============================
-# INSTALL SQL SERVER
-# ===============================
-if (-not $mssqlInstalled) {
+    if (-not (Test-Path $IsoPath)) {
+        Write-Host "[*] Downloading ISO to: $IsoPath" -ForegroundColor Cyan
+        Invoke-WebRequest $isoUrl -OutFile $IsoPath -UseBasicParsing
+    }
+
+    # ===============================
+    # MOUNT ISO
+    # ===============================
+    Write-Host "[*] Mounting ISO..." -ForegroundColor Cyan
+
+    $mountedImage = Mount-DiskImage $IsoPath -StorageType ISO -PassThru
+    $volume = $mountedImage | Get-Volume
+    $iso_drive = if ($volume) {
+        $volume.DriveLetter + ':'
+    } else {
+        # Fallback for Windows Sandbox
+        Get-PSDrive | Where-Object { $_.Description -like 'sql*' } | Select-Object -ExpandProperty Root
+    }
+
+    if (!$iso_drive) { 
+        throw "Can't find mounted ISO drive" 
+    }
+
+    Write-Host "[+] ISO mounted at: $iso_drive" -ForegroundColor Green
+
+    # ===============================
+    # INSTALL SQL SERVER
+    # ===============================
     Write-Host "[*] Installing SQL Server..." -ForegroundColor Cyan
 
-    # Build installation command
-    # Install with Windows auth only to avoid DPAPI profile errors, enable SQL auth post-install
-    $cmd = @(
-        "${iso_drive}setup.exe"
-        '/Q'                                    # Silent install
-        '/INDICATEPROGRESS'                     # Show progress
-        '/IACCEPTSQLSERVERLICENSETERMS'         # Accept license
-        '/ACTION=install'                       # Install action
-        '/UPDATEENABLED=false'                  # No updates
-        '/FEATURES=SQLEngine'                   # Database engine only
-        "/INSTANCENAME=$InstanceName"           # Instance name
-        "/SQLSYSADMINACCOUNTS=""BUILTIN\Administrators"""
-        '/SQLSVCACCOUNT="NT Service\\MSSQLSERVER"'
-        '/AGTSVCACCOUNT="NT Service\\SQLSERVERAGENT"'
+    $setupPath = "${iso_drive}setup.exe"
+    $arguments = @(
+        '/Q'
+        '/INDICATEPROGRESS'
+        '/IACCEPTSQLSERVERLICENSETERMS'
+        '/ACTION=install'
+        '/UPDATEENABLED=false'
+        '/FEATURES=SQLEngine'
+        "/INSTANCENAME=$InstanceName"
+        '/SQLSYSADMINACCOUNTS="BUILTIN\Administrators"'
+        '/SQLSVCACCOUNT="NT Service\MSSQLSERVER"'
+        '/AGTSVCACCOUNT="NT Service\SQLSERVERAGENT"'
         '/SQLSVCSTARTUPTYPE=automatic'
         '/AGTSVCSTARTUPTYPE=automatic'
-        '/TCPENABLED=1'                         # Enable TCP/IP
-        '/NPENABLED=1'                          # Enable Named Pipes
+        '/TCPENABLED=1'
+        '/NPENABLED=1'
     )
 
     Write-Host "[*] Running SQL Server setup..." -ForegroundColor Cyan
-    $setupCmd = $cmd -join ' '
-    Invoke-Expression $setupCmd
+    $argString = $arguments -join ' '
+    Write-Host "[*] Arguments: $argString" -ForegroundColor Gray
+    
+    $process = Start-Process -FilePath $setupPath -ArgumentList $arguments -Wait -PassThru -NoNewWindow
+    $exitCode = $process.ExitCode
 
-    if ($LastExitCode -and $LastExitCode -ne 3010 -and $LastExitCode -ne 0) {
-        throw "SQL Server installation failed, exit code: $LastExitCode"
+    if ($exitCode -and $exitCode -ne 3010 -and $exitCode -ne 0) {
+        throw "SQL Server installation failed, exit code: $exitCode"
     }
 
     Write-Host "[+] SQL Server installed" -ForegroundColor Green
-} else {
-    Write-Host "[+] SQL Server already installed, skipping installation step" -ForegroundColor Green
 }
 
-# Wait for services to start
+# Wait for services to start and be ready
 Write-Host "[*] Waiting for SQL Server services..." -ForegroundColor Cyan
 Start-Sleep -Seconds 10
 
@@ -353,7 +337,11 @@ PRINT 'SunSpire database populated with solar panel data';
 Write-Host "[*] Cleaning up..." -ForegroundColor Cyan
 
 # Dismount ISO
-Dismount-DiskImage $IsoPath -ErrorAction SilentlyContinue
+if ($mountedImage) {
+    Dismount-DiskImage -ImagePath $mountedImage.ImagePath -ErrorAction SilentlyContinue
+} else {
+    Dismount-DiskImage $IsoPath -ErrorAction SilentlyContinue
+}
 
 # Remove temp SQL files
 Remove-Item "$Env:TEMP\sql_config.sql" -Force -ErrorAction SilentlyContinue

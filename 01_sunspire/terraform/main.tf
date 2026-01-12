@@ -74,4 +74,5 @@ resource "proxmox_vm_qemu" "vms" {
     ipconfig0  = "ip=${each.value.ip_address},gw=10.100.0.1"
     nameserver = "10.100.0.1"
     tags       = ""
+    upgrade_packages = false
 }

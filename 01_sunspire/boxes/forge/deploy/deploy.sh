@@ -23,12 +23,16 @@ echo "[+] Packages installed"
 # ===============================
 echo "[*] Creating users..."
 
-# Create forge user
-useradd -m -s /bin/bash forge
+# Create forge user (if not exists)
+if ! id "forge" &>/dev/null; then
+    useradd -m -s /bin/bash forge
+fi
 echo "forge:h1ewFWZG" | chpasswd
 
-# Create ops user
-useradd -m -s /bin/bash ops
+# Create ops user (if not exists)
+if ! id "ops" &>/dev/null; then
+    useradd -m -s /bin/bash ops
+fi
 echo "ops:9ksP311p" | chpasswd
 
 # Set root password
@@ -133,12 +137,11 @@ git config --global --add safe.directory "$PRIV_REPO" 2>/dev/null || true
 
 if [ ! -d .git ]; then
 	git init
+	git config user.email "forge@sunspire.local"
+	git config user.name "Forge Build System"
 fi
 
-git config user.email "forge@sunspire.local"
-git config user.name "Forge Build System"
-
-# Add some initial scripts
+# Add some initial scripts (overwrite if exist)
 cat > build.sh << 'EOF'
 #!/bin/bash
 # Manufacturing build script
@@ -160,8 +163,14 @@ EOF
 
 chmod +x build.sh validate.sh
 
-git add .
-git commit -m "Initial build scripts"
+# Only commit if there are changes
+if ! git diff --quiet 2>/dev/null || [ -z "$(git log --oneline -1 2>/dev/null)" ]; then
+	git add .
+	git commit -m "Initial build scripts" 2>/dev/null || true
+fi
+
+# Ensure hooks directory exists
+mkdir -p .git/hooks
 
 # Create pre-commit hook (world-writable - vulnerability!)
 cat > .git/hooks/pre-commit << 'EOF'
@@ -193,8 +202,8 @@ echo "[*] Setting up root cron job..."
 cp /opt/sunspire/boxes/forge/deploy/root-cron.sh /usr/local/bin/forge-build.sh
 chmod +x /usr/local/bin/forge-build.sh
 
-# Add cron job for root - runs every 5 minutes
-(crontab -l 2>/dev/null; echo "*/5 * * * * /usr/local/bin/forge-build.sh") | crontab -
+# Add cron job for root - runs every 5 minutes (remove existing first to avoid duplicates)
+(crontab -l 2>/dev/null | grep -v '/usr/local/bin/forge-build.sh'; echo "*/5 * * * * /usr/local/bin/forge-build.sh") | crontab -
 
 echo "[+] Root cron job configured"
 

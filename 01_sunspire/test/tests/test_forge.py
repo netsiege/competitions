@@ -91,7 +91,7 @@ class TestForge(unittest.TestCase):
             target_ip=self.forge_target_ip,
             username="forge",
             password="h1ewFWZG",
-            command="if [ -w /home/forge/manufacturing-scripts/.git/hooks/pre-commit ]; then echo 'valid'; fi",
+            command="if [ -w /home/forge/manufacturing-scripts/.git/hooks/pre-commit.sample ]; then echo 'valid'; fi",
             expected_output="valid"
         )
         self.assertTrue(result.success, msg=result.message)

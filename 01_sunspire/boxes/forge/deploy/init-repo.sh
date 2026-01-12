@@ -12,6 +12,13 @@ GIT_DIR="/var/lib/git"
 BARE_REPO="${GIT_DIR}/${REPO_NAME}.git"
 TEMP_DIR=$(mktemp -d)
 
+# Check if repo already exists
+if [ -d "$BARE_REPO" ]; then
+    echo "[*] Git repository already exists at ${BARE_REPO}, skipping creation"
+    rm -rf "$TEMP_DIR"
+    exit 0
+fi
+
 echo "[*] Creating git repository with password leak history..."
 
 # ===============================

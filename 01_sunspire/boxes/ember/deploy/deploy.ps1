@@ -364,7 +364,7 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Par
 Grant-SmbShareAccess -Name "Scripts" -AccountName "Anonymous Logon" -AccessRight Full -Force
 Grant-SmbShareAccess -Name "Scripts" -AccountName "Everyone" -AccessRight Full -Force
 
-Set-LocalUser -Name "Guest" -AccountNeverExpires $true
+Set-LocalUser -Name "Guest" -AccountNeverExpires
 Enable-LocalUser -Name "Guest"
 
 # Export policy

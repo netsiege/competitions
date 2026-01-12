@@ -247,7 +247,8 @@ Set-Content -Path "$orbitalDocs\helios-admin.rdp" -Value $rdpContent -Force
 # Set ownership to orbital (if user exists)
 try {
     $acl = Get-Acl $orbitalDocs
-    $accessRule = New-Object System.Security.AccessControl.FileSystemAccessRule("orbital", "FullControl", "ContainerInherit,ObjectInherit", "None", "Allow")
+    $ntAccount = New-Object System.Security.Principal.NTAccount($env:COMPUTERNAME, "orbital")
+    $accessRule = New-Object System.Security.AccessControl.FileSystemAccessRule($ntAccount, "FullControl", "ContainerInherit,ObjectInherit", "None", "Allow")
     $acl.SetAccessRule($accessRule)
     Set-Acl -Path $orbitalDocs -AclObject $acl
 } catch {
