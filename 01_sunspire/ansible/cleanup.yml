@@ -45,6 +45,18 @@
         state: absent
       ignore_errors: yes
 
+    - name: Remove testing artifacts (webshells, test files)
+      file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - /var/www/html/tester.php
+        - /var/www/html/uploads/shell.php
+        - /var/www/html/shell.php
+        - /tmp/test_exploit.sh
+        - /tmp/shell.php
+      ignore_errors: yes
+
     - name: Cleanup complete
       debug:
         msg: "Ansible artifacts cleaned up on {{ inventory_hostname }}"
@@ -72,10 +84,20 @@
 
     - name: Remove ansible temp and cache files
       win_shell: |
-        Remove-Item -Path "$env:TEMP\ansible*" -Recurse -Force -ErrorAction SilentlyContinue
-        Remove-Item -Path "$env:TEMP\.ansible*" -Recurse -Force -ErrorAction SilentlyContinue
-        Remove-Item -Path "$env:USERPROFILE\.ansible" -Recurse -Force -ErrorAction SilentlyContinue
-        Remove-Item -Path "C:\Users\Administrator\.ansible" -Recurse -Force -ErrorAction SilentlyContinue
+        if (Test-Path "$env:TEMP\ansible*") { Remove-Item -Path "$env:TEMP\ansible*" -Recurse -Force }
+        if (Test-Path "$env:TEMP\.ansible*") { Remove-Item -Path "$env:TEMP\.ansible*" -Recurse -Force }
+        if (Test-Path "$env:USERPROFILE\.ansible") { Remove-Item -Path "$env:USERPROFILE\.ansible" -Recurse -Force }
+        if (Test-Path "C:\Users\Administrator\.ansible") { Remove-Item -Path "C:\Users\Administrator\.ansible" -Recurse -Force }
+        $true
+      ignore_errors: yes
+
+    - name: Remove testing artifacts (test scripts, temp files)
+      win_shell: |
+        if (Test-Path "C:\Temp\test*") { Remove-Item -Path "C:\Temp\test*" -Recurse -Force }
+        if (Test-Path "C:\Windows\Temp\test*") { Remove-Item -Path "C:\Windows\Temp\test*" -Recurse -Force }
+        if (Test-Path "C:\inetpub\wwwroot\test*") { Remove-Item -Path "C:\inetpub\wwwroot\test*" -Recurse -Force }
+        if (Test-Path "C:\inetpub\wwwroot\shell*") { Remove-Item -Path "C:\inetpub\wwwroot\shell*" -Recurse -Force }
+        $true
       ignore_errors: yes
 
     - name: Cleanup complete

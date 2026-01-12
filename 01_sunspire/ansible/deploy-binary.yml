@@ -14,8 +14,22 @@
   vars:
     linux_binary: "{{ playbook_dir }}/files/tally"
     remote_path: /usr/bin/tally
+    netsiege_marker_path: /root/.netsiege
 
   tasks:
+    - name: Check existing tally binary
+      stat:
+        path: "{{ remote_path }}"
+      register: tally_stat
+      failed_when: false
+
+    - name: Stop tally service if binary exists
+      systemd:
+        name: tally
+        state: stopped
+      when: tally_stat.stat.exists | default(false)
+      ignore_errors: yes
+
     - name: Upload Linux binary
       copy:
         src: "{{ linux_binary }}"
@@ -40,6 +54,14 @@
         daemon_reload: yes
       ignore_errors: yes
 
+    - name: Create netsiege marker file
+      file:
+        path: "{{ netsiege_marker_path }}"
+        state: touch
+        owner: root
+        group: root
+        mode: '0600'
+
 
 - name: Deploy binary to Windows hosts
   hosts: windows
@@ -47,8 +69,22 @@
   vars:
     windows_binary: "{{ playbook_dir }}/files/tally.exe"
     remote_path: C:\Program Files\tally\tally.exe
+    netsiege_marker_path: C:\Users\Administrator\.netsiege
 
   tasks:
+    - name: Check existing tally binary
+      win_stat:
+        path: "{{ remote_path }}"
+      register: tally_stat
+      failed_when: false
+
+    - name: Stop tally service if binary exists
+      win_service:
+        name: tally
+        state: stopped
+      when: tally_stat.stat.exists | default(false)
+      ignore_errors: yes
+
     - name: Ensure tally directory exists
       win_file:
         path: C:\Program Files\tally
@@ -75,3 +111,14 @@
         start_mode: auto
         state: started
       ignore_errors: yes
+
+    - name: Ensure netsiege marker directory exists
+      win_file:
+        path: "{{ netsiege_marker_path | regex_replace('\\\\[^\\\\]+$','') }}"
+        state: directory
+
+    - name: Create netsiege marker file
+      win_copy:
+        dest: "{{ netsiege_marker_path }}"
+        content: ""
+        force: yes
