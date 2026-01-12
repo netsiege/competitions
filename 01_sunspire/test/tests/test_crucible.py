@@ -50,8 +50,9 @@ class TestCrucible(unittest.TestCase):
 			# Send format string to print PASSWORD argument
 			sock.sendall(b"%s\n")
 			leaked = sock.recv(8182000).decode()
-			leaked2 = sock.recv(8182000).decode()
-			leaked += leaked2
+			# leaked2 = sock.recv(8182000).decode()
+			# leaked += leaked2
+			print(leaked)
 
 		self.assertIn("mqD5uv0j", leaked, msg="Format string did not leak chatbot password")
 
