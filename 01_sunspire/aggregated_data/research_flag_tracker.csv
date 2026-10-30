@@ -1,0 +1,204 @@
+timestamp,team,player_id,ip,flag_type,command,full_command
+2026-01-12 18:32:34,Steel,T2,10.100.7.32,man,man enum4linux,man enum4linux
+2026-01-12 18:32:38,Steel,T2,10.100.7.32,--help flag,enum4linux --help,enum4linux --help
+2026-01-12 18:32:40,Steel,T2,10.100.7.32,--help flag,enum4linux --help,enum4linux --help
+2026-01-12 18:32:50,Steel,T2,10.100.7.32,--help flag,enum4linux --help |,enum4linux --help | less
+2026-01-12 18:33:03,Steel,T2,10.100.7.32,--help flag,enum4linux --help |,enum4linux --help | less
+2026-01-12 18:33:06,Steel,T2,10.100.7.32,--help flag,enum4linux --help,enum4linux --help
+2026-01-13 18:41:11,Steel,T2,10.100.7.32,tldr,tldr,tldr
+2026-01-13 18:42:34,Steel,T2,10.100.7.32,tldr,tldr hydra,tldr hydra
+2026-01-13 18:42:39,Steel,T2,10.100.7.32,tldr,tldr --update,tldr --update
+2026-01-13 18:42:42,Steel,T2,10.100.7.32,tldr,tldr hydra,tldr hydra
+2026-01-13 18:42:54,Steel,T2,10.100.7.32,tldr,tldr hydra,tldr hydra | less
+2026-01-13 18:42:56,Steel,T2,10.100.7.32,tldr,tldr less,tldr less
+2026-01-13 18:43:18,Steel,T2,10.100.7.32,tldr,tldr hydra,tldr hydra | less
+2026-01-13 18:43:23,Steel,T2,10.100.7.32,tldr,tldr vim,tldr vim
+2026-01-13 18:43:27,Steel,T2,10.100.7.32,tldr,tldr vim,tldr vim
+2026-01-13 18:44:05,Steel,T2,10.100.7.32,tldr,tldr netexec,tldr netexec
+2026-01-13 18:44:10,Steel,T2,10.100.7.32,tldr,tldr nxc,tldr nxc
+2026-01-13 18:44:17,Steel,T2,10.100.7.32,man,man nxc,man nxc
+2026-01-13 18:44:22,Steel,T2,10.100.7.32,--help flag,nxc --help,nxc --help
+2026-01-13 18:44:39,Steel,T2,10.100.7.32,tldr,tldr nxc,tldr nxc
+2026-01-13 18:45:12,Steel,T2,10.100.7.32,tldr,tldr nxc,tldr nxc
+2026-01-13 18:47:23,Steel,T2,10.100.7.32,tldr,tldr smbclient,tldr smbclient
+2026-01-13 18:47:28,Harmony,H2,10.100.7.22,man,man smb,man smb
+2026-01-13 18:47:59,Harmony,H2,10.100.7.22,man,man smbClient,man smbClient
+2026-01-13 18:48:21,Steel,T2,10.100.7.32,tldr,tldr nxc,tldr nxc
+2026-01-13 18:53:32,Steel,T2,10.100.7.32,tldr,tldr tar,tldr tar
+2026-01-13 18:53:43,Steel,T2,10.100.7.32,tldr,tldr tar,tldr tar
+2026-01-13 18:53:45,Steel,T2,10.100.7.32,tldr,tldr tar,tldr tar
+2026-01-13 18:54:59,Steel,T2,10.100.7.32,tldr,tldr tar,tldr tar
+2026-01-13 18:59:23,Canopy,C4,10.100.7.14,tldr,tldr hydra,tldr hydra
+2026-01-13 18:59:38,Canopy,C4,10.100.7.14,tldr,tldr --update,tldr --update
+2026-01-13 18:59:42,Canopy,C4,10.100.7.14,tldr,tldr hydra,tldr hydra
+2026-01-13 19:04:21,Canopy,C1,10.100.7.11,tldr,tldr smb,tldr smb
+2026-01-13 19:04:29,Canopy,C1,10.100.7.11,tldr,tldr smb,tldr smb
+2026-01-13 19:04:36,Canopy,C1,10.100.7.11,tldr,tldr smbdclient,tldr smbdclient
+2026-01-13 19:04:40,Canopy,C1,10.100.7.11,tldr,tldr smbclient,tldr smbclient
+2026-01-13 19:05:52,Canopy,C1,10.100.7.11,tldr,tldr hydra,tldr hydra
+2026-01-13 19:05:59,Canopy,C1,10.100.7.11,tldr,tldr --update,tldr --update
+2026-01-13 19:06:03,Canopy,C1,10.100.7.11,tldr,tldr hydra,tldr hydra
+2026-01-13 19:07:09,Canopy,C1,10.100.7.11,tldr,tldr smbclient,tldr smbclient
+2026-01-13 19:08:55,Steel,T2,10.100.7.32,tldr,tldr netsta,tldr netsta
+2026-01-13 19:12:02,Steel,T4,10.100.7.34,tldr,tldr nxc,tldr nxc
+2026-01-13 19:12:35,Steel,T4,10.100.7.34,tldr,tldr nxc,tldr nxc
+2026-01-13 19:12:42,Steel,T4,10.100.7.34,tldr,tldr nxc,tldr nxc
+2026-01-13 19:12:59,Steel,T4,10.100.7.34,tldr,tldr ls,tldr ls
+2026-01-13 19:13:25,Steel,T4,10.100.7.34,tldr,tldr --update,tldr --update
+2026-01-13 19:13:32,Steel,T4,10.100.7.34,tldr,tldr nxc,tldr nxc
+2026-01-13 19:15:47,Steel,T4,10.100.7.34,tldr,tldr nxc,tldr nxc smb
+2026-01-13 19:18:12,Canopy,C1,10.100.7.11,tldr,tldr su,tldr su
+2026-01-13 19:18:35,Steel,T3,10.100.7.33,tldr,tldr ftp,tldr ftp
+2026-01-13 19:19:32,Steel,T3,10.100.7.33,tldr,tldr nxc,tldr nxc
+2026-01-13 19:19:55,Steel,T3,10.100.7.33,tldr,tldr --update,tldr --update
+2026-01-13 19:20:01,Steel,T3,10.100.7.33,tldr,tldr nxc,tldr nxc
+2026-01-13 19:22:04,Canopy,C1,10.100.7.11,tldr,tldr smbclient,tldr smbclient
+2026-01-13 19:23:09,Steel,T3,10.100.7.33,tldr,tldr nxc,tldr nxc smb
+2026-01-13 19:32:24,Canopy,C3,10.100.7.13,tldr,tldr smbclient.py,tldr smbclient.py
+2026-01-13 19:32:29,Canopy,C3,10.100.7.13,tldr,tldr smbclient,tldr smbclient
+2026-01-13 19:32:54,Canopy,C3,10.100.7.13,tldr,tldr --update,tldr --update
+2026-01-13 19:33:00,Canopy,C3,10.100.7.13,tldr,tldr smbclient,tldr smbclient
+2026-01-13 19:36:26,Canopy,C3,10.100.7.13,tldr,tldr nxc,tldr nxc
+2026-01-13 19:39:53,Canopy,C3,10.100.7.13,tldr,tldr nxc,tldr nxc
+2026-01-13 19:40:03,Canopy,C3,10.100.7.13,tldr,tldr smb,tldr smb
+2026-01-13 19:40:12,Canopy,C3,10.100.7.13,tldr,tldr --update,tldr --update
+2026-01-13 19:40:12,Canopy,C3,10.100.7.13,tldr,tldr --update,tldr --update
+2026-01-13 19:40:19,Canopy,C3,10.100.7.13,tldr,tldr smb,tldr smb
+2026-01-13 19:40:24,Canopy,C3,10.100.7.13,tldr,tldr smbclient,tldr smbclient
+2026-01-13 19:40:56,Steel,T3,10.100.7.33,tldr,tldr smbclient,tldr smbclient
+2026-01-13 19:45:57,Canopy,C3,10.100.7.13,tldr,tldr evil-winrm,tldr evil-winrm
+2026-01-13 19:46:51,Steel,T3,10.100.7.33,tldr,tldr smbclient,tldr smbclient
+2026-01-13 19:47:24,Canopy,C1,10.100.7.11,tldr,tldr evil-winrm,tldr evil-winrm
+2026-01-13 19:58:01,Canopy,C1,10.100.7.11,tldr,tldr evil-winrm,tldr evil-winrm
+2026-01-13 20:05:20,Canopy,C1,10.100.7.11,tldr,tldr smbclient,tldr smbclient
+2026-01-13 20:07:14,Steel,T4,10.100.7.34,tldr,tldr gobuster,tldr gobuster
+2026-01-13 20:08:55,Steel,T3,10.100.7.33,tldr,tldr evil-winrm,tldr evil-winrm
+2026-01-13 20:09:07,Steel,T3,10.100.7.33,tldr,tldr evil-winrm,tldr evil-winrm
+2026-01-13 20:09:07,Steel,T3,10.100.7.33,tldr,tldr evil-winrm,tldr evil-winrm
+2026-01-13 20:10:10,Steel,T3,10.100.7.33,tldr,tldr nxc,tldr nxc
+2026-01-13 20:11:05,Canopy,C3,10.100.7.13,tldr,tldr gunzip,tldr gunzip
+2026-01-16 14:58:40,Canopy,C4,10.100.7.14,tldr,tldr gunzip,tldr gunzip
+2026-01-16 14:58:53,Canopy,C4,10.100.7.14,tldr,tldr gzip,tldr gzip
+2026-01-16 15:06:25,Canopy,C4,10.100.7.14,tldr,tldr xfreerdp3,tldr xfreerdp3
+2026-01-20 18:56:07,Steel,T2,10.100.7.32,tldr,tldr ssh-keygen,tldr ssh-keygen
+2026-01-20 19:05:47,Steel,T3,10.100.7.33,tldr,tldr ssh,tldr ssh
+2026-01-20 19:15:36,Harmony,H2,10.100.7.22,tldr,tldr ssh,tldr ssh
+2026-01-20 19:17:01,Harmony,H2,10.100.7.22,man,man ssh,man ssh
+2026-01-20 19:17:41,Steel,T2,10.100.7.32,tldr,tldr ssh-copy-id,tldr ssh-copy-id
+2026-01-20 19:21:08,Steel,T3,10.100.7.33,tldr,tldr getsystem,tldr getsystem
+2026-01-20 19:27:50,Steel,T3,10.100.7.33,tldr,tldr msfconsole,tldr msfconsole
+2026-01-20 19:28:08,Steel,T3,10.100.7.33,--help flag,msfconsole -h,msfconsole -h
+2026-01-20 19:34:15,Steel,T3,10.100.7.33,tldr,tldr nxc,tldr nxc
+2026-01-20 19:34:37,Steel,T3,10.100.7.33,--help flag,nxc smb -h,nxc smb -h
+2026-01-20 19:45:57,Steel,T3,10.100.7.33,tldr,tldr evil-winrm,tldr evil-winrm
+2026-01-20 20:02:15,Canopy,C1,10.100.7.11,tldr,tldr systemctl,tldr systemctl
+2026-01-20 20:04:42,Steel,T3,10.100.7.33,tldr,tldr smbclient,tldr smbclient
+2026-01-20 20:20:30,Steel,T3,10.100.7.33,tldr,tldr rpc,tldr rpc
+2026-01-20 20:33:13,Steel,T3,10.100.7.33,tldr,tldr rpcinfor,tldr rpcinfor
+2026-01-20 20:33:16,Steel,T3,10.100.7.33,tldr,tldr rpcinfo,tldr rpcinfo
+2026-01-20 20:35:43,Steel,T3,10.100.7.33,tldr,tldr rpcclient,tldr rpcclient
+2026-01-26 18:30:38,Canopy,C3,10.100.7.13,tldr,tldr nxc,tldr nxc
+2026-01-26 18:32:47,Steel,T3,10.100.7.33,tldr,tldr nmap,tldr nmap
+2026-01-26 18:44:07,Canopy,C1,10.100.7.11,tldr,tldr gobuster,tldr gobuster
+2026-01-26 18:45:11,Canopy,C1,10.100.7.11,tldr,tldr gobuster,tldr gobuster
+2026-01-26 18:49:37,Steel,T3,10.100.7.33,tldr,tldr ssh,tldr ssh
+2026-01-26 18:53:03,Steel,T2,10.100.7.32,tldr,tldr git,tldr git
+2026-01-26 18:54:46,Canopy,C3,10.100.7.13,tldr,tldr nxc,tldr nxc
+2026-01-26 18:55:19,Canopy,C3,10.100.7.13,tldr,tldr hydra,tldr hydra
+2026-01-26 19:32:03,Steel,T3,10.100.7.33,tldr,tldr enum4linux,tldr enum4linux
+2026-01-26 19:32:42,Canopy,C3,10.100.7.13,tldr,tldr nxc,tldr nxc
+2026-01-26 19:32:42,Canopy,C3,10.100.7.13,tldr,tldr nxc,tldr nxc
+2026-01-26 19:44:40,Canopy,C1,10.100.7.11,tldr,tldr,tldr
+2026-01-26 19:45:05,Canopy,C1,10.100.7.11,tldr,tldr enum4linux,tldr enum4linux
+2026-01-26 20:00:09,Canopy,C1,10.100.7.11,tldr,tldr hashcat,tldr hashcat
+2026-01-26 20:03:53,Canopy,C1,10.100.7.11,tldr,tldr hashcat,tldr hashcat
+2026-01-27 18:39:12,Steel,T3,10.100.7.33,tldr,tldr enum4linux,tldr enum4linux
+2026-01-27 18:39:16,Steel,T3,10.100.7.33,tldr,tldr enum4linux,tldr enum4linux
+2026-01-27 18:39:24,Steel,T3,10.100.7.33,tldr,tldr nmap,tldr nmap
+2026-01-27 18:52:12,Canopy,C1,10.100.7.11,tldr,tldr hashcat,tldr hashcat
+2026-01-27 18:54:01,Canopy,C4,10.100.7.14,tldr,tldr xfreerdp3,tldr xfreerdp3
+2026-01-27 18:54:20,Canopy,C4,10.100.7.14,tldr,tldr -update xfreerdp3,tldr -update xfreerdp3
+2026-01-27 18:54:34,Canopy,C4,10.100.7.14,tldr,tldr --update,tldr --update
+2026-01-27 18:54:42,Canopy,C4,10.100.7.14,tldr,tldr xfreerdp3,tldr xfreerdp3
+2026-01-27 19:06:12,Steel,T3,10.100.7.33,tldr,tldr hydra,tldr hydra
+2026-01-27 19:11:57,Steel,T3,10.100.7.33,tldr,tldr ssh,tldr ssh
+2026-01-27 19:13:47,Canopy,C4,10.100.7.14,tldr,tldr evil-winrm,tldr evil-winrm
+2026-01-27 19:19:27,Harmony,H1,10.100.7.21,--help flag,hydra -h,hydra -h
+2026-01-27 19:19:54,Steel,T2,10.100.7.32,tldr,tldr smbclient,tldr smbclient
+2026-01-27 19:20:35,Steel,T3,10.100.7.33,tldr,tldr nxc,tldr nxc
+2026-01-27 19:23:59,Steel,T3,10.100.7.33,tldr,tldr smbclient,tldr smbclient
+2026-01-27 19:28:17,Canopy,C4,10.100.7.14,tldr,tldr,tldr
+2026-01-27 19:28:22,Canopy,C4,10.100.7.14,tldr,tldr dirbuster,tldr dirbuster
+2026-01-27 19:33:02,Steel,T3,10.100.7.33,tldr,tldr msfconsole,tldr msfconsole
+2026-01-27 19:50:06,Canopy,C4,10.100.7.14,tldr,tldr ffuf,tldr ffuf
+2026-01-27 19:55:54,Canopy,C4,10.100.7.14,tldr,tldr ffuf,tldr ffuf
+2026-01-27 19:57:22,Canopy,C2,10.100.7.12,tldr,tldr,tldr
+2026-01-27 20:13:21,Canopy,C4,10.100.7.14,tldr,tldr ffuf,tldr ffuf
+2026-01-27 20:17:50,Canopy,C4,10.100.7.14,tldr,tldr nmap,tldr nmap
+2026-02-02 18:03:47,Canopy,C2,10.100.7.12,tldr,tldr sqlmap,tldr sqlmap
+2026-02-02 18:04:05,Canopy,C2,10.100.7.12,tldr,tldr --update,tldr --update
+2026-02-02 18:04:08,Canopy,C2,10.100.7.12,tldr,tldr sqlmap,tldr sqlmap
+2026-02-02 18:18:52,Canopy,C2,10.100.7.12,tldr,tldr sqlmap,tldr sqlmap
+2026-02-02 18:22:50,Canopy,C2,10.100.7.12,tldr,tldr history,tldr history
+2026-02-02 19:02:46,Canopy,C1,10.100.7.11,tldr,tldr john,tldr john
+2026-02-02 19:10:55,Canopy,C1,10.100.7.11,tldr,tldr unshadow,tldr unshadow
+2026-02-02 19:21:21,Canopy,C4,10.100.7.14,--help flag,nikto -h,nikto -h http://10.100.7.45
+2026-02-02 19:21:36,Steel,T2,10.100.7.32,tldr,tldr sqlmap,tldr sqlmap
+2026-02-02 19:21:57,Steel,T2,10.100.7.32,tldr,tldr sqlmap,tldr sqlmap
+2026-02-02 19:24:01,Steel,T2,10.100.7.32,tldr,tldr sqlite,tldr sqlite
+2026-02-02 19:54:39,Steel,T2,10.100.7.32,tldr,tldr sqlmap,tldr sqlmap
+2026-02-02 19:57:53,Steel,T2,10.100.7.32,tldr,tldr sqlmap,tldr sqlmap
+2026-02-03 19:04:58,Canopy,C1,10.100.7.11,tldr,tldr unshadow,tldr unshadow
+2026-02-03 19:38:04,Steel,T2,10.100.7.32,tldr,tldr setcap,tldr setcap
+2026-02-09 18:34:00,Canopy,C4,10.100.7.14,--help flag,sqlmap -h,sqlmap -h
+2026-02-09 18:58:10,Steel,T2,10.100.7.32,tldr,tldr jq,tldr jq
+2026-02-09 19:27:54,Canopy,C1,10.100.7.11,tldr,tldr evil-winrm,tldr evil-winrm
+2026-02-09 19:28:51,Steel,T2,10.100.7.32,tldr,tldr nc,tldr nc
+2026-02-09 19:29:03,Steel,T2,10.100.7.32,tldr,tldr nc,tldr nc
+2026-02-09 19:41:26,Canopy,C2,10.100.7.12,--help flag,mysql -h,mysql -h 10.100.7.48
+2026-02-09 19:41:39,Canopy,C2,10.100.7.12,--help flag,mysql -u root,mysql -u root -h 10.100.7.48 -p
+2026-02-09 19:42:01,Canopy,C2,10.100.7.12,--help flag,mysql -u root,mysql -u root -h 10.100.7.48
+2026-02-09 19:42:37,Canopy,C2,10.100.7.12,--help flag,mysql -u root,mysql -u root -h 10.100.7.48 --skip-password
+2026-02-09 19:42:54,Canopy,C2,10.100.7.12,--help flag,mysql -u inspire,mysql -u inspire -h 10.100.7.48 --skip-password
+2026-02-09 19:48:49,Canopy,C2,10.100.7.12,--help flag,mysql -u inspire,mysql -u inspire -h 10.100.7.48 -p
+2026-02-09 19:49:03,Canopy,C2,10.100.7.12,--help flag,mysql -u inspire,mysql -u inspire -h 10.100.7.48 -p --skip-ssl
+2026-02-09 19:49:29,Canopy,C2,10.100.7.12,--help flag,mysql -u inspire,mysql -u inspire -h 10.100.7.48 -p --skip-ssl
+2026-02-09 19:49:56,Canopy,C2,10.100.7.12,--help flag,mysql -u inspire,mysql -u inspire -h 10.100.7.48 -p --skip-ssl
+2026-02-09 19:50:31,Canopy,C2,10.100.7.12,--help flag,mysql -u inspire,mysql -u inspire -h 10.100.7.48 -p --skip-ssl
+2026-02-10 18:37:03,Canopy,C2,10.100.7.12,--help flag,mysql -u inspire,mysql -u inspire -h 10.100.7.48 -p --skip-ssl
+2026-02-10 18:47:23,Canopy,C2,10.100.7.12,--help flag,mysql -u inspire,mysql -u inspire -h 10.100.7.48 -p --skip-ssl
+2026-02-10 18:55:04,Canopy,C2,10.100.7.12,--help flag,mysql -u inspire,mysql -u inspire -h 10.100.7.48 -p --skip-ssl
+2026-02-10 19:18:01,Canopy,C4,10.100.7.14,--help flag,mysql -h,mysql -h 10.100.7.48 -P 3306 -uinspire
+2026-02-10 19:21:49,Canopy,C4,10.100.7.14,--help flag,mysql -h,mysql -h 10.100.7.48 -P 3306 -u inspire
+2026-02-10 19:23:29,Canopy,C1,10.100.7.11,tldr,tldr evil-winrm,tldr evil-winrm
+2026-02-10 19:25:02,Steel,T4,10.100.7.34,--help flag,mysql -h,mysql -h 10.100.7.48 -u root -\n
+2026-02-10 19:25:03,Steel,T4,10.100.7.34,--help flag,mysql -h,mysql -h 10.100.7.48 -u root -\n
+2026-02-10 19:25:03,Steel,T4,10.100.7.34,--help flag,mysql -h,mysql -h 10.100.7.48 -u root -\n
+2026-02-10 19:25:03,Steel,T4,10.100.7.34,--help flag,mysql -h,mysql -h 10.100.7.48 -u root -\n
+2026-02-10 19:25:03,Steel,T4,10.100.7.34,--help flag,mysql -h,mysql -h 10.100.7.48 -u root -\n
+2026-02-10 19:25:03,Steel,T4,10.100.7.34,--help flag,mysql -h,mysql -h 10.100.7.48 -u root -\n
+2026-02-10 19:25:03,Steel,T4,10.100.7.34,--help flag,mysql -h,mysql -h 10.100.7.48 -u root -\n
+2026-02-10 19:25:04,Steel,T4,10.100.7.34,--help flag,mysql -h,mysql -h 10.100.7.48 -u root -\n
+2026-02-10 19:25:04,Steel,T4,10.100.7.34,--help flag,mysql -h,mysql -h 10.100.7.48 -u root -\n
+2026-02-10 19:25:09,Steel,T4,10.100.7.34,--help flag,mysql -h,mysql -h 10.100.7.48 -u root
+2026-02-10 19:25:28,Steel,T4,10.100.7.34,--help flag,mysql -h,mysql -h 10.100.7.48 -u root -p
+2026-02-10 19:25:38,Steel,T4,10.100.7.34,--help flag,mysql -h,mysql -h 10.100.7.48 -u root -p
+2026-02-10 19:25:38,Steel,T4,10.100.7.34,--help flag,mysql -h,mysql -h 10.100.7.48 -u root -p
+2026-02-10 19:25:39,Steel,T4,10.100.7.34,--help flag,mysql -h,mysql -h 10.100.7.48 -u root -p
+2026-02-10 19:26:31,Canopy,C4,10.100.7.14,--help flag,mysql -h,mysql -h 10.100.7.48 -P 3306 -u inspire
+2026-02-10 19:30:06,Steel,T4,10.100.7.34,--help flag,mysql -h,mysql -h 10.100.7.48 -u root --ssl-mode=DISABLED
+2026-02-10 19:30:21,Steel,T4,10.100.7.34,--help flag,mysql -h,mysql -h 10.100.7.48 -u root -p --ssl-mode=DISABLED
+2026-02-10 19:37:21,Canopy,C1,10.100.7.11,man,man mssql,man mssql
+2026-02-10 19:38:23,Canopy,C2,10.100.7.12,--help flag,mysql -u inspire,mysql -u inspire -h 10.100.7.48 -p --skip-ssl
+2026-02-10 19:42:09,Canopy,C4,10.100.7.14,--help flag,mysql -h,mysql -h 10.100.7.48
+2026-02-10 19:42:18,Canopy,C4,10.100.7.14,--help flag,mysql -h,mysql -h 10.100.7.48 -u inspire
+2026-02-10 19:43:06,Canopy,C4,10.100.7.14,--help flag,mysql -h,mysql -h 10.100.7.48 -u inspire
+2026-02-10 19:43:21,Canopy,C4,10.100.7.14,--help flag,mysql -h,mysql -h 10.100.7.48 -u inspire
+2026-02-10 19:43:21,Canopy,C4,10.100.7.14,--help flag,└─$ mysql -h,└─$ mysql -h 10.100.7.48
+2026-02-10 19:43:22,Canopy,C4,10.100.7.14,--help flag,└─$ mysql -h,└─$ mysql -h 10.100.7.48 -u inspire
+2026-02-10 19:43:23,Canopy,C4,10.100.7.14,--help flag,└─$ mysql -h,└─$ mysql -h 10.100.7.48 -u inspire
+2026-02-10 19:45:10,Canopy,C2,10.100.7.12,--help flag,mysql -u inspire,mysql -u inspire -h 10.100.7.48 -p --skip-ssl
+2026-02-10 19:45:40,Canopy,C4,10.100.7.14,--help flag,mysql -h,mysql -h 10.100.7.48 -P 3306 -u inspire
+2026-02-10 19:45:50,Canopy,C4,10.100.7.14,--help flag,mysql -h,mysql -h 10.100.7.48 -P 3306 -u inspire
+2026-02-10 19:53:50,Canopy,C4,10.100.7.14,--help flag,mysql -h,mysql -h 10.100.7.48 -P 3306
+2026-02-10 20:15:53,Steel,T1,10.100.7.31,tldr,tldr smbclient,tldr smbclient

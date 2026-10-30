@@ -1,0 +1,145 @@
+2026-01-08 19:28:07,"/home/kali","exit"
+2026-01-08 19:29:27,"/home/kali","sudo bash"
+2026-01-08 19:29:46,"/home/kali","sudo bash"
+2026-01-12 19:30:00,"/home/kali","exit"
+2026-01-12 19:30:08,"/home/kali","xfreerdp3"
+2026-01-12 19:34:35,"/home/kali","xfreerdp3 /u:helios /v:10.100.7.41 /u:')b:t].n!5<Xj=/DGXtv&'"
+2026-01-12 19:35:13,"/home/kali","xfreerdp3 /u:helios /v:10.100.7.41 /u:')b:t].n!5<Xj=/DGXtv&'"
+2026-01-12 19:36:02,"/home/kali","xfreerdp3 /u:helios /v:10.100.7.41 /u:')b:t].n!5<Xj=/DGXtv&'"
+2026-01-12 19:41:37,"/home/kali","xfreerdp3 /u:helios /v:10.100.7.41 /p:')b:t].n!5<Xj=/DGXtv&'"
+2026-01-12 19:51:45,"/home/kali","eerdp3 /u:helios /v:10.100.7.41 /u:')b:t].n!5<Xj=/DGXtv&'"
+2026-01-12 19:51:49,"/home/kali","clear"
+2026-01-12 19:54:12,"/home/kali","ssh superuser@10.100.7.43"
+2026-01-12 19:54:39,"/home/kali","nmap 10.100.7.41 10.100.7.42 10.100.7.43"
+2026-01-12 19:55:17,"/home/kali","nmap 10.100.7.40"
+2026-01-12 19:58:49,"/home/kali","enum4linux -a -u Administrator 10.100.7.40"
+2026-01-12 20:00:56,"/home/kali","sudo apt install nxe"
+2026-01-12 20:01:17,"/home/kali","sudo apt install ncx"
+2026-01-12 20:01:26,"/home/kali","sudo apt install nxc"
+2026-01-12 20:01:52,"/home/kali","pipx install nxc"
+2026-01-13 19:05:31,"/home/kali","^[[200~nmap 10.100.7.42 -p 445~"
+2026-01-13 19:05:35,"/home/kali","nmap 10.100.7.42 -p 445"
+2026-01-13 19:06:23,"/home/kali","nxc smb 10.100.7.42 -u guest -p ‘ ‘"
+2026-01-13 19:12:02,"/home/kali","tldr nxc"
+2026-01-13 19:12:35,"/home/kali","tldr nxc"
+2026-01-13 19:12:42,"/home/kali","tldr nxc"
+2026-01-13 19:12:59,"/home/kali","tldr ls"
+2026-01-13 19:13:25,"/home/kali","tldr --update"
+2026-01-13 19:13:32,"/home/kali","tldr nxc"
+2026-01-13 19:15:47,"/home/kali","tldr nxc smb"
+2026-01-13 19:18:07,"/home/kali","nxc smb 10.100.7.40 -u solaris -p password123!"
+2026-01-13 19:36:56,"/home/kali","smbclient //server/share --user guest"
+2026-01-13 19:39:30,"/home/kali","smbclient //server/share --user guest"
+2026-01-13 19:41:11,"/home/kali","nxc smb 10.100.7.40 -u asdfasdfsolaris -p passwasdfasdford123!"
+2026-01-13 19:41:30,"/home/kali","nxc smb 10.100.7.40 -u asdfasdfsolaris -p passwasdfasdford123! --shares"
+2026-01-13 19:42:06,"/home/kali","nxc smb 10.100.7.40 -u asdfasdfsolaris -p passwasdfasdford123! --users"
+2026-01-13 19:49:24,"/home/kali","smbclient //10.100.7.40/share --user guest"
+2026-01-13 19:49:43,"/home/kali","smbclient //10.100.7.40/share --share public"
+2026-01-13 19:50:19,"/home/kali","smbclient //10.100.7.40/share --public"
+2026-01-13 19:52:48,"/home/kali","smbclient //10.100.7.40/public"
+2026-01-13 19:53:04,"/home/kali","unzip backup.zip"
+2026-01-13 19:53:25,"/home/kali","cat credentials.txt"
+2026-01-13 19:53:44,"/home/kali","cat credentials.txt"
+2026-01-13 19:53:45,"/home/kali","cat credentials.txt"
+2026-01-13 19:53:45,"/home/kali","cat credentials.txt"
+2026-01-13 19:53:45,"/home/kali","cat credentials.txt"
+2026-01-13 19:57:55,"/home/kali","ssh solaris@[http://10.100.7.40/](http://10.100.7.40/)"
+2026-01-13 19:57:59,"/home/kali","ssh solaris@[http://10.100.7.40/](http://10.100.7.40/)"
+2026-01-13 20:00:48,"/home/kali","ssh solaris@10.100.7.40"
+2026-01-13 20:02:32,"/home/kali","ssh solaris@10.100.7.40"
+2026-01-13 20:03:19,"/home/kali","ssh solaris.solaris@10.100.7.40"
+2026-01-13 20:03:23,"/home/kali","ssh solaris.solaris@10.100.7.40"
+2026-01-13 20:03:58,"/home/kali","ssh solaris.solaris@10.100.7.40"
+2026-01-13 20:07:14,"/home/kali","tldr gobuster"
+2026-01-13 20:10:00,"/home/kali","gobuster dir 10.100.7.40 /usr/share/wordlists/dirb/common.txt"
+2026-01-13 20:11:18,"/home/kali","gobuster dir -u http://10.100.7.40 -w /usr/share/wordlists/dirb/common.txt"
+2026-01-13 20:14:16,"/home/kali","gobuster dir -u http://10.100.7.40 -w /usr/share/wordlists/dirb/common.txt"
+2026-01-13 20:14:16,"/home/kali","gobuster dir -u http://10.100.7.40 -w /usr/share/wordlists/dirb/common.txt"
+2026-01-13 20:14:17,"/home/kali","gobuster dir -u http://10.100.7.40 -w /usr/share/wordlists/dirb/common.txt"
+2026-01-13 20:31:48,"/home/kali","nc -lvp 4444"
+2026-01-13 20:31:53,"/home/kali","ls"
+2026-01-13 20:31:56,"/home/kali","ls"
+2026-01-26 19:02:49,"/home/kali","nc -lvp 4444"
+2026-01-27 18:59:46,"/home/kali","nxc smb http://10.100.7.46/ u-username p-password"
+2026-01-27 19:01:55,"/home/kali","nxc smb http://10.100.7.46/ u-username p-password"
+2026-01-27 19:02:00,"/home/kali","nxc smb http://10.100.7.46/ u-username p-password"
+2026-01-27 19:04:28,"/home/kali","nxc smb 10.100.7.46 -u username -p password
+"
+2026-01-27 19:04:41,"/home/kali","nxc smb 10.100.7.46 -u username -p password
+"
+2026-01-27 19:04:41,"/home/kali","nxc smb 10.100.7.46 -u username -p password
+"
+2026-01-27 19:04:41,"/home/kali","nxc smb 10.100.7.46 -u username -p password
+"
+2026-01-27 19:05:46,"/home/kali","smbclient //server/share --user guest"
+2026-01-27 19:06:22,"/home/kali","nxc smb http://10.100.7.46/ u-username p-password --shares"
+2026-01-27 19:06:40,"/home/kali","nxc smb 10.100.7.46 u-username p-password --shares"
+2026-01-27 19:07:34,"/home/kali","nxc smb 10.100.7.46 u-username p-password --shares"
+2026-01-27 19:21:37,"/home/kali","nxc smb 10.100.7.46 u-username p-password --shares"
+2026-01-27 20:04:54,"/home/kali","kj;"
+2026-01-27 20:04:55,"/home/kali","kj;"
+2026-02-10 18:56:07,"/home/kali","exit"
+2026-02-10 19:18:29,"/home/kali","nmap -sC -sV -p- -T4 10.100.7.48
+"
+2026-02-10 19:21:17,"/home/kali","nmap -sC -sV -p 22,80 10.100.7.48
+"
+2026-02-10 19:21:35,"/home/kali","nmap -sC -sV -p 22,80 10.100.7.48
+"
+2026-02-10 19:21:35,"/home/kali","nmap -sC -sV -p 22,80 10.100.7.48
+"
+2026-02-10 19:21:35,"/home/kali","nmap -sC -sV -p 22,80 10.100.7.48
+"
+2026-02-10 19:21:58,"/home/kali","gobuster dir -u http://10.100.7.48/ -w /usr/share/wordlists/dirb/common.txt
+"
+2026-02-10 19:22:18,"/home/kali","gobuster dir -u http://10.100.7.48/ -w /usr/share/wordlists/dirb/common.txt
+"
+2026-02-10 19:22:18,"/home/kali","gobuster dir -u http://10.100.7.48/ -w /usr/share/wordlists/dirb/common.txt
+"
+2026-02-10 19:25:02,"/home/kali","mysql -h 10.100.7.48 -u root -\n"
+2026-02-10 19:25:03,"/home/kali","mysql -h 10.100.7.48 -u root -\n"
+2026-02-10 19:25:03,"/home/kali","mysql -h 10.100.7.48 -u root -\n"
+2026-02-10 19:25:03,"/home/kali","mysql -h 10.100.7.48 -u root -\n"
+2026-02-10 19:25:03,"/home/kali","mysql -h 10.100.7.48 -u root -\n"
+2026-02-10 19:25:03,"/home/kali","mysql -h 10.100.7.48 -u root -\n"
+2026-02-10 19:25:03,"/home/kali","mysql -h 10.100.7.48 -u root -\n"
+2026-02-10 19:25:04,"/home/kali","mysql -h 10.100.7.48 -u root -\n"
+2026-02-10 19:25:04,"/home/kali","mysql -h 10.100.7.48 -u root -\n"
+2026-02-10 19:25:09,"/home/kali","mysql -h 10.100.7.48 -u root
+"
+2026-02-10 19:25:28,"/home/kali","mysql -h 10.100.7.48 -u root -p
+"
+2026-02-10 19:25:38,"/home/kali","mysql -h 10.100.7.48 -u root -p
+"
+2026-02-10 19:25:38,"/home/kali","mysql -h 10.100.7.48 -u root -p
+"
+2026-02-10 19:25:39,"/home/kali","mysql -h 10.100.7.48 -u root -p
+"
+2026-02-10 19:26:05,"/home/kali","whatweb http://10.100.7.48"
+2026-02-10 19:26:51,"/home/kali","gobuster dir -u http://10.100.7.48/ -w /usr/share/wordlists/dirb/common.txt
+"
+2026-02-10 19:27:05,"/home/kali","gobuster dir -u http://10.100.7.48/ -w /usr/share/wordlists/dirb/common.txt
+"
+2026-02-10 19:27:06,"/home/kali","gobuster dir -u http://10.100.7.48/ -w /usr/share/wordlists/dirb/common.txt
+"
+2026-02-10 19:27:06,"/home/kali","gobuster dir -u http://10.100.7.48/ -w /usr/share/wordlists/dirb/common.txt
+"
+2026-02-10 19:27:06,"/home/kali","gobuster dir -u http://10.100.7.48/ -w /usr/share/wordlists/dirb/common.txt
+"
+2026-02-10 19:28:11,"/home/kali","gobuster dir -u http://10.100.7.48/data/ -w /usr/share/wordlists/dirb/common.txt
+"
+2026-02-10 19:30:06,"/home/kali","mysql -h 10.100.7.48 -u root --ssl-mode=DISABLED
+"
+2026-02-10 19:30:21,"/home/kali","mysql -h 10.100.7.48 -u root -p --ssl-mode=DISABLED
+"
+2026-02-10 19:30:32,"/home/kali","gobuster dir -u http://10.100.7.48 -w /usr/share/wordlists/dirb/common.txt -x php,txt,env,bak
+"
+2026-02-10 19:54:15,"/home/kali","nmap -sC -sV -p 3389,445 10.100.7.42
+"
+2026-02-10 19:55:34,"/home/kali","nmap -sC -sV -p- -T4 10.100.7.42
+"
+2026-02-10 19:55:48,"/home/kali","smbclient -L //10.100.7.42/ -N
+"
+2026-02-10 19:56:27,"/home/kali","enum4linux -a 10.100.7.42
+"
+2026-02-10 19:56:40,"/home/kali","nmap --script smb-enum-shares,smb-enum-users -p445 10.100.7.42
+"

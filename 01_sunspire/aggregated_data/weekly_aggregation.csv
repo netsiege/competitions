@@ -1,0 +1,19 @@
+week,team,total_commands,unique_commands,top_5_commands
+2026-W02 (2026-01-05),Canopy,20,4,sudo bash (8); exit (7); cat .full_research_history.csv (4); ls (1)
+2026-W02 (2026-01-05),Harmony,20,4,exit (10); sudo bash (6); cat .full_research_history.csv (3); ls (1)
+2026-W02 (2026-01-05),Steel,15,3,sudo bash (8); exit (4); cat .full_research_history.csv (3)
+2026-W03 (2026-01-12),Canopy,290,93,nxc smb (25); smbclient (25); nmap -sV (22); ls (18); exit (15)
+2026-W03 (2026-01-12),Harmony,159,38,xfreerdp3 (34); ssh solaris@10.100.7.40 (17); smbclient (15); enum4linux -a (10); ls (8)
+2026-W03 (2026-01-12),Steel,464,100,ls (52); nxc smb (45); smbclient (40); ssh -i (37); clear (24)
+2026-W04 (2026-01-19),Canopy,115,49,ssh -i (23); nmap (12); ls (8); cat file1.txt.pub (8); ssh starfall@10.100.7.43 (6)
+2026-W04 (2026-01-19),Harmony,132,53,ls (24); curl (10); ./exp (8); nmap -sV (6); ssh -i authorized_keys (6)
+2026-W04 (2026-01-19),Steel,137,59,ls (30); ssh -i (11); exit (8); nxc smb (7); clear (5)
+2026-W05 (2026-01-26),Canopy,514,159,smbclient (41); ls (36); nxc smb (35); nmap (30); xfreerdp3 (25)
+2026-W05 (2026-01-26),Harmony,375,87,xfreerdp3 (46); ls (38); smbclient (37); nxc smb (36); smbclient -L (22)
+2026-W05 (2026-01-26),Steel,364,77,ls (91); nxc smb (34); smbclient (17); cat maintenance.ps1 (16); curl (14)
+2026-W06 (2026-02-02),Canopy,380,91,"sqlmap -u 10.100.7.45/panels.php?id=1"" (105); curl (41); ls (23); history (16); cat (14)"
+2026-W06 (2026-02-02),Harmony,2,2,sudo bash (1); ls (1)
+2026-W06 (2026-02-02),Steel,329,77,"sqlmap -u http://10.100.7.45/panels.php?id=1"" (60); ls (55); clear (18); history (11); nmap (9)"
+2026-W07 (2026-02-09),Canopy,334,83,xfreerdp3 (54); nmap (33); nxc smb (25); smbclient (17); mysql -u inspire (14)
+2026-W07 (2026-02-09),Steel,200,66,ls (26); ssh -i (16); mysql -h (16); exit (15); nxc smb (10)
+2026-W20 (2026-05-11),Canopy,3,2,ls (2); nc -lvnp 4445 (1)

