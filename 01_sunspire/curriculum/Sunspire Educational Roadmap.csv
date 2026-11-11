@@ -1,0 +1,15 @@
+#,Title,Content,
+1.1,Introduction to Netsiege,"Competition scenario, structure, scoring, access",
+1.2,Operating System Fundamentals,"Linux/Windows CLI, SSH, RDP",
+2.1,Network Enumeration and Basic Attacks,"NMAP/Enum4Linux, Password reuse",Phase 1
+2.2,File shares,"SMB, FTP",
+3.1,CVEs,Using and adapting CVE PoCs,NO MEETING TODAY
+3.1,Basic privilege escalation,"SUID, writable files, scheduled jobs, leaked credentials/keys",
+4.1,Web 1,"Command injection, LFI, File upload",Phase 2
+4.2,Networking basics,"IPs, NiCs, routers, and basic networking",
+5.1,Defense,"Logs, password rotations, configuration fixes",
+5.2,Review and compete,N / A,
+6.1,Advanced privesc,"Unquoted Service Paths, Local Services, DLL Hijacking",
+6.2,Web 2,"SQLi, Log poisoning, SSTi",
+7.1,Complete writeups,Instructions for write-ups,Phase 3
+7.2,Submissions and wrap up,N / A,
